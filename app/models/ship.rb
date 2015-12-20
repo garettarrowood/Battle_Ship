@@ -2,6 +2,11 @@ class Ship < ApplicationRecord
   belongs_to :board
   attribute :positions, :point, array: true
 
+  validates_associated :board
+  validates_acceptance_of :adjacent?
+
+  private
+
   def adjacent?
     if positions.map(&:x).uniq.size == 1
       ys = positions.map(&:y).each_cons(2)

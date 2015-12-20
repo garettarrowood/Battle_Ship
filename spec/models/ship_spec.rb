@@ -7,8 +7,12 @@ RSpec.describe Ship, :type => :model do
   let(:battleship) { create :battleship }
   let(:aircraft_carrier) { create :aircraft_carrier }
   
-  it 'has valid factory' do
-    expect(patrol_boat).to be_valid
+  it 'has valid factories' do
+    expect(patrol_boat.valid?).to eq true
+    expect(destroyer.valid?).to eq true
+    expect(submarine.valid?).to eq true
+    expect(battleship.valid?).to eq true
+    expect(aircraft_carrier.valid?).to eq true
   end
 
   context 'has length of' do
@@ -33,14 +37,12 @@ RSpec.describe Ship, :type => :model do
     end  
   end
 
-  let(:crazy_patroller) { create :patrol_boat, positions: [ActiveRecord::Point.new(1, 1), ActiveRecord::Point.new(4, 9)] }
-  let(:crooked_battleship) { create :battleship, positions: [ActiveRecord::Point.new(2,2), ActiveRecord::Point.new(3,2), ActiveRecord::Point.new(4,2), ActiveRecord::Point.new(6,2)]}
+  let(:crazy_patroller) { build :patrol_boat, positions: [ActiveRecord::Point.new(1, 1), ActiveRecord::Point.new(4, 9)] }
+  let(:crooked_battleship) { build :battleship, positions: [ActiveRecord::Point.new(2,2), ActiveRecord::Point.new(3,2), ActiveRecord::Point.new(4,2), ActiveRecord::Point.new(6,2)]}
 
-  it 'only has linear adjacent positions' do
-    expect(battleship.adjacent?).to eq true
-    expect(crooked_battleship.adjacent?).to eq false
-    expect(patrol_boat.adjacent?).to eq true
-    expect(crazy_patroller.adjacent?).to eq false
+  it 'is only valid with consecutive adjacent positions' do
+    expect(crooked_battleship.valid?).to eq false
+    expect(crazy_patroller.valid?).to eq false
   end
 
 end
