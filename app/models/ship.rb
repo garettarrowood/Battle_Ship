@@ -5,6 +5,7 @@ class Ship < ApplicationRecord
   validates_associated :board
   validates_acceptance_of :adjacent?
   validates_acceptance_of :in_bounds?
+  validates_acceptance_of :correct_size?
 
   private
 
@@ -24,4 +25,13 @@ class Ship < ApplicationRecord
     positions.map(&:x).all? { |x| x.between?(1,10) } && positions.map(&:y).all? { |y| y.between?(1,10) }
   end
 
+  def correct_size?
+    case type
+    when "Patrol Boat" then positions.size == 2
+    when "Destroyer" then positions.size == 3
+    when "Submarine" then positions.size == 3
+    when "Battleship" then positions.size == 4
+    when "Aircraft Carrier" then positions.size == 5
+    end  
+  end
 end

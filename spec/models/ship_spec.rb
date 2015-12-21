@@ -40,7 +40,7 @@ RSpec.describe Ship, :type => :model do
   let(:crazy_patroller) { build :patrol_boat, positions: [ActiveRecord::Point.new(1, 1), ActiveRecord::Point.new(4, 9)] }
   let(:crooked_battleship) { build :battleship, positions: [ActiveRecord::Point.new(2,2), ActiveRecord::Point.new(3,2), ActiveRecord::Point.new(4,2), ActiveRecord::Point.new(6,2)]}
 
-  it 'is only valid with consecutive adjacent positions' do
+  it 'only have consecutive adjacent positions' do
     expect(crooked_battleship.valid?).to eq false
     expect(crazy_patroller.valid?).to eq false
   end
@@ -48,7 +48,7 @@ RSpec.describe Ship, :type => :model do
   let(:jumping_submarine) { build :submarine, positions: [ActiveRecord::Point.new(3,9), ActiveRecord::Point.new(3,10), ActiveRecord::Point.new(3,11)] }
   let(:renagade_destroyer) { build :destroyer, positions: [ActiveRecord::Point.new(1,2), ActiveRecord::Point.new(0,3), ActiveRecord::Point.new(-1,4)]}
 
-  it 'must only have positions on the 10x10 board' do
+  it 'only have positions on the 10x10 board' do
     expect(jumping_submarine.valid?).to eq false
     expect(renagade_destroyer.valid?).to eq false
   end
