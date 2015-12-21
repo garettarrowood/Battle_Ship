@@ -4,6 +4,7 @@ class Ship < ApplicationRecord
 
   validates_associated :board
   validates_acceptance_of :adjacent?
+  validates_acceptance_of :in_bounds?
 
   private
 
@@ -18,4 +19,9 @@ class Ship < ApplicationRecord
       false
     end
   end
+
+  def in_bounds?
+    positions.map(&:x).all? { |x| x.between?(1,10) } && positions.map(&:y).all? { |y| y.between?(1,10) }
+  end
+
 end

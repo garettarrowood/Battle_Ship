@@ -8,11 +8,11 @@ RSpec.describe Ship, :type => :model do
   let(:aircraft_carrier) { create :aircraft_carrier }
   
   it 'has valid factories' do
-    expect(patrol_boat.valid?).to eq true
-    expect(destroyer.valid?).to eq true
-    expect(submarine.valid?).to eq true
-    expect(battleship.valid?).to eq true
-    expect(aircraft_carrier.valid?).to eq true
+    expect(patrol_boat).to be_valid
+    expect(destroyer).to be_valid
+    expect(submarine).to be_valid
+    expect(battleship).to be_valid
+    expect(aircraft_carrier).to be_valid
   end
 
   context 'has length of' do
@@ -43,6 +43,14 @@ RSpec.describe Ship, :type => :model do
   it 'is only valid with consecutive adjacent positions' do
     expect(crooked_battleship.valid?).to eq false
     expect(crazy_patroller.valid?).to eq false
+  end
+
+  let(:jumping_submarine) { build :submarine, positions: [ActiveRecord::Point.new(3,9), ActiveRecord::Point.new(3,10), ActiveRecord::Point.new(3,11)] }
+  let(:renagade_destroyer) { build :destroyer, positions: [ActiveRecord::Point.new(1,2), ActiveRecord::Point.new(0,3), ActiveRecord::Point.new(-1,4)]}
+
+  it 'must only have positions on the 10x10 board' do
+    expect(jumping_submarine.valid?).to eq false
+    expect(renagade_destroyer.valid?).to eq false
   end
 
 end
