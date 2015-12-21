@@ -3,11 +3,11 @@ class Move < ApplicationRecord
   attribute :position, :point
 
   validates_presence_of :board
-  validates_acceptance_of :custom_uniqueness_checker
+  validates_acceptance_of :uniqueness_checker
 
   private
 
-  def custom_uniqueness_checker
+  def uniqueness_checker
     board.moves.include?(self) ? false : true
   end
   

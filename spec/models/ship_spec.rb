@@ -15,6 +15,22 @@ RSpec.describe Ship, :type => :model do
     expect(aircraft_carrier).to be_valid
   end
 
+  let(:crazy_patroller) { build :patrol_boat, positions: [ActiveRecord::Point.new(1, 1), ActiveRecord::Point.new(4, 9)] }
+  let(:crooked_battleship) { build :battleship, positions: [ActiveRecord::Point.new(2,2), ActiveRecord::Point.new(3,2), ActiveRecord::Point.new(4,2), ActiveRecord::Point.new(6,2)]}
+
+  it 'only has consecutive adjacent positions' do
+    expect(crooked_battleship.valid?).to eq false
+    expect(crazy_patroller.valid?).to eq false
+  end
+
+  let(:jumping_submarine) { build :submarine, positions: [ActiveRecord::Point.new(3,9), ActiveRecord::Point.new(3,10), ActiveRecord::Point.new(3,11)] }
+  let(:renagade_destroyer) { build :destroyer, positions: [ActiveRecord::Point.new(1,2), ActiveRecord::Point.new(0,3), ActiveRecord::Point.new(-1,4)]}
+
+  it 'only has positions on the 10x10 board' do
+    expect(jumping_submarine.valid?).to eq false
+    expect(renagade_destroyer.valid?).to eq false
+  end
+
   context 'has length of' do
     it '2 positions if type is Patrol Boat' do 
       expect(patrol_boat.positions.size).to eq 2
@@ -35,22 +51,6 @@ RSpec.describe Ship, :type => :model do
     it '5 positions if type is Aircraft Carrier' do 
       expect(aircraft_carrier.positions.size).to eq 5
     end  
-  end
-
-  let(:crazy_patroller) { build :patrol_boat, positions: [ActiveRecord::Point.new(1, 1), ActiveRecord::Point.new(4, 9)] }
-  let(:crooked_battleship) { build :battleship, positions: [ActiveRecord::Point.new(2,2), ActiveRecord::Point.new(3,2), ActiveRecord::Point.new(4,2), ActiveRecord::Point.new(6,2)]}
-
-  it 'only have consecutive adjacent positions' do
-    expect(crooked_battleship.valid?).to eq false
-    expect(crazy_patroller.valid?).to eq false
-  end
-
-  let(:jumping_submarine) { build :submarine, positions: [ActiveRecord::Point.new(3,9), ActiveRecord::Point.new(3,10), ActiveRecord::Point.new(3,11)] }
-  let(:renagade_destroyer) { build :destroyer, positions: [ActiveRecord::Point.new(1,2), ActiveRecord::Point.new(0,3), ActiveRecord::Point.new(-1,4)]}
-
-  it 'only have positions on the 10x10 board' do
-    expect(jumping_submarine.valid?).to eq false
-    expect(renagade_destroyer.valid?).to eq false
   end
 
 end
