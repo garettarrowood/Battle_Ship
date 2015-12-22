@@ -2,6 +2,7 @@ class Ship < ApplicationRecord
   belongs_to :board
   attribute :positions, :point, array: true
 
+  validates :classification, :positions, presence: true
   validates_associated :board
   validates_acceptance_of :adjacent?
   validates_acceptance_of :in_bounds?
