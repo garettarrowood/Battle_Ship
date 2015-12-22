@@ -6,4 +6,6 @@ RSpec.describe Game, :type => :model do
   it 'has valid factory' do
     expect(game).to be_valid
   end
+
+  #upon creation of game (with difficulty selected), it should create 2 boards and set ships on opponent board
 end

@@ -3,7 +3,7 @@ class CreateShips < ActiveRecord::Migration[5.0]
     create_table :ships do |t|
       t.references :board
       t.point :positions, array: true
-      t.string :type
+      t.string :classification
       t.timestamps
     end
   end

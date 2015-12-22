@@ -7,6 +7,10 @@ class Ship < ApplicationRecord
   validates_acceptance_of :in_bounds?
   validates_acceptance_of :correct_size?
 
+  def visible?
+    board.opponent? ? false : true
+  end
+
   private
 
   def adjacent?
@@ -26,7 +30,7 @@ class Ship < ApplicationRecord
   end
 
   def correct_size?
-    case type
+    case classification
     when "Patrol Boat" then positions.size == 2
     when "Destroyer" then positions.size == 3
     when "Submarine" then positions.size == 3

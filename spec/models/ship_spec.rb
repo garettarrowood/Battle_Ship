@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Ship, :type => :model do
-  let(:patrol_boat) { create :patrol_boat }
-  let(:destroyer) { create :destroyer }
-  let(:submarine) { create :submarine }
-  let(:battleship) { create :battleship }
-  let(:aircraft_carrier) { create :aircraft_carrier }
+  let(:patrol_boat) { build :patrol_boat }
+  let(:destroyer) { build :destroyer }
+  let(:submarine) { build :submarine }
+  let(:battleship) { build :battleship }
+  let(:aircraft_carrier) { build :aircraft_carrier }
   
   it 'has valid factories' do
     expect(patrol_boat).to be_valid

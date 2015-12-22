@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20151220022035) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "game_id"
+    t.boolean  "opponent?"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,10 +38,10 @@ ActiveRecord::Schema.define(version: 20151220022035) do
 
   create_table "ships", force: :cascade do |t|
     t.integer  "board_id"
-    t.point    "positions",               array: true
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.point    "positions",                   array: true
+    t.string   "classification"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade do |t|
