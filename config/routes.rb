@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
 
   authenticate :user do
+    root to: 'games#index'
+    resources :games
   end
 
   # Serve websocket cable requests in-process
