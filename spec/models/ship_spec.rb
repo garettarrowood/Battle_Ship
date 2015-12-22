@@ -15,6 +15,16 @@ RSpec.describe Ship, :type => :model do
     expect(aircraft_carrier).to be_valid
   end
 
+  it 'has to have classification' do
+    destroyer.classification = nil
+    expect(destroyer).to_not be_valid
+  end
+
+  it 'must belong to board' do
+    submarine.board_id = nil
+    expect(submarine).to_not be_valid
+  end
+
   let(:crazy_patroller) { build :patrol_boat, positions: [ActiveRecord::Point.new(1, 1), ActiveRecord::Point.new(4, 9)] }
   let(:crooked_battleship) { build :battleship, positions: [ActiveRecord::Point.new(2,2), ActiveRecord::Point.new(3,2), ActiveRecord::Point.new(4,2), ActiveRecord::Point.new(6,2)]}
 
@@ -31,24 +41,24 @@ RSpec.describe Ship, :type => :model do
     expect(renagade_destroyer.valid?).to eq false
   end
 
-  context 'has length of' do
-    it '2 positions if type is Patrol Boat' do 
+  context 'has size of' do
+    it '2 positions if a Patrol Boat' do 
       expect(patrol_boat.positions.size).to eq 2
     end
 
-    it '3 positions if type is Destroyer' do 
+    it '3 positions if a Destroyer' do 
       expect(destroyer.positions.size).to eq 3
     end
 
-    it '3 positions if type is Submarine' do 
+    it '3 positions if a Submarine' do 
       expect(submarine.positions.size).to eq 3
     end
 
-    it '4 positions if type is Battleship' do 
+    it '4 positions if a Battleship' do 
       expect(battleship.positions.size).to eq 4
     end
 
-    it '5 positions if type is Aircraft Carrier' do 
+    it '5 positions if an Aircraft Carrier' do 
       expect(aircraft_carrier.positions.size).to eq 5
     end  
   end
