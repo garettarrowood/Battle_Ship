@@ -2,3 +2,11 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+.cell {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  border: 2px solid navy;
+  margin: .2%;
+}
