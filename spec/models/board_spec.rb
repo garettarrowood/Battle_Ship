@@ -7,11 +7,6 @@ RSpec.describe Board, :type => :model do
     expect(board).to be_valid
   end
 
-  xit 'is not valid without 5 ships' do
-    board.ships.clear
-    expect(board).to_not be_valid
-  end
-
   it 'intializes with 5 placed ships' do
     expect(board.ships.size).to eq 5
   end
@@ -20,11 +15,11 @@ RSpec.describe Board, :type => :model do
     let(:player_board) { create :board, opponent?: false }
 
     it 'holds visible ships once placed' do
-      expect(player_board.ships[0].visible?).to eq true
-      expect(player_board.ships[1].visible?).to eq true
-      expect(player_board.ships[2].visible?).to eq true
-      expect(player_board.ships[3].visible?).to eq true
-      expect(player_board.ships[4].visible?).to eq true
+      expect(player_board.patrol_boat.visible?).to eq true
+      expect(player_board.destroyer.visible?).to eq true
+      expect(player_board.submarine.visible?).to eq true
+      expect(player_board.battleship.visible?).to eq true
+      expect(player_board.aircraft_carrier.visible?).to eq true
     end
   end
 
@@ -32,11 +27,11 @@ RSpec.describe Board, :type => :model do
     let(:opponent_board) { create :board, opponent?: true }
 
     it 'holds invisible ships' do
-      expect(opponent_board.ships[0].visible?).to eq false
-      expect(opponent_board.ships[1].visible?).to eq false
-      expect(opponent_board.ships[2].visible?).to eq false
-      expect(opponent_board.ships[3].visible?).to eq false
-      expect(opponent_board.ships[4].visible?).to eq false
+      expect(opponent_board.patrol_boat.visible?).to eq false
+      expect(opponent_board.destroyer.visible?).to eq false
+      expect(opponent_board.submarine.visible?).to eq false
+      expect(opponent_board.battleship.visible?).to eq false
+      expect(opponent_board.aircraft_carrier.visible?).to eq false
     end
   end
 
