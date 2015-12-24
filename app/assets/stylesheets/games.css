@@ -6,7 +6,12 @@
 .cell {
   width: 30px;
   height: 30px;
-  display: inline-block;
-  border: 2px solid navy;
-  margin: .5px;
+  display: table-cell;
+  border: 1px solid black;
+  margin: 0;
+  background-image: url("cell.png");
+}
+
+.white-peg {
+  background-image: url("white-peg.png");
 }

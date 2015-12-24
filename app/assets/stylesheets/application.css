@@ -18,17 +18,17 @@
  /*///// LAYOUT /////*/
 
 .wrapper {
-  width: 890px;
+  width: 750px;
   margin: 0 auto;
 }
 
 .col-1 {
   float: left;
-  width: 49%;
+  width: 49.5%;
 }
 
 [class*="col-"] {
-  margin-left: 2%;
+  margin-left: 1%;
 }
 
 .first {
