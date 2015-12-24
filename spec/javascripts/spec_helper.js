@@ -12,6 +12,7 @@ ENV = {
   TESTING: true
 };
 
-beforeEach(function() {
-  window.SANDBOX = $("#konacha");
-});
+// I think the below is like a fast-fail
+// beforeEach(function() {
+//   window.SANDBOX = $("#konacha");
+// });

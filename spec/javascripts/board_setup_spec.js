@@ -1,3 +1,4 @@
+//= require spec_helper
 //= require board_setup
 
 describe("Array#sum", function() {
