@@ -7,11 +7,41 @@
   width: 30px;
   height: 30px;
   display: table-cell;
-  border: 1px solid black;
+  border: 1px solid navy;
   margin: 0;
   background-image: url("cell.png");
 }
 
-.white-peg {
-  background-image: url("white-peg.png");
+.ship {
+  height: 30px;
+  display: table-cell;
+  border: 1px solid navy;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#patrol-boat {
+  width: 62px;
+  background-image: url("patrol-boat.png");
+}
+
+#destroyer {
+  width: 93px;
+  background-image: url("destroyer.png");
+}
+
+#submarine {
+  width: 93px;
+  background-image: url("submarine.png");
+}
+
+#battleship {
+  width: 124px;
+  background-image: url("battleship.png");
+}
+
+#aircraft-carrier {
+  width: 155px;
+  background-image: url("aircraft-carrier.png");
 }
