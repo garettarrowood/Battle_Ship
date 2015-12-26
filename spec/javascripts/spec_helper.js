@@ -1,3 +1,5 @@
+//= require jquery
+
 // set the Mocha test interface
 // see http://mochajs.org/#interfaces
 mocha.ui('bdd');
@@ -11,8 +13,3 @@ chai.config.includeStack = true;
 ENV = {
   TESTING: true
 };
-
-// I think the below is like a fast-fail
-// beforeEach(function() {
-//   window.SANDBOX = $("#konacha");
-// });
