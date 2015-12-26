@@ -1,12 +1,19 @@
 //= require spec_helper
 //= require board_setup
 
-describe("Array#sum", function() {
-  it("returns 0 when the Array is empty", function() {
-    [].sum().should.equal(0);
+
+describe("Ship#new", function() {
+  boardSetup();
+
+  it("can create a new instance", function() {
+    var ship = new Ship(5, "patrol_boat");
+    expect(ship).to.be.valid;
   });
 
-  it("returns the sum of numeric elements", function() {
-    [1,2,3].sum().should.equal(6);
+  it('foo', function() {
+    expect(foo).to.equal('bar');
   });
+
+
 });
+
