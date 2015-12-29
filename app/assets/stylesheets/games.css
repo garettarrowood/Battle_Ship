@@ -37,25 +37,25 @@
 
 .horizontal#destroyer {
   height: 30px;
-  width: 93px;
+  width: 94px;
   background-image: url("destroyer.png");
 }
 
 .horizontal#submarine {
   height: 30px;
-  width: 93px;
+  width: 94px;
   background-image: url("submarine.png");
 }
 
 .horizontal#battleship {
   height: 30px;
-  width: 124px;
+  width: 126px;
   background-image: url("battleship.png");
 }
 
 .horizontal#aircraft-carrier {
   height: 30px;
-  width: 155px;
+  width: 158px;
   background-image: url("aircraft-carrier.png");
 }
 
@@ -66,25 +66,25 @@
 }
 
 .vertical#destroyer {
-  height: 93px;
+  height: 94px;
   width: 30px;
   background-image: url("destroyer-vertical.png");
 }
 
 .vertical#submarine {
-  height: 93px;
+  height: 94px;
   width: 30px;
   background-image: url("submarine-vertical.png");
 }
 
 .vertical#battleship {
-  height: 124px;
+  height: 126px;
   width: 30px;
   background-image: url("battleship-vertical.png");
 }
 
 .vertical#aircraft-carrier {
-  height: 155px;
+  height: 158px;
   width: 30px;
   background-image: url("aircraft-carrier-vertical.png");
 }
