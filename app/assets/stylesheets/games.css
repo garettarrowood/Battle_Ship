@@ -14,34 +14,70 @@
 
 .ship {
   height: 30px;
-  display: table-cell;
+  display: inline-block;
   border: 1px solid navy;
   margin: 0;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-#patrol-boat {
+.horizontal#patrol-boat {
+  height: 30px;
   width: 62px;
   background-image: url("patrol-boat.png");
 }
 
-#destroyer {
+.horizontal#destroyer {
+  height: 30px;
   width: 93px;
   background-image: url("destroyer.png");
 }
 
-#submarine {
+.horizontal#submarine {
+  height: 30px;
   width: 93px;
   background-image: url("submarine.png");
 }
 
-#battleship {
+.horizontal#battleship {
+  height: 30px;
   width: 124px;
   background-image: url("battleship.png");
 }
 
-#aircraft-carrier {
+.horizontal#aircraft-carrier {
+  height: 30px;
   width: 155px;
   background-image: url("aircraft-carrier.png");
 }
+
+.vertical#patrol-boat {
+  height: 62px;
+  width: 30px;
+  background-image: url("patrol-boat-vertical.png");
+}
+
+.vertical#destroyer {
+  height: 93px;
+  width: 30px;
+  background-image: url("destroyer-vertical.png");
+}
+
+.vertical#submarine {
+  height: 93px;
+  width: 30px;
+  background-image: url("submarine-vertical.png");
+}
+
+.vertical#battleship {
+  height: 124px;
+  width: 30px;
+  background-image: url("battleship-vertical.png");
+}
+
+.vertical#aircraft-carrier {
+  height: 155px;
+  width: 30px;
+  background-image: url("aircraft-carrier-vertical.png");
+}
+

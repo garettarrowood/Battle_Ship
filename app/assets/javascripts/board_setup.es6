@@ -1,18 +1,33 @@
-function boardSetup(){
 
-  class Ship {
-    constructor(length, classification) {
-      this.length = length;
-      this.classification = classification;
-    }
+class Ship {
+  constructor(length, classification) {
+    this.length = length;
+    this.classification = classification;
   }
-
-  var foo = "bar";
-
-  $('div#board-setup').click(function() {
-    $('.cell').hide();
-  });
-
 }
 
-$(document).ready(boardSetup);
+
+let boardReady = (function(){
+  let $patrol_boat = $('#patrol-boat'),
+      $destroyer = $('#destroyer'),
+      $submarine = $('#submarine'),
+      $battleship = $('#battleship'),
+      $aircraft_carrier = $('#aircraft-carrier');
+
+  $('.ship').click(function(){
+    if ($(this).hasClass('horizontal')) {
+      $(this).removeClass('horizontal');
+      $(this).addClass('vertical');
+    } else {
+      $(this).removeClass('vertical');
+      $(this).addClass('horizontal');
+    }
+  });
+
+  $('.ship').draggable({
+    grid: [ 31,31 ]
+  });
+
+});
+
+$(document).ready(boardReady);
