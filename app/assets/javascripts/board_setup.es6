@@ -6,7 +6,6 @@ class Ship {
   }
 }
 
-
 let boardReady = (function(){
   let $patrol_boat = $('#patrol-boat'),
       $destroyer = $('#destroyer'),
@@ -25,7 +24,7 @@ let boardReady = (function(){
   });
 
   $('.ship').draggable({
-    grid: [ 31,31 ]
+    grid: [ 30,30 ]
   });
 
 });
