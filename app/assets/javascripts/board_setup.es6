@@ -24,7 +24,14 @@ let boardReady = (function(){
   });
 
   $('.ship').draggable({
-    grid: [ 30,30 ]
+    grid: [ 32,32 ]
+  });
+
+  $('#board-setup').droppable({
+    accept: ".ship",
+    drop: function(){
+      alert("Sort of on the board.");
+    }
   });
 
 });

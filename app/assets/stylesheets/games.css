@@ -12,9 +12,17 @@
   background-image: url("cell.png");
 }
 
+#board-setup {
+  position: absolute;
+  top: 96px;
+  left: 96px;
+  height: 320px;
+  width: 320px;
+}
+
 .ship {
   height: 30px;
-  display: inline-block;
+  display: block;
   border: 1px solid navy;
   margin: 0;
   background-repeat: no-repeat;
@@ -81,3 +89,8 @@
   background-image: url("aircraft-carrier-vertical.png");
 }
 
+.fixed-right {
+  position: absolute;
+  top: 96px;
+  left: 480px;
+}

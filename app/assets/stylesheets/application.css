@@ -22,20 +22,3 @@
   width: 750px;
   margin: 0 auto;
 }
-
-.col-1 {
-  float: left;
-  width: 49.5%;
-}
-
-[class*="col-"] {
-  margin-left: 1%;
-}
-
-.first {
-  margin-left: 0%;
-}
-
-.right {
-  float: right;
-}
