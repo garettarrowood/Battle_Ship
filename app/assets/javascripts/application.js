@@ -14,5 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui/draggable
 //= require jquery-ui/droppable
+//= require jquery-collision.min
+//= require jquery-ui-draggable-collision
 //= require turbolinks
 //= require_tree .

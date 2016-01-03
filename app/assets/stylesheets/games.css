@@ -18,10 +18,10 @@
   left: 96px;
   height: 320px;
   width: 320px;
+  /*background-image: url("board.png");*/
 }
 
 .ship {
-  height: 30px;
   display: block;
   border: 1px solid navy;
   margin: 0;
@@ -91,6 +91,43 @@
 
 .fixed-right {
   position: absolute;
+  top: 192px;
+  left: 480px;
+}
+
+.dont-move {
+  position: absolute;
   top: 96px;
   left: 480px;
+}
+
+.later {
+  position: absolute;
+  top: 192px;
+  width: 450px;
+}
+
+.position-a {
+  position: absolute;
+  top: 0px;
+}
+
+.position-b {
+  position: absolute;
+  top: 32px;
+}
+
+.position-c {
+  position: absolute;
+  top: 64px;
+}
+
+.position-d {
+  position: absolute;
+  top: 96px;
+}
+
+.position-e {
+  position: absolute;
+  top: 128px;
 }
