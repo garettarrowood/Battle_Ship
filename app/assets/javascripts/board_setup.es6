@@ -1,5 +1,4 @@
 class Ship {
-
   constructor(length, classification) {
     this.length = length;
     this.classification = classification;
@@ -34,11 +33,9 @@ class Ship {
     let ship = document.getElementById(this.classification);
     return ship.style.left !== "" && ship.style.left !== "0px";
   }
-
 }
 
 class Board {
-
   constructor() {
     this.ships = [new Ship(2, "patrol-boat"), new Ship(3, "destroyer"), new Ship(3, "submarine"), new Ship(4, "battleship"), new Ship(5, "aircraft-carrier")];
   }
@@ -105,36 +102,6 @@ function rotate($ship) {
   }
 }
 
-function checkOtherShips(ship, board){
-  let answer = true;
-  Ship.all.forEach(boat => {
-    if (boat.classification === ship.id) {
-      let flipped = [],
-          first = boat.cells()[0],
-          size = boat.cells().length,
-          column = parseInt(first),
-          row = parseInt(first.substr(2));
-
-      if (ship.className.match(/\bhorizontal\b/)) {
-        for(let i=0; i<size; i++) {
-          flipped.push((column+i)+'-'+row);
-        }
-      } else {
-        for(let i=0; i<size; i++) {
-          flipped.push(column+'-'+(row+1));
-        }
-      }
-
-      flipped.forEach(position => {
-        if (board.blockedPositions(boat).includes(position)) {
-          answer = false;
-        }
-      });
-    }
-  });
-  return answer;
-}
-
 function checkBottomWallCollision(ship) {
   switch (ship.id) {
     case "patrol-boat":
@@ -167,6 +134,36 @@ function checkRightWallCollision(ship) {
     case "aircraft-carrier":
       return parseInt(ship.style.left) <= -224;
   }
+}
+
+function checkOtherShips(ship, board){
+  let answer = true;
+  Ship.all.forEach(boat => {
+    if (boat.classification === ship.id) {
+      let flipped = [],
+          first = boat.cells()[0],
+          size = boat.cells().length,
+          column = parseInt(first),
+          row = parseInt(first.substr(2));
+
+      if (ship.className.match(/\bhorizontal\b/)) {
+        for(let i=0; i<size; i++) {
+          flipped.push((column+i)+'-'+row);
+        }
+      } else {
+        for(let i=0; i<size; i++) {
+          flipped.push(column+'-'+(row+1));
+        }
+      }
+
+      flipped.forEach(position => {
+        if (board.blockedPositions(boat).includes(position)) {
+          answer = false;
+        }
+      });
+    }
+  });
+  return answer;
 }
 
 let boardReady = (function(){
@@ -238,7 +235,6 @@ let boardReady = (function(){
     accept: ".ship",
     tolerance: "fit"
   });
-
 });
 
 $(document).ready(boardReady);
