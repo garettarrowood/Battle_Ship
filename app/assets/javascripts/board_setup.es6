@@ -1,89 +1,3 @@
-class Ship {
-  constructor(length, classification) {
-    this.length = length;
-    this.classification = classification;
-    if (Ship.all === undefined) {
-      Ship.all = [this];
-    } else {
-      Ship.all.push(this);
-    }
-  }
-
-  cells() {
-    let ship = $('#'+this.classification);
-    let row = parseInt(ship[0].style.left)/32 + 13;
-    let column = parseInt(ship[0].style.top)/32 + 4;
-    let answer = [];
-
-    if (ship.hasClass("vertical")){
-      for(let i=0;i<this.length;i++){
-        answer.push(column+'-'+row);
-        column++;
-      }
-    } else {
-      for(let i=0;i<this.length;i++){
-        answer.push(column+'-'+row);
-        row++;
-      }
-    }
-    return answer;
-  }
-
-  on_board() {
-    let ship = document.getElementById(this.classification);
-    return ship.style.left !== "" && ship.style.left !== "0px";
-  }
-}
-
-class Board {
-  constructor() {
-    this.ships = [new Ship(2, "patrol-boat"), new Ship(3, "destroyer"), new Ship(3, "submarine"), new Ship(4, "battleship"), new Ship(5, "aircraft-carrier")];
-  }
-
-  placed_ships() {
-    let affirmatives = [];
-    this.ships.forEach(ship => {
-      if (ship.on_board()) {
-        affirmatives.push(ship);
-      }
-    });
-    return affirmatives;
-  }
-
-  occupiedPositions(){
-    let positions = [];
-    this.placed_ships().forEach(ship => {
-      positions.push(ship.cells());
-    });
-
-    if (positions.length != 0) {
-      return positions.reduce((a, b) => {
-        return a.concat(b);
-      });
-    } else {
-      return [];
-    }
-  }
-
-  blockedPositions(ship){
-    let positions = [];
-    this.placed_ships().forEach(anchoredShip => {
-      if (ship.classification == anchoredShip.classification) {
-        return;
-      }
-      positions.push(anchoredShip.cells());
-    });
-
-    if (positions.length != 0) {
-      return positions.reduce((a, b) => {
-        return a.concat(b);
-      });
-    } else {
-      return [];
-    }
-  }
-}
-
 function generateObstacles(ship, board){
   let obstacleArray = [];
   board.blockedPositions(ship).forEach(id => {
@@ -235,6 +149,7 @@ let boardReady = (function(){
     accept: ".ship",
     tolerance: "fit"
   });
+
 });
 
 $(document).ready(boardReady);
