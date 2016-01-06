@@ -150,6 +150,25 @@ let boardReady = (function(){
     tolerance: "fit"
   });
 
+  $('form').submit((event) => {
+    event.preventDefault();
+
+    let valid = true
+    board.ships.forEach(ship => {
+      ship.cells();
+      if (!ship.on_board()) {
+        valid = false;
+      }
+    });
+
+    if (valid) {
+      $.post("/games", { ships: board.ships } )
+    } else {
+      alert("Make sure all your ships are placed before submitting your board.");  
+      $(this).unbind('submit'); 
+    }
+  });
+
 });
 
 $(document).ready(boardReady);
