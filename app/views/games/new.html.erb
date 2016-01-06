@@ -114,6 +114,11 @@
   <div class="cell" id="10-10"></div>
 </span>
 
+<div class="dont-move">
+  <p>ARRANGE YOUR SHIPS</p>
+  <p>Drag and drop</p>
+</div>
+
 <div class="fixed-right">
   <span class="ship horizontal position-a" id="patrol-boat"></span>
   <span class="ship horizontal position-b" id="destroyer"></span>
@@ -121,12 +126,22 @@
   <span class="ship horizontal position-d" id="battleship"></span>
   <span class="ship horizontal position-e" id="aircraft-carrier"></span>
   <div class="later">
-    <p>Select AI difficulty here. Large fancy radio boxes.</p>
-    <p>And - have a submit button when everything is set.</p>
-  </div>
-</div>
 
-<div class="dont-move">
-  <p>ARRANGE YOUR SHIPS</p>
-  <p>Drag and drop</p>
+    <%= form_for(@game) do |f| %>
+      <% if @game.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@group.errors.count, "error") %>
+            prohibited this game from being saved:</h2>
+          <ul>
+          <% @game.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <p>Select AI difficulty here. Large fancy radio boxes.</p>
+      <%= f.submit "Board is Ready!" %>
+    <% end %>
+  </div>
 </div>
