@@ -19,7 +19,7 @@ class Board {
       positions.push(ship.cells());
     });
 
-    if (positions.length != 0) {
+    if (positions.length !== 0) {
       return positions.reduce((a, b) => {
         return a.concat(b);
       });
@@ -31,13 +31,13 @@ class Board {
   blockedPositions(ship){
     let positions = [];
     this.placed_ships().forEach(anchoredShip => {
-      if (ship.classification == anchoredShip.classification) {
+      if (ship.classification === anchoredShip.classification) {
         return;
       }
       positions.push(anchoredShip.cells());
     });
 
-    if (positions.length != 0) {
+    if (positions.length !== 0) {
       return positions.reduce((a, b) => {
         return a.concat(b);
       });
