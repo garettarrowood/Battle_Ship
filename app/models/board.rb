@@ -27,11 +27,7 @@ class Board < ApplicationRecord
 
   def occupied_positions
     points = []
-    if ships.length != 0
-      ships.each do |ship|
-        points << ship.positions
-      end
-    end
+    ships.each { |ship| points << ship.positions } if ships.length != 0
     points.flatten
   end
 

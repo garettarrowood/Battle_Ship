@@ -168,7 +168,4 @@ let boardReady = (function(){
       $(this).unbind('submit'); 
     }
   });
-
 });
-
-$(document).ready(boardReady);
