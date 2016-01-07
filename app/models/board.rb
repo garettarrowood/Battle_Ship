@@ -24,4 +24,15 @@ class Board < ApplicationRecord
   def aircraft_carrier
     ships.where(classification: "Aircraft Carrier")[0]
   end
+
+  def occupied_positions
+    points = []
+    if ships.length != 0
+      ships.each do |ship|
+        points << ship.positions
+      end
+    end
+    points.flatten
+  end
+
 end
