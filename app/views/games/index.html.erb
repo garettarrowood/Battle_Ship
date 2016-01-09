@@ -2,4 +2,10 @@
 
 <h4>Sink all you opponent's ships</h4>
 
-<%= link_to "START", new_game_path %>
+<p>Eventually add record of games won and lost here. And provide option to play computer or online friend.</p>
+
+<%= link_to "START NEW GAME", new_game_path %><br>
+
+<% if !!@game %>
+  <%= link_to "Back to last game", @game %>
+<% end %>
