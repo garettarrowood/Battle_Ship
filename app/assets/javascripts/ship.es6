@@ -33,7 +33,7 @@ class Ship {
   }
 
   on_board() {
-    let ship = document.getElementById(this.classification);
+    let ship = $('#'+this.classification)[0];
     return ship.style.left !== "" && ship.style.left !== "0px";
   }
 }
