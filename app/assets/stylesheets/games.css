@@ -12,13 +12,32 @@
   background-image: url("cell.png");
 }
 
+.hit-cell {
+  width: 30px;
+  height: 30px;
+  display: table-cell;
+  border: 1px solid navy;
+  margin: 0;
+  background-image: url("hit-cell.png");
+  z-index: 2;
+}
+
+.miss-cell {
+  width: 30px;
+  height: 30px;
+  display: table-cell;
+  border: 1px solid navy;
+  margin: 0;
+  background-image: url("miss-cell.png");
+  z-index: 2;
+}
+
 #board-setup {
   position: absolute;
   top: 96px;
   left: 96px;
   height: 320px;
   width: 320px;
-  /*background-image: url("board.png");*/
 }
 
 .ship {
@@ -130,4 +149,8 @@
 .position-e {
   position: absolute;
   top: 128px;
+}
+
+#opponent-board .cell:hover {
+  background-image: url("hover-cell.png");
 }
