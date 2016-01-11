@@ -31,4 +31,10 @@ class Board < ApplicationRecord
     points.flatten
   end
 
+  def occupied_positions_as_strings
+    points = []
+    ships.each { |ship| points << ship.positions_to_strings } if ships.length != 0
+    points.flatten
+  end
+
 end

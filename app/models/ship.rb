@@ -12,6 +12,14 @@ class Ship < ApplicationRecord
     board.opponent? ? false : true
   end
 
+  def direction
+    self.positions[0].x < self.positions[1].x ? "horizontal" : "vertical"
+  end
+
+  def positions_to_strings
+    positions.map { |point| "#{point.y.round(0).to_s}-#{point.x.round(0).to_s}" }
+  end
+
   private
 
   def adjacent?
@@ -38,5 +46,11 @@ class Ship < ApplicationRecord
     when "Battleship" then positions.size == 4
     when "Aircraft Carrier" then positions.size == 5
     end  
+  end
+end
+
+class ActiveRecord::Point
+  def point_to_string
+    "#{y.round(0).to_s}-#{x.round(0).to_s}"
   end
 end
