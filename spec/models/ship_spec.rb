@@ -63,4 +63,7 @@ RSpec.describe Ship, :type => :model do
     end  
   end
 
+  # Add #direction, #positions_to_strings test
+  # Put ActiveRecord::Point monkey patching somewhere else?
+
 end

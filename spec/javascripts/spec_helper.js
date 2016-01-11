@@ -4,6 +4,7 @@
 //= require jquery-ui/droppable
 //= require jquery-collision.min
 //= require jquery-ui-draggable-collision
+//= require sinon-1.17.2
 
 // set the Mocha test interface
 // see http://mochajs.org/#interfaces
