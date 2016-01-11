@@ -13,6 +13,7 @@ gem 'responders'
 gem 'puma'
 gem "sprockets"
 gem "sprockets-es6"
+gem 'gon'
 
 group :development, :test do
   gem 'rspec-rails'
