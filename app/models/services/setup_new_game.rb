@@ -1,5 +1,7 @@
 class SetupNewGame
 
+  attr_accessor :patrol_boat, :destroyer, :submarine, :battleship, :aircraft_carrier, :game
+
   def initialize(json, game)
     @game = game
     @patrol_boat = json["0"]["positions"]
@@ -11,27 +13,27 @@ class SetupNewGame
   end
 
   def run!
-    @user_board = @game.boards.create(opponent?: false)
-    create_user_ships
+    user_board = @game.boards.create(opponent?: false)
+    create_user_ships(user_board)
     comp_board = @game.boards.create(opponent?: true)
     GenerateRandomShips.new(comp_board).run!
   end
 
-  def create_user_ships
+  def create_user_ships(board)
     patrol_points = strings_to_points(@patrol_boat)
-    @user_board.ships.create(positions: patrol_points, classification: "Patrol Boat")
+    board.ships.create(positions: patrol_points, classification: "Patrol Boat")
 
     destroyer_points = strings_to_points(@destroyer)
-    @user_board.ships.create(positions: destroyer_points, classification: "Destroyer")
+    board.ships.create(positions: destroyer_points, classification: "Destroyer")
 
     sub_points = strings_to_points(@submarine)
-    @user_board.ships.create(positions: sub_points, classification: "Submarine")
+    board.ships.create(positions: sub_points, classification: "Submarine")
 
     battle_points = strings_to_points(@battleship)
-    @user_board.ships.create(positions: battle_points, classification: "Battleship")
+    board.ships.create(positions: battle_points, classification: "Battleship")
 
     carrier_points = strings_to_points(@aircraft_carrier)
-    @user_board.ships.create(positions: carrier_points, classification: "Aircraft Carrier")
+    board.ships.create(positions: carrier_points, classification: "Aircraft Carrier")
   end
 
   def strings_to_points(positions)

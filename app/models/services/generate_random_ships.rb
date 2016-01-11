@@ -51,7 +51,7 @@ class GenerateRandomShips
         y+=1
       end
     end
-    place_battleship if positions & @board.occupied_positions != []
+    return place_battleship if positions & @board.occupied_positions != []
     @board.ships.create(positions: positions, classification: "Battleship")
   end
 
@@ -73,7 +73,7 @@ class GenerateRandomShips
         y+=1
       end
     end
-    place_submarine if positions & @board.occupied_positions != []
+    return place_submarine if positions & @board.occupied_positions != []
     @board.ships.create(positions: positions, classification: "Submarine")
   end
 
@@ -95,7 +95,7 @@ class GenerateRandomShips
         y+=1
       end
     end
-    place_destroyer if positions & @board.occupied_positions != []
+    return place_destroyer if positions & @board.occupied_positions != []
     @board.ships.create(positions: positions, classification: "Destroyer")
   end
 
@@ -117,7 +117,7 @@ class GenerateRandomShips
         y+=1
       end
     end
-    place_patrol_boat if positions & @board.occupied_positions != []
+    return place_patrol_boat if positions & @board.occupied_positions != []
     @board.ships.create(positions: positions, classification: "Patrol Boat")
   end
 end
