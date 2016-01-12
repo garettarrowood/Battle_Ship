@@ -16,9 +16,6 @@ describe("Board", function() {
     // write own stubs for those ships - Brandon: "instead of `new Ship(...)` you can pass in a stub constructor like `function(){this.on_board = function(){return true;};}""
     // should't need Sinon at all then, maybe
 
-    var patrol_stub = sinon.stub(patrol);
- 
-    expect(patrol_stub).to.equal(true);
   });
 });
 
