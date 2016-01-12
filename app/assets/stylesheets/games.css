@@ -3,42 +3,57 @@
   They will automatically be included in application.css.
 */
 
-.cell {
-  width: 30px;
-  height: 30px;
-  display: table-cell;
-  border: 1px solid navy;
-  margin: 0;
-  background-image: url("cell.png");
+
+/*/////// Layout ///////*/
+
+.fixed-right {
+  position: absolute;
+  top: 192px;
+  left: 480px;
 }
 
-.hit-cell {
-  width: 30px;
-  height: 30px;
-  display: table-cell;
-  border: 1px solid navy;
-  margin: 0;
-  background-image: url("hit-cell.png");
-  z-index: 2;
+.right-for-now {
+  position: absolute;
+  top: 96px;
+  left: 736px;
 }
 
-.miss-cell {
-  width: 30px;
-  height: 30px;
-  display: table-cell;
-  border: 1px solid navy;
-  margin: 0;
-  background-image: url("miss-cell.png");
-  z-index: 2;
+.dont-move {
+  position: absolute;
+  top: 96px;
+  left: 480px;
+}
+
+.later {
+  position: absolute;
+  top: 192px;
+  width: 450px;
+}
+
+/*/////// Game Boards ///////*/
+
+.grid {
+  position: absolute;
+  width: 320px;
+  height: 320px;
 }
 
 #board-setup {
-  position: absolute;
   top: 96px;
   left: 96px;
-  height: 320px;
-  width: 320px;
 }
+
+#opponent-board {
+  top: 96px;
+  left: 32px;
+}
+
+#user-board {
+  top: 160px;
+  left: 384px;
+}
+
+/*/////// Ships ///////*/
 
 .ship {
   display: block;
@@ -46,6 +61,7 @@
   margin: 0;
   background-repeat: no-repeat;
   background-position: center;
+  z-index: 100;
 }
 
 .horizontal#patrol-boat {
@@ -58,6 +74,7 @@
   height: 30px;
   width: 94px;
   background-image: url("destroyer.png");
+  z-index: 100;
 }
 
 .horizontal#submarine {
@@ -108,24 +125,6 @@
   background-image: url("aircraft-carrier-vertical.png");
 }
 
-.fixed-right {
-  position: absolute;
-  top: 192px;
-  left: 480px;
-}
-
-.dont-move {
-  position: absolute;
-  top: 96px;
-  left: 480px;
-}
-
-.later {
-  position: absolute;
-  top: 192px;
-  width: 450px;
-}
-
 .position-a {
   position: absolute;
   top: 0px;
@@ -151,6 +150,63 @@
   top: 128px;
 }
 
+/*/////// Cells ///////*/
+
+.cell {
+  width: 30px;
+  height: 30px;
+  display: table-cell;
+  border: 1px solid navy;
+  margin: 0;
+  background-image: url("cell.png");
+  position: relative;
+}
+
+.hit-cell {
+  width: 30px;
+  height: 30px;
+  display: table-cell;
+  border: 1px solid navy;
+  margin: 0;
+  background-image: url("hit-cell.png");
+  position: relative;
+  z-index: 200;
+}
+
+.miss-cell {
+  width: 30px;
+  height: 30px;
+  display: table-cell;
+  border: 1px solid navy;
+  margin: 0;
+  background-image: url("miss-cell.png");
+  position: relative;
+  z-index: 200;
+}
+
 #opponent-board .cell:hover {
   background-image: url("hover-cell.png");
 }
+
+/*/////// Misc ///////*/
+
+#board-complete {
+  background: navy;
+  background-image: -webkit-linear-gradient(top, navy, #2980b9);
+  background-image: -moz-linear-gradient(top, navy, #2980b9);
+  background-image: -ms-linear-gradient(top, navy, #2980b9);
+  background-image: -o-linear-gradient(top, navy, #2980b9);
+  background-image: linear-gradient(to bottom, navy, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  cursor: pointer;
+  width: 60px;
+}
+
+

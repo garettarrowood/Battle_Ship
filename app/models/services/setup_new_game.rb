@@ -9,7 +9,7 @@ class SetupNewGame
     @submarine = json["2"]["positions"]
     @battleship = json["3"]["positions"]
     @aircraft_carrier = json["4"]["positions"]
-    # eventually, also process game difficulty setting, utilizing another model (maybe a service?) for computer board setup and AI strategy
+    # eventually, also process game difficulty setting, utilizing another model AI strategy
   end
 
   def run!
@@ -38,8 +38,8 @@ class SetupNewGame
 
   def strings_to_points(positions)
     positions.map do |string|
-      x = string[2].to_i
-      y = string[0].to_i
+      x = string.split("-")[1].to_i
+      y = string.split("-")[0].to_i
       ActiveRecord::Point.new(x,y)
     end
   end

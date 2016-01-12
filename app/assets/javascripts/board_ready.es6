@@ -68,10 +68,8 @@ let boardReady = (function(){
     tolerance: "fit"
   });
 
-  $('form').submit((event) => {
-    event.preventDefault();
-
-    let valid = true
+  $('#board-complete').on("click", (event) => {
+    let valid = true;
     board.ships.forEach(ship => {
       ship.cells();
       if (!ship.on_board()) {
@@ -82,8 +80,7 @@ let boardReady = (function(){
     if (valid) {
       $.post("/games", { ships: board.ships } )
     } else {
-      alert("Make sure all your ships are placed before submitting your board.");  
-      $(this).unbind('submit'); 
+      alert("Make sure all your ships are placed before submitting your board.");
     }
   });
 });
