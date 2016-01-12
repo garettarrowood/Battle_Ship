@@ -50,7 +50,7 @@ class Ship < ApplicationRecord
 end
 
 class ActiveRecord::Point
-  def point_to_string
-    "#{y.round(0).to_s}-#{x.round(0).to_s}"
+  def point_to_px
+    [ (x.to_i*32-32).to_s+"px", (y.to_i*32-32).to_s+"px" ]
   end
 end
