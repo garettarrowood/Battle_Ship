@@ -80,3 +80,44 @@ function checkOtherShips(ship, board){
   });
   return answer;
 }
+
+// gamePlay functions
+
+function setUserBoard(boardInfo) {
+  let $patrol_boat = $('#patrol-boat'),
+      $destroyer = $('#destroyer'),
+      $submarine = $('#submarine'),
+      $battleship = $('#battleship'),
+      $aircraft_carrier = $('#aircraft-carrier');
+
+  if (boardInfo.patrol_boat.direction === "horizontal") {
+    $patrol_boat.css("left", boardInfo.patrol_boat.left).css("top", boardInfo.patrol_boat.top);
+  } else {
+    $patrol_boat.css("left", boardInfo.patrol_boat.left).css("top", boardInfo.patrol_boat.top).removeClass("horizontal").addClass("vertical");
+  }
+
+  if (boardInfo.destroyer.direction === "horizontal") {
+    $destroyer.css("left", boardInfo.destroyer.left).css("top", boardInfo.destroyer.top);
+  } else {
+    $destroyer.css("left", boardInfo.destroyer.left).css("top", boardInfo.destroyer.top).removeClass("horizontal").addClass("vertical");
+  }
+
+  if (boardInfo.submarine.direction === "horizontal") {
+    $submarine.css("left", boardInfo.submarine.left).css("top", boardInfo.submarine.top);
+  } else {
+    $submarine.css("left", boardInfo.submarine.left).css("top", boardInfo.submarine.top).removeClass("horizontal").addClass("vertical");
+  }
+
+  if (boardInfo.battleship.direction === "horizontal") {
+    $battleship.css("left", boardInfo.battleship.left).css("top", boardInfo.battleship.top);
+  } else {
+    $battleship.css("left", boardInfo.battleship.left).css("top", boardInfo.battleship.top).removeClass("horizontal").addClass("vertical");
+  }
+
+  if (boardInfo.aircraft_carrier.direction === "horizontal") {
+    $aircraft_carrier.css("left", boardInfo.aircraft_carrier.left).css("top", boardInfo.aircraft_carrier.top);
+  } else {
+    $aircraft_carrier.css("left", boardInfo.aircraft_carrier.left).css("top", boardInfo.aircraft_carrier.top).removeClass("horizontal").addClass("vertical");
+  }
+}
+
