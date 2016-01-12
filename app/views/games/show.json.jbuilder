@@ -25,7 +25,6 @@ json.opponent_board do
     json.direction @opponent_board.ships[0].direction
   end
   json.occupied_positions @opponent_board.occupied_positions_as_strings
-  json.moves @opponent_board.moves
 end
 
 json.user_board do 
@@ -55,5 +54,4 @@ json.user_board do
     json.direction @user_board.ships[4].direction
   end
   json.occupied_positions @user_board.occupied_positions_as_strings
-  json.moves @user_board.moves
 end

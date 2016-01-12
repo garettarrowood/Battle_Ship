@@ -1,33 +1,15 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
-
-
 /*/////// Layout ///////*/
 
-.fixed-right {
+.ship-holder {
   position: absolute;
   top: 192px;
-  left: 480px;
+  left: 448px;
 }
 
 .right-for-now {
   position: absolute;
   top: 96px;
   left: 736px;
-}
-
-.dont-move {
-  position: absolute;
-  top: 96px;
-  left: 480px;
-}
-
-.later {
-  position: absolute;
-  top: 192px;
-  width: 450px;
 }
 
 /*/////// Game Boards ///////*/
@@ -40,7 +22,7 @@
 
 #board-setup {
   top: 96px;
-  left: 96px;
+  left: 64px;
 }
 
 #opponent-board {
@@ -188,7 +170,46 @@
   background-image: url("hover-cell.png");
 }
 
-/*/////// Misc ///////*/
+/*/////// Instructions & Buttons ///////*/
+
+.top-left {
+  position: absolute;
+  left: 64px;
+  top: 45px;
+  font-size: 20px;
+  width: 320px;
+  text-align: center;
+}
+
+.opponent-align {
+  position: absolute;
+  left: 96px;
+  top: 45px;
+  font-size: 20px;
+}
+
+.user-align {
+  position: absolute;
+  left: 480px;
+  top: 475px;
+  font-size: 20px;
+}
+
+#placement-instructions {
+  position: absolute;
+  top: 96px;
+  left: 448px;
+  width: 265px;
+  text-align: center;
+}
+
+.future-ai-buttons {
+  position: absolute;
+  top: 384px;
+  left: 448px;
+  width: 265px;
+  text-align: center;
+}
 
 #board-complete {
   background: navy;
@@ -206,7 +227,18 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   cursor: pointer;
-  width: 60px;
+  width: 280px;
+  text-align: center;
+}
+
+#board-complete:hover {
+  background: #1160d6;
+  background-image: -webkit-linear-gradient(top, #1160d6, #4b93c2);
+  background-image: -moz-linear-gradient(top, #1160d6, #4b93c2);
+  background-image: -ms-linear-gradient(top, #1160d6, #4b93c2);
+  background-image: -o-linear-gradient(top, #1160d6, #4b93c2);
+  background-image: linear-gradient(to bottom, #1160d6, #4b93c2);
+  text-decoration: none;
 }
 
 

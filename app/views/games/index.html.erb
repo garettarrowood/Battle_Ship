@@ -1,11 +1,13 @@
-<h3>Welcome to BATTLESHIP</h3>
+<h1>Welcome to BATTLESHIP</h3>
 
-<h4>Sink all you opponent's ships</h4>
+<h3>Sink all you opponent's ships</h4>
 
 <p>Eventually add record of games won and lost here. And provide option to play computer or online friend.</p>
 
-<%= link_to "START NEW GAME", new_game_path %><br>
+<p><%= link_to "NEW GAME", new_game_path %></p>
 
+<!-- 
+  This currently doesn't work properly. I suspect because the json is not getting rendered from the create action leading into the show action.
 <% if !!@game %>
   <%= link_to "Back to last game", @game %>
-<% end %>
+<% end %> -->

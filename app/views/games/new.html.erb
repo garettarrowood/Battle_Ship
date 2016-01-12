@@ -1,6 +1,4 @@
-<div class="wrapper">
-  <p>Set up your board!</p>
-</div>
+<p class="top-left">SETUP YOUR BOARD</p>
 
 <div class="grid" id="board-setup">
   <div class="cell" id="1-1"></div>
@@ -112,24 +110,24 @@
   <div class="cell" id="10-8"></div>
   <div class="cell" id="10-9"></div>
   <div class="cell" id="10-10"></div>
+  <p id="board-complete">DONE</p>
 </div>
 
-<div class="dont-move">
-  <p>ARRANGE YOUR SHIPS</p>
-  <p>Drag to move. Once on board, click to rotate.</p>
+<div id="placement-instructions">
+  <p id="arrange-ships">ARRANGE YOUR SHIPS</p>
+  <p id="drag-instructions">Drag & Drop<br>Click to Rotate</p>
 </div>
 
-<div class="fixed-right">
+<div class="ship-holder">
   <span class="ship horizontal position-a" id="patrol-boat"></span>
   <span class="ship horizontal position-b" id="destroyer"></span>
   <span class="ship horizontal position-c" id="submarine"></span>
   <span class="ship horizontal position-d" id="battleship"></span>
   <span class="ship horizontal position-e" id="aircraft-carrier"></span>
-  <div class="later">
+</div>
 
-  <p>Select AI difficulty here. Large fancy radio boxes.</p>
-  <div id="board-complete">DONE</div>
-  </div>
+<div class="future-ai-buttons">
+  <p>FUTURE FEATURE<br>(Select AI difficulty - Fancy radio boxes.)</p>
 </div>
 
 <script>$(document).ready(boardReady);</script>

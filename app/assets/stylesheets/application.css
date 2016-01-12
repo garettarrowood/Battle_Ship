@@ -15,9 +15,18 @@
  *= require_self
  */
 
- /*///// LAYOUT /////*/
+ @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:700);
 
-.wrapper {
-  width: 750px;
-  margin: 0 auto;
+/*/////// Global ///////*/
+
+p, h1, h3 {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.alert-success {
+  color: green;
+}
+
+.alert-danger {
+  color: red;
 }
