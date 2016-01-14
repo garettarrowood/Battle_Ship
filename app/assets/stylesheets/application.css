@@ -23,6 +23,14 @@ p, h1, h2, h3, a, label {
   font-family: 'Josefin Sans', sans-serif;
 }
 
+body {
+  margin: 0;
+}
+
+.wrapper {
+  margin: 8px;
+}
+
 .alert-success {
   color: green;
 }

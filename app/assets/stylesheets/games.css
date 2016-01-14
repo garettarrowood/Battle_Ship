@@ -1,15 +1,32 @@
 /*/////// Layout ///////*/
 
-.ship-holder {
-  position: absolute;
-  top: 192px;
-  left: 448px;
+#header {
+  width: 100%;
+  background-color: navy;
+  height: 60px;
 }
 
-.right-for-now {
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: navy;
+  height: 60px;
+  z-index: 500;
+}
+
+#battleship-header {
   position: absolute;
-  top: 96px;
-  left: 736px;
+  left: 32px;
+  top: 16px;
+  font-size: 28px;
+  color: white;
+}
+
+.ship-holder {
+  position: absolute;
+  top: 224px;
+  left: 448px;
 }
 
 /*/////// Game Boards ///////*/
@@ -21,18 +38,18 @@
 }
 
 #board-setup {
-  top: 96px;
+  top: 128px;
   left: 64px;
 }
 
 #opponent-board {
-  top: 96px;
+  top: 128px;
   left: 32px;
 }
 
 #user-board {
-  top: 160px;
-  left: 384px;
+  top: 128px;
+  left: 610px;
 }
 
 /*/////// Ships ///////*/
@@ -160,32 +177,42 @@
 
 /*/////// Instructions & Buttons ///////*/
 
+.center {
+  position: absolute;
+  left: 384px;
+  top: 128px;
+  width: 194px;
+}
+
 .top-left {
   position: absolute;
   left: 64px;
-  top: 45px;
+  top: 77px;
   font-size: 20px;
   width: 320px;
   text-align: center;
 }
 
-.opponent-align {
+.label-align {
   position: absolute;
-  left: 96px;
-  top: 45px;
+  left: 32px;
+  top: 77px;
+  width: 320px;
   font-size: 20px;
+  text-align: center;
 }
 
-.user-align {
-  position: absolute;
-  left: 480px;
-  top: 475px;
-  font-size: 20px;
+#opponent-board-label {
+  left: 32px;
+}
+
+#player-board-label {
+  left: 610px;
 }
 
 #placement-instructions {
   position: absolute;
-  top: 96px;
+  top: 128px;
   left: 448px;
   width: 265px;
   text-align: center;
@@ -193,13 +220,13 @@
 
 .future-ai-buttons {
   position: absolute;
-  top: 384px;
+  top: 416px;
   left: 448px;
   width: 265px;
   text-align: center;
 }
 
-#board-complete {
+.blue-button {
   background: navy;
   background-image: -webkit-linear-gradient(top, navy, #2980b9);
   background-image: -moz-linear-gradient(top, navy, #2980b9);
@@ -215,11 +242,20 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   cursor: pointer;
-  width: 280px;
   text-align: center;
 }
 
-#board-complete:hover {
+.plain {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: block;
+}
+
+#board-complete {
+  width: 280px;
+}
+
+.blue-button:hover {
   background: #1160d6;
   background-image: -webkit-linear-gradient(top, #1160d6, #4b93c2);
   background-image: -moz-linear-gradient(top, #1160d6, #4b93c2);

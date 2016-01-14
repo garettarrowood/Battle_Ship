@@ -229,14 +229,16 @@
 </div>
 
 <div class="labels">
-  <p class="opponent-align">OPPONENT'S BOARD</p>
-  <p class="user-align">YOUR BOARD</p>
+  <p class="label-align" id="opponent-board-label">OPPONENT</p>
+  <p class="label-align" id="player-board-label">PLAYER</p>
 </div>
 
-<div class="right-for-now">
+<div class="center">
   <p>Data goes here:</p>
   <p>Display user and opponent ships that have sunk (graphic).</p>
   <p>Show number of moves user has made.</p>
+  <p><%= link_to 'Home', games_path, :class => 'blue-button plain' %></p>
+  <p><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'blue-button plain' %></p>
 </div>
 
 <script>$(document).ready(gamePlay);</script>
