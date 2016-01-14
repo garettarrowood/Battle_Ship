@@ -1,0 +1,1 @@
+json.move @comp_move
