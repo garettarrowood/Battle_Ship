@@ -1,5 +1,5 @@
 // boardReady functions
-function generateObstacles(ship, board){
+function generateObstacles(ship, board) {
   let obstacleArray = [];
   board.blockedPositions(ship).forEach(id => {
     obstacleArray.push({ obstacle: "#"+id, preventCollision: true })
@@ -51,7 +51,7 @@ function checkRightWallCollision(ship) {
   }
 }
 
-function checkOtherShips(ship, board){
+function checkOtherShips(ship, board) {
   let answer = true;
   Ship.all.forEach(boat => {
     if (boat.classification === ship.id) {
@@ -83,6 +83,14 @@ function checkOtherShips(ship, board){
 
 // gamePlay functions
 
+function setUserShip(boatData, $boat) {
+  if (boatData.direction === "horizontal") {
+    $boat.css("left", boatData.left).css("top", boatData.top);
+  } else {
+    $boat.css("left", boatData.left).css("top", boatData.top).removeClass("horizontal").addClass("vertical");
+  }
+}
+
 function setUserBoard(boardInfo) {
   let $patrol_boat = $('#patrol-boat'),
       $destroyer = $('#destroyer'),
@@ -90,34 +98,53 @@ function setUserBoard(boardInfo) {
       $battleship = $('#battleship'),
       $aircraft_carrier = $('#aircraft-carrier');
 
-  if (boardInfo.patrol_boat.direction === "horizontal") {
-    $patrol_boat.css("left", boardInfo.patrol_boat.left).css("top", boardInfo.patrol_boat.top);
-  } else {
-    $patrol_boat.css("left", boardInfo.patrol_boat.left).css("top", boardInfo.patrol_boat.top).removeClass("horizontal").addClass("vertical");
-  }
+  setUserShip(boardInfo.patrol_boat, $patrol_boat);
+  setUserShip(boardInfo.destroyer, $destroyer);
+  setUserShip(boardInfo.submarine, $submarine);
+  setUserShip(boardInfo.battleship, $battleship);
+  setUserShip(boardInfo.aircraft_carrier, $aircraft_carrier);
+}
 
-  if (boardInfo.destroyer.direction === "horizontal") {
-    $destroyer.css("left", boardInfo.destroyer.left).css("top", boardInfo.destroyer.top);
-  } else {
-    $destroyer.css("left", boardInfo.destroyer.left).css("top", boardInfo.destroyer.top).removeClass("horizontal").addClass("vertical");
-  }
+// how to wait for sound to finish before going on? - setTimeout()
+// probably better to cache all that data on the FE when determining if a ship is sunk??
+function clickCellCallback() {
+  if ($(this).hasClass("available")) {
+    let launch = new Audio('/assets/Missle_Launch.mp3'),
+        gamePath =  window.location.pathname,
+        gameId = gamePath.substr(gamePath.lastIndexOf('/') + 1),
+        opponent_coord = this.id.split("opponent-")[1];
 
-  if (boardInfo.submarine.direction === "horizontal") {
-    $submarine.css("left", boardInfo.submarine.left).css("top", boardInfo.submarine.top);
-  } else {
-    $submarine.css("left", boardInfo.submarine.left).css("top", boardInfo.submarine.top).removeClass("horizontal").addClass("vertical");
-  }
+    launch.play();
+    $.post(`/games/${gameId}/move`, {move: opponent_coord}).done(updateUserBoard);
+    updateOpponentBoard($(this), opponent_coord);
 
-  if (boardInfo.battleship.direction === "horizontal") {
-    $battleship.css("left", boardInfo.battleship.left).css("top", boardInfo.battleship.top);
-  } else {
-    $battleship.css("left", boardInfo.battleship.left).css("top", boardInfo.battleship.top).removeClass("horizontal").addClass("vertical");
-  }
+    $(this).removeClass('available');
 
-  if (boardInfo.aircraft_carrier.direction === "horizontal") {
-    $aircraft_carrier.css("left", boardInfo.aircraft_carrier.left).css("top", boardInfo.aircraft_carrier.top);
+    // function that checks if ship is sunk & another to check if all ships are sunk
+  }
+};
+
+function updateUserBoard(data) {
+  let user_coord = `${data.move.y}-${data.move.x}`;
+  if (isUserShipHit(user_coord)) {
+    $('#user-'+data.move.y+'-'+data.move.x).addClass("hit");
   } else {
-    $aircraft_carrier.css("left", boardInfo.aircraft_carrier.left).css("top", boardInfo.aircraft_carrier.top).removeClass("horizontal").addClass("vertical");
+    $('#user-'+data.move.y+'-'+data.move.x).addClass("miss");
   }
 }
 
+function updateOpponentBoard(el, opponent_coord) {
+  if (isOpponentShipHit(opponent_coord)) {
+    el.addClass("hit");
+  } else {
+    el.addClass("miss");
+  }
+}
+
+function isUserShipHit(user_coord) {
+  return gon.user_board.occupied_positions.includes(user_coord);
+}
+
+function isOpponentShipHit(opponent_coord) {
+  return gon.opponent_board.occupied_positions.includes(opponent_coord);
+}
