@@ -144,29 +144,17 @@
   position: relative;
 }
 
-.hit-cell {
-  width: 30px;
-  height: 30px;
-  display: table-cell;
-  border: 1px solid navy;
-  margin: 0;
+.hit {
   background-image: url("hit-cell.png");
-  position: relative;
   z-index: 200;
 }
 
-.miss-cell {
-  width: 30px;
-  height: 30px;
-  display: table-cell;
-  border: 1px solid navy;
-  margin: 0;
+.miss {
   background-image: url("miss-cell.png");
-  position: relative;
   z-index: 200;
 }
 
-#opponent-board .cell:hover {
+#opponent-board .available:hover {
   background-image: url("hover-cell.png");
 }
 
@@ -240,5 +228,3 @@
   background-image: linear-gradient(to bottom, #1160d6, #4b93c2);
   text-decoration: none;
 }
-
-
