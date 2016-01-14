@@ -18,3 +18,4 @@
 //= require jquery-ui-draggable-collision
 //= require turbolinks
 //= require_tree .
+//= require_tree ./../audios
