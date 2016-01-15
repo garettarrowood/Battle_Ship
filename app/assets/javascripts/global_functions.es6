@@ -83,14 +83,6 @@ function checkOtherShips(ship, board) {
 
 // gamePlay functions
 
-function setUserShip(boatData, $boat) {
-  if (boatData.direction === "horizontal") {
-    $boat.css("left", boatData.left).css("top", boatData.top);
-  } else {
-    $boat.css("left", boatData.left).css("top", boatData.top).removeClass("horizontal").addClass("vertical");
-  }
-}
-
 function setUserBoard(boardInfo) {
   let $patrol_boat = $('#patrol-boat'),
       $destroyer = $('#destroyer'),
@@ -105,8 +97,15 @@ function setUserBoard(boardInfo) {
   setUserShip(boardInfo.aircraft_carrier, $aircraft_carrier);
 }
 
-// how to wait for sound to finish before going on? - setTimeout()
-// probably better to cache all that data on the FE when determining if a ship is sunk??
+function setUserShip(boatData, $boat) {
+  if (boatData.direction === "horizontal") {
+    $boat.css("left", boatData.left).css("top", boatData.top);
+  } else {
+    $boat.css("left", boatData.left).css("top", boatData.top).removeClass("horizontal").addClass("vertical");
+  }
+}
+
+// wait for sound to finish before going on? - setTimeout()
 function clickCellCallback() {
   if ($(this).hasClass("available")) {
     let launch = new Audio('/assets/Missle_Launch.mp3'),
@@ -115,12 +114,16 @@ function clickCellCallback() {
         opponent_coord = this.id.split("opponent-")[1];
 
     launch.play();
-    $.post(`/games/${gameId}/move`, {move: opponent_coord}).done(updateUserBoard);
     updateOpponentBoard($(this), opponent_coord);
 
-    $(this).removeClass('available');
+    $.post(`/games/${gameId}/move`, {move: opponent_coord}).done(function(data) {
+      debugger
+      updateOpponentShipDisplay(data.opponentSunkShips);
+      updateUserBoard(data);
+      updateUserShipDisplay(data.userSunkShips);
+    });
 
-    // function that checks if ship is sunk & another to check if all ships are sunk
+    $(this).removeClass('available');
   }
 };
 
@@ -147,4 +150,19 @@ function isUserShipHit(user_coord) {
 
 function isOpponentShipHit(opponent_coord) {
   return gon.opponent_board.occupied_positions.includes(opponent_coord);
+}
+
+function updateOpponentShipDisplay(ships) {
+  // if ships.length === 5, then redirect to game over
+  ships.forEach(ship => {
+    debugger
+    $("#opponent-block "+`.dummy-${ship.split(" ")[0].toLowerCase()}`).css("display", "inline-block");
+  });
+}
+
+function updateUserShipDisplay(ships) {
+  // if ships.length === 5, then redirect to game over
+  ships.forEach(ship => {
+    $("#user-block "+`.dummy-${ship.split(" ")[0].toLowerCase()}`).css("display", "inline-block");
+  });
 }
