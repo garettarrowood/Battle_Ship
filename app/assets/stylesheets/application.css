@@ -19,8 +19,9 @@
 
 /*/////// Global ///////*/
 
-p, h1, h2, h3, a, label {
+p, h1, h2, h3, div, a, label, span {
   font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
 }
 
 body {
@@ -29,6 +30,7 @@ body {
 
 .wrapper {
   margin: 8px;
+  height: 480px;
 }
 
 .alert-success {

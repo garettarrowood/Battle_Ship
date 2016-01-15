@@ -8,6 +8,10 @@ class Ship < ApplicationRecord
   validates_acceptance_of :in_bounds?
   validates_acceptance_of :correct_size?
 
+  def sunk?
+    (positions - board.moves.map(&:position)).empty?
+  end
+
   def visible?
     board.opponent? ? false : true
   end

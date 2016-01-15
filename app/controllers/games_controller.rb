@@ -22,10 +22,10 @@ class GamesController < ApplicationController
 
   def move
     game = Game.find(params[:game_id])
-    opponent_board = game.boards.where(opponent?: true)[0]
-    MoveLogger.new(params[:move], opponent_board).log!
-    user_board = game.boards.where(opponent?: false)[0]
-    @comp_move = CompAI.new(user_board).new_move
-    MoveLogger.new(@comp_move, user_board).log!
+    @opponent_board = game.boards.where(opponent?: true)[0]
+    MoveLogger.new(params[:move], @opponent_board).log!
+    @user_board = game.boards.where(opponent?: false)[0]
+    @comp_move = CompAI.new(@user_board).new_move
+    MoveLogger.new(@comp_move, @user_board).log!
   end
 end

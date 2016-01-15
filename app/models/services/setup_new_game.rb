@@ -9,7 +9,6 @@ class SetupNewGame
     @submarine = json["2"]["positions"]
     @battleship = json["3"]["positions"]
     @aircraft_carrier = json["4"]["positions"]
-    # eventually, also process game difficulty setting, utilizing another model AI strategy
   end
 
   def run!
@@ -36,6 +35,7 @@ class SetupNewGame
     board.ships.create(positions: carrier_points, classification: "Aircraft Carrier")
   end
 
+  # change into module?
   def strings_to_points(positions)
     positions.map do |string|
       x = string.split("-")[1].to_i

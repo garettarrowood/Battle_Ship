@@ -5,6 +5,14 @@ class Board < ApplicationRecord
 
   validates_associated :game
 
+  def sunk_ships
+    ship_classes = []
+    ships.each do |ship|
+      ship_classes << ship.classification if ship.sunk?
+    end
+    ship_classes
+  end
+
   def patrol_boat
     ships.where(classification: "Patrol Boat")[0]
   end

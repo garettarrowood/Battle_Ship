@@ -7,12 +7,11 @@
 }
 
 #footer {
-  position: fixed;
   bottom: 0;
   width: 100%;
   background-color: navy;
-  height: 60px;
-  z-index: 500;
+  height: 120px;
+  z-index: 300;
 }
 
 #battleship-header {
@@ -23,10 +22,28 @@
   color: white;
 }
 
+#logout {
+  position: absolute;
+  right: 64px;
+  top: 20px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+#logout:hover {
+  font-style: italic;
+}
+
 .ship-holder {
   position: absolute;
   top: 224px;
   left: 448px;
+}
+
+.ship-block {
+  height: 170px;
+  font-size: 18px;
 }
 
 /*/////// Game Boards ///////*/
@@ -69,14 +86,34 @@
   background-image: url("patrol-boat.png");
 }
 
+.dummy-patrol {
+  display: none;
+  height: 30px;
+  width: 62px;
+  background-image: url("patrol-boat.png");
+}
+
 .horizontal#destroyer {
   height: 30px;
   width: 94px;
   background-image: url("destroyer.png");
-  z-index: 100;
+}
+
+.dummy-destroyer {
+  display: none;
+  height: 30px;
+  width: 94px;
+  background-image: url("destroyer.png");
 }
 
 .horizontal#submarine {
+  height: 30px;
+  width: 94px;
+  background-image: url("submarine.png");
+}
+
+.dummy-submarine {
+  display: none;
   height: 30px;
   width: 94px;
   background-image: url("submarine.png");
@@ -88,7 +125,21 @@
   background-image: url("battleship.png");
 }
 
+.dummy-battleship {
+  display: none;  
+  height: 30px;
+  width: 126px;
+  background-image: url("battleship.png");
+}
+
 .horizontal#aircraft-carrier {
+  height: 30px;
+  width: 158px;
+  background-image: url("aircraft-carrier.png");
+}
+
+.dummy-aircraft {
+  display: none;  
   height: 30px;
   width: 158px;
   background-image: url("aircraft-carrier.png");
@@ -180,7 +231,7 @@
 .center {
   position: absolute;
   left: 384px;
-  top: 128px;
+  top: 77px;
   width: 194px;
 }
 
@@ -190,7 +241,6 @@
   top: 77px;
   font-size: 20px;
   width: 320px;
-  text-align: center;
 }
 
 .label-align {
@@ -199,7 +249,6 @@
   top: 77px;
   width: 320px;
   font-size: 20px;
-  text-align: center;
 }
 
 #opponent-board-label {
@@ -215,15 +264,6 @@
   top: 128px;
   left: 448px;
   width: 265px;
-  text-align: center;
-}
-
-.future-ai-buttons {
-  position: absolute;
-  top: 416px;
-  left: 448px;
-  width: 265px;
-  text-align: center;
 }
 
 .blue-button {
@@ -242,7 +282,6 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   cursor: pointer;
-  text-align: center;
 }
 
 .plain {
