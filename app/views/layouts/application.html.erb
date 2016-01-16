@@ -10,14 +10,14 @@
   </head>
 
   <body>
-  
+
     <div id="header">
       <span id="battleship-header">BATTLESHIP</span>
       <% if user_signed_in? %>
         <%= link_to "Logout", destroy_user_session_path, method: :delete, :id => "logout" %>
       <% end %>
     </div>
-
+    
     <div class="wrapper">
   
       <% if notice %>

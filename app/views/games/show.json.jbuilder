@@ -30,6 +30,7 @@ json.opponent_board do
     json.positions @opponent_board.ships[0].positions_to_strings
   end
   json.occupied_positions @opponent_board.occupied_positions_as_strings
+  json.sunkShips @opponent_board.sunk_ships
   json.moves @opponent_board.moves
 end
 
@@ -66,4 +67,5 @@ json.user_board do
   end
   json.occupied_positions @user_board.occupied_positions_as_strings
   json.moves @user_board.moves
+  json.sunkShips @user_board.sunk_ships
 end
