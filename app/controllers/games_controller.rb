@@ -28,4 +28,11 @@ class GamesController < ApplicationController
     @comp_move = CompAI.new(@user_board).new_move
     MoveLogger.new(@comp_move, @user_board).log!
   end
+
+  def load_game
+    # this action exists due to a loading issue with the gon gem
+    @game = current_user.games.last
+    redirect_to @game
+  end
+
 end
