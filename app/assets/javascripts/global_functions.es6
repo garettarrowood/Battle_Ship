@@ -110,19 +110,14 @@ function clickCellCallback() {
   if ($(this).hasClass("available")) {
     let launch = new Audio('/assets/Missle_Launch.mp3'),
         gamePath =  window.location.pathname,
-        gameId = gamePath.substr(gamePath.lastIndexOf('/') + 1),
         opponent_coord = this.id.split("opponent-")[1],
         opponent_x = opponent_coord.split("-")[1],
         opponent_y = opponent_coord.split("-")[0];
 
-    launch.play();
+    // launch.play();
     updateOpponentBoard(opponent_x, opponent_y);
 
-    $.post(`/games/${gameId}/move`, {move: opponent_coord}).done(function(data) {
-      updateOpponentShipDisplay(data.opponentSunkShips);
-      updateUserBoard(data.move.x, data.move.y);
-      updateUserShipDisplay(data.userSunkShips);
-    });
+    $.post(`${gamePath}/move`, {move: opponent_coord}).done(gameUpdates);
   }
 };
 
@@ -157,20 +152,18 @@ function isOpponentShipHit(opponent_coord) {
 }
 
 function updateOpponentShipDisplay(ships) {
-  // if ships.length === 5, then redirect to game over
   ships.forEach(ship => {
     $("#opponent-block "+`.dummy-${ship.split(" ")[0].toLowerCase()}`).css("display", "inline-block");
   });
 }
 
 function updateUserShipDisplay(ships) {
-  // if ships.length === 5, then redirect to game over
   ships.forEach(ship => {
     $("#user-block "+`.dummy-${ship.split(" ")[0].toLowerCase()}`).css("display", "inline-block");
   });
 }
 
-function setupMoves(userMoves, opponentMoves, sunkUserShips) {
+function setupMoves(userMoves, opponentMoves) {
   userMoves.forEach(move => {
     updateUserBoard(move.position.x, move.position.y);
   });
@@ -185,5 +178,17 @@ function setupSunkShips(sunkUserShips, sunkOpponentShips) {
   updateOpponentShipDisplay(sunkOpponentShips);
 }
 
+function gameUpdates(data) {
+  let gamePath = window.location.pathname;
 
+  updateOpponentShipDisplay(data.opponentSunkShips);
+  updateUserBoard(data.move.x, data.move.y);
+  updateUserShipDisplay(data.userSunkShips);
+
+  if (data.userWins === true) {
+    window.location.href = `${gamePath}/won`;
+  } else if (data.opponentWins === true) {
+    window.location.href = `${gamePath}/lost`;
+  }
+}
 
