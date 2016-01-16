@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     root to: 'games#index'
     resources :games do
       post '/move', to: "games#move"
+      get '/won', to: "games#won"
+      get '/lost', to: "games#lost"
     end
     post '/load_game', to: "games#load_game", as: :load_game
   end
