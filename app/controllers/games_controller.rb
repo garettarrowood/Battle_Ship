@@ -1,7 +1,9 @@
 class GamesController < ApplicationController
+  before_action :set_game, only: [:show, :move, :won, :lost]
+  before_action :set_last_game, only: [:index, :load_game]
+  before_filter :authenticate_user!
 
   def index
-    @game = current_user.games.last
   end
 
   def new
@@ -15,24 +17,37 @@ class GamesController < ApplicationController
   end
 
   def show
-    @opponent_board = Game.find(params[:id]).boards.where(opponent?: true)[0]
-    @user_board = Game.find(params[:id]).boards.where(opponent?: false)[0]
+    @opponent_board = @game.boards.where(opponent?: true)[0]
+    @user_board = @game.boards.where(opponent?: false)[0]
     gon.jbuilder
   end
 
   def move
-    game = Game.find(params[:game_id])
-    @opponent_board = game.boards.where(opponent?: true)[0]
+    @opponent_board = @game.boards.where(opponent?: true)[0]
     MoveLogger.new(params[:move], @opponent_board).log!
-    @user_board = game.boards.where(opponent?: false)[0]
+    @user_board = @game.boards.where(opponent?: false)[0]
     @comp_move = CompAI.new(@user_board).new_move
     MoveLogger.new(@comp_move, @user_board).log!
   end
 
-  def load_game
-    # this action exists due to a loading issue with the gon gem
-    @game = current_user.games.last
+  def load_game # resolves load issue with gon gem
     redirect_to @game
+  end
+
+  def won
+  end
+
+  def lost
+  end
+
+  private
+
+  def set_game
+    @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
+  end
+
+  def set_last_game
+    @game = current_user.games.last
   end
 
 end
