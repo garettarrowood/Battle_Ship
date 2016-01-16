@@ -1,11 +1,20 @@
-<h3>Sink all you opponent's ships</h3>
 
-<!-- Eventually add record of games won and lost here. And provide option to play computer or online friend. -->
+<div class="left-side">
+  <p class="spaced big">RULES</p>
+  <p class="spaced">Each player has 5 ships</p>
+  <p class="spaced">Take turns shooting</p>
+  <p class="spaced">Sink all your opponent's ships to WIN!</p>
+</div>
 
-<p><%= link_to "NEW GAME", new_game_path, :class => "blue-button plain" %></p>
+<div class="right-side">
+  <p class="spaced">Sink all you opponent's ships</p>
 
-<!-- 
-  This currently doesn't work properly. I suspect because the json is not getting rendered from the create action leading into the show action.
-<% if !!@game %>
-  <%= link_to "Back to last game", @game %>
-<% end %> -->
+  <!-- Eventually add record of games won and lost here. And provide option to play computer or online friend. -->
+
+  <p><%= link_to "NEW GAME", new_game_path, :class => "blue-button plain" %></p>
+
+  <% if !!@game %>
+    <p><%= link_to "Back to last game", load_game_path, method: :post, :class => "blue-button plain" %></p>
+  <% end %> 
+
+</div>
