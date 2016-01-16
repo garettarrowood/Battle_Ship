@@ -111,37 +111,41 @@ function clickCellCallback() {
     let launch = new Audio('/assets/Missle_Launch.mp3'),
         gamePath =  window.location.pathname,
         gameId = gamePath.substr(gamePath.lastIndexOf('/') + 1),
-        opponent_coord = this.id.split("opponent-")[1];
+        opponent_coord = this.id.split("opponent-")[1],
+        opponent_x = opponent_coord.split("-")[1],
+        opponent_y = opponent_coord.split("-")[0];
 
     launch.play();
-    updateOpponentBoard($(this), opponent_coord);
+    updateOpponentBoard(opponent_x, opponent_y);
 
     $.post(`/games/${gameId}/move`, {move: opponent_coord}).done(function(data) {
-      debugger
       updateOpponentShipDisplay(data.opponentSunkShips);
-      updateUserBoard(data);
+      updateUserBoard(data.move.x, data.move.y);
       updateUserShipDisplay(data.userSunkShips);
     });
-
-    $(this).removeClass('available');
   }
 };
 
-function updateUserBoard(data) {
-  let user_coord = `${data.move.y}-${data.move.x}`;
+function updateUserBoard(x, y) {
+  let user_coord = `${y}-${x}`;
   if (isUserShipHit(user_coord)) {
-    $('#user-'+data.move.y+'-'+data.move.x).addClass("hit");
+    $('#user-'+user_coord).addClass("hit");
   } else {
-    $('#user-'+data.move.y+'-'+data.move.x).addClass("miss");
+    $('#user-'+user_coord).addClass("miss");
   }
 }
 
-function updateOpponentBoard(el, opponent_coord) {
+function updateOpponentBoard(x, y) {
+  let opponent_coord = `${y}-${x}`,
+      $opponent_cell = $('#opponent-'+opponent_coord);
+
   if (isOpponentShipHit(opponent_coord)) {
-    el.addClass("hit");
+    $opponent_cell.addClass("hit");
   } else {
-    el.addClass("miss");
+    $opponent_cell.addClass("miss");
   }
+
+  $opponent_cell.removeClass('available');
 }
 
 function isUserShipHit(user_coord) {
@@ -155,7 +159,6 @@ function isOpponentShipHit(opponent_coord) {
 function updateOpponentShipDisplay(ships) {
   // if ships.length === 5, then redirect to game over
   ships.forEach(ship => {
-    debugger
     $("#opponent-block "+`.dummy-${ship.split(" ")[0].toLowerCase()}`).css("display", "inline-block");
   });
 }
@@ -166,3 +169,21 @@ function updateUserShipDisplay(ships) {
     $("#user-block "+`.dummy-${ship.split(" ")[0].toLowerCase()}`).css("display", "inline-block");
   });
 }
+
+function setupMoves(userMoves, opponentMoves, sunkUserShips) {
+  userMoves.forEach(move => {
+    updateUserBoard(move.position.x, move.position.y);
+  });
+
+  opponentMoves.forEach(move => {
+    updateOpponentBoard(move.position.x, move.position.y)
+  });
+}
+
+function setupSunkShips(sunkUserShips, sunkOpponentShips) {
+  updateUserShipDisplay(sunkUserShips);
+  updateOpponentShipDisplay(sunkOpponentShips);
+}
+
+
+

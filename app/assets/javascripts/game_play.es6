@@ -2,7 +2,10 @@ let gamePlay = (function(){
 
   setUserBoard(gon.user_board);
 
-  // add check for previous moves function is game - important if page gets reloaded - if gon.board.moves === [], then nothing to do, otherwise implement
+  if (gon.user_board.moves.length !== 0) {
+    setupMoves(gon.user_board.moves, gon.opponent_board.moves); 
+    setupSunkShips(gon.user_board.sunkShips, gon.opponent_board.sunkShips);
+  }
 
   $('#opponent-board .cell').on("click", clickCellCallback);
 });
