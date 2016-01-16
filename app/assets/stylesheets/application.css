@@ -19,18 +19,24 @@
 
 /*/////// Global ///////*/
 
+html {
+  background: #132029;
+}
+
 p, h1, h2, h3, div, a, label, span {
   font-family: 'Josefin Sans', sans-serif;
   text-align: center;
+  margin: 0;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 .wrapper {
-  margin: 8px;
   height: 480px;
+  background-color: rgb(220, 225, 230);
 }
 
 .alert-success {

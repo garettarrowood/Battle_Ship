@@ -2,15 +2,25 @@
 
 #header {
   width: 100%;
-  background-color: navy;
+  background: #132029;
+  background-image: -webkit-linear-gradient(top, #132029, #6b757a);
+  background-image: -moz-linear-gradient(top, #132029, #6b757a);
+  background-image: -ms-linear-gradient(top, #132029, #6b757a);
+  background-image: -o-linear-gradient(top, #132029, #6b757a);
+  background-image: linear-gradient(to bottom, #132029, #6b757a);
   height: 60px;
 }
 
 #footer {
   bottom: 0;
   width: 100%;
-  background-color: navy;
-  height: 120px;
+  background: #132029;
+  background-image: -webkit-linear-gradient(top, #132029, #6b757a);
+  background-image: -moz-linear-gradient(top, #132029, #6b757a);
+  background-image: -ms-linear-gradient(top, #132029, #6b757a);
+  background-image: -o-linear-gradient(top, #132029, #6b757a);
+  background-image: linear-gradient(to bottom, #132029, #6b757a);
+  height: 165px;
   z-index: 300;
 }
 
@@ -33,6 +43,18 @@
 
 #logout:hover {
   font-style: italic;
+}
+
+.left-side {
+  float: left;
+  width: 46%;
+  margin: 2%;
+}
+
+.right-side {
+  float: left;
+  width: 46%;
+  margin: 2%;
 }
 
 .ship-holder {
@@ -228,6 +250,16 @@
 
 /*/////// Instructions & Buttons ///////*/
 
+.spaced {
+  margin: 20px;
+  font-size: 20px;
+}
+
+.big {
+  font-size: 40px;
+  text-decoration: underline;
+}
+
 .center {
   position: absolute;
   left: 384px;
@@ -282,6 +314,7 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .plain {
