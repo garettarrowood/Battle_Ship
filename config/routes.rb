@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   authenticate :user do
     root to: 'games#index'
-    resources :games
+    resources :games do
+      post '/move', to: "games#move"
+    end
+    post '/load_game', to: "games#load_game", as: :load_game
   end
 
   # Serve websocket cable requests in-process
