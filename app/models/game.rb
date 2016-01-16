@@ -4,5 +4,7 @@ class Game < ApplicationRecord
 
   validates_associated :user
 
-  #upon creation of game (with difficulty selected), it should create 2 boards and set ships on opponent board
+  def over?
+    boards.any? { |board| board.all_ships_sunk? }
+  end
 end

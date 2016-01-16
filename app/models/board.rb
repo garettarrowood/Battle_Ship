@@ -13,6 +13,10 @@ class Board < ApplicationRecord
     ship_classes
   end
 
+  def all_ships_sunk?
+    sunk_ships.length == 5
+  end
+
   def patrol_boat
     ships.where(classification: "Patrol Boat")[0]
   end
