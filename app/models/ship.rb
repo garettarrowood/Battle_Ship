@@ -12,10 +12,6 @@ class Ship < ApplicationRecord
     (positions - board.moves.map(&:position)).empty?
   end
 
-  def visible?
-    board.opponent? ? false : true
-  end
-
   def direction
     self.positions[0].x < self.positions[1].x ? "horizontal" : "vertical"
   end

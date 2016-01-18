@@ -63,7 +63,37 @@ RSpec.describe Ship, :type => :model do
     end  
   end
 
-  # Add #direction, #positions_to_strings test
-  # Put ActiveRecord::Point monkey patching somewhere else?
+  context "#sunk?" do
+    it "returns false if ship is afloat" do
+      patrol_boat.save
+      expect(patrol_boat.sunk?).to eq false
+    end
 
+    it "returns true if ship is sunk" do
+      patrol_boat.save
+      patrol_boat.board.moves.create(position: ActiveRecord::Point.new(1.0,2.0))
+      patrol_boat.board.moves.create(position: ActiveRecord::Point.new(1.0,3.0))
+      expect(patrol_boat.sunk?).to eq true
+    end
+  end
+
+  context "#direction" do
+    let(:vertical_patrol) { build :patrol_boat }
+    let(:horizontal_patrol) { build :patrol_boat, positions: [ActiveRecord::Point.new(8, 5), ActiveRecord::Point.new(9, 5)]}
+
+    it "returns whether ship is placed horizontal or vertical" do
+      expect(vertical_patrol.direction).to eq "vertical"
+      expect(horizontal_patrol.direction).to eq "horizontal"
+    end
+  end
+
+  context "#positions_to_strings" do
+    let(:stringy_patrol) { build :patrol_boat, positions: [ActiveRecord::Point.new(8, 5), ActiveRecord::Point.new(9, 5)]}
+
+    it "returns all ship positions as 'y-x' instead of point datatypes" do
+      expect(stringy_patrol.positions_to_strings).to eq(["5-8", "5-9"])
+    end
+  end
 end
+
+# Put ActiveRecord::Point monkey patching somewhere else?
