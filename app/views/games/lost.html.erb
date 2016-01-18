@@ -1,3 +1,9 @@
-<p class="big">All your ships were sunk.<br>You lost.</p>
+<div class="gameover">
+  <p class="big">All your ships were sunk.<br>You lost.</p>
+  <p>Total shots made: <%= @moves %></p>
+  <p>Enemy sunk ships: <%= @sunk_ships %></p>
+  <p>Your sunk ships: 5</p> 
 
-<p><%= link_to 'Back to Base', games_path, :class => 'blue-button plain' %></p>
+  <p><%= link_to 'Back to Base', games_path, :class => 'blue-button plain' %></p>
+
+</div>

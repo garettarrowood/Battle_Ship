@@ -1,11 +1,6 @@
-<div class="navbar-text">
-  <% if user_signed_in? %>
-    <p>Logged in as <strong><%= current_user.email %></strong>.
-    <%= link_to 'Home', games_path, :class => 'navbar-link' %> |  
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %><p>
-  <% else %>
+<div class="welcome">
+  <p class="big">Welcome to BATTLESHIP</p>
+  <div class="registration">
     <p><%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Login", new_user_session_path %> to access your account</p>
-  <% end %>
+  </div>
 </div>
-
-<h3>Home Page for BattleShip app</h3>

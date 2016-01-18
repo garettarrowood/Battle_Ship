@@ -47,14 +47,14 @@
 
 .left-side {
   float: left;
-  width: 46%;
-  margin: 2%;
+  width: 44%;
+  margin: 3%;
 }
 
 .right-side {
   float: left;
-  width: 46%;
-  margin: 2%;
+  width: 44%;
+  margin: 3%;
 }
 
 .ship-holder {
@@ -68,10 +68,19 @@
   font-size: 18px;
 }
 
-.gameover {
+.gameover, .welcome {
   margin: auto;
   padding: 50px;
   width: 300px;
+}
+
+.registration {
+  margin-top: 30px;
+}
+
+#notifications {
+  padding: 15px;
+  text-align: left;
 }
 
 /*/////// Game Boards ///////*/
