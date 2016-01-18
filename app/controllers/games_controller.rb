@@ -40,6 +40,8 @@ class GamesController < ApplicationController
   end
 
   def lost
+    @moves = @game.boards.where(opponent?: false)[0].moves.length
+    @sunk_ships = @game.boards.where(opponent?: true)[0].sunk_ships.length
   end
 
   private
