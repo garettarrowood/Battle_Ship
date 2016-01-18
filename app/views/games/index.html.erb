@@ -1,20 +1,21 @@
-
 <div class="left-side">
-  <p class="spaced big">RULES</p>
+  <p class="big">HOME BASE</p>
   <p class="spaced">Each player has 5 ships</p>
   <p class="spaced">Take turns shooting</p>
   <p class="spaced">Sink all your opponent's ships to WIN!</p>
-</div>
-
-<div class="right-side">
-  <p class="spaced">Sink all you opponent's ships</p>
-
-  <!-- Eventually add record of games won and lost here. And provide option to play computer or online friend. -->
-
+  
   <p><%= link_to "NEW GAME", new_game_path, :class => "blue-button plain" %></p>
 
   <% if !!@game && !@game.over? %>
-    <p><%= link_to "Back to last game", load_game_path, method: :post, :class => "blue-button plain" %></p>
+    <%= link_to "Back to last game", load_game_path, method: :post, :class => "blue-button plain" %>
   <% end %> 
+</div>
 
+<div class="right-side">
+  <p class="big">STATS</p>
+  <p>Total games played: <%= @total_games %></p>
+  <p>Total games won: <%= @games_won %></p>
+  <p>Ships you have sunk: <%= @enemy_sunk_ships %></p>
+  <p>Ships you have lost: <%= @your_sunk_ships %></p>
+  <p>Last game: <%= @last_game_status %></p>
 </div>
