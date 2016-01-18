@@ -66,4 +66,18 @@ RSpec.describe SetupNewGame, :type => :model do
       expect(@board.ships[4].classification).to eq("Aircraft Carrier")
     end
   end
+
+  context "#run!" do
+    it "creates 2 boards for game" do
+      expect(game.boards.length).to eq 0
+      @game_setup.run!
+      expect(game.boards.length).to eq 2
+    end
+
+    it "places 5 ships on each new board" do
+      @game_setup.run!
+      expect(game.boards[0].ships.length).to eq 5
+      expect(game.boards[1].ships.length).to eq 5
+    end
+  end
 end
