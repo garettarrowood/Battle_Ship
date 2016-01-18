@@ -115,7 +115,8 @@ class CompAI
       return down(@last_hit.position) if @available_positions.include?(down(@last_hit.position))
       return right(@last_hit.position) if @available_positions.include?(right(@last_hit.position))
       return up(@last_hit.position) if @available_positions.include?(up(@last_hit.position))
-      second_last = @board.damaging_moves.last(2)[0].position
+      second_last = @board.damaging_moves.sort_by { |move| move.id }[-2].position
+      return left(second_last) if @available_positions.include?(left(second_last))
       return down(second_last) if @available_positions.include?(down(second_last))
       return right(second_last) if @available_positions.include?(right(second_last))
       return up(second_last) if @available_positions.include?(up(second_last))
@@ -125,7 +126,7 @@ class CompAI
 
   def analyze
     return "random" if @board.damaging_moves.length == 0
-    @last_hit = @board.damaging_moves.last
+    @last_hit = @board.damaging_moves.sort_by { |move| move.id }[-1]
     return "random" if @board.sinking_move?(@last_hit)
     "educated guess"
   end
@@ -154,10 +155,3 @@ class CompAI
     x <= 10 ? ActiveRecord::Point.new(x,y) : false
   end 
 end
-
-
-
-
-
-
-
