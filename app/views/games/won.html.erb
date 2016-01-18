@@ -1,4 +1,9 @@
+<div class="gameover">
+  <p class="big">You sunk all your enemy's ships!<br>You won!!!</p>
+  <p>RESULTS</p>
+  <p>Total shots made: <%= @moves %></p>
+  <p>Enemy sunk ships: 5</p>
+  <p>Your sunk ships: <%= @sunk_ships %></p> 
 
-<p class="big">User won!!!</p>
-
-<p><%= link_to 'Back to Base', games_path, :class => 'blue-button plain' %></p>
+  <p><%= link_to 'Back to Base', games_path, :class => 'blue-button plain' %></p>
+</div>

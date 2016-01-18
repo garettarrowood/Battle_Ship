@@ -1,4 +1,4 @@
-json.move @comp_move
+json.move @comp_position
 json.opponentSunkShips @opponent_board.sunk_ships
 json.opponentWins @user_board.all_ships_sunk?
 json.userSunkShips @user_board.sunk_ships
