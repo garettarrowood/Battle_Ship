@@ -68,6 +68,12 @@
   font-size: 18px;
 }
 
+.gameover {
+  margin: auto;
+  padding: 50px;
+  width: 300px;
+}
+
 /*/////// Game Boards ///////*/
 
 .grid {
@@ -257,7 +263,6 @@
 
 .big {
   font-size: 40px;
-  text-decoration: underline;
 }
 
 .center {
