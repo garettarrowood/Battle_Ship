@@ -26,8 +26,8 @@ class GamesController < ApplicationController
     @opponent_board = @game.boards.where(opponent?: true)[0]
     MoveLogger.new(params[:move], @opponent_board).log!
     @user_board = @game.boards.where(opponent?: false)[0]
-    @comp_move = CompAI.new(@user_board).new_move
-    MoveLogger.new(@comp_move, @user_board).log!
+    @comp_position = CompAI.new(@user_board).new_move
+    MoveLogger.new(@comp_position, @user_board).log!
   end
 
   def load_game # resolves load issue with gon gem
@@ -35,6 +35,8 @@ class GamesController < ApplicationController
   end
 
   def won
+    @moves = @game.boards.where(opponent?: false)[0].moves.length
+    @sunk_ships = @game.boards.where(opponent?: false)[0].sunk_ships.length
   end
 
   def lost
