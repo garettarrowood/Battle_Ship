@@ -4,7 +4,7 @@ class Board < ApplicationRecord
   has_many :moves, dependent: :delete_all
 
   validates_associated :game
-
+  
   def sunk_ships
     ship_classes = []
     ships.each do |ship|
@@ -15,6 +15,16 @@ class Board < ApplicationRecord
 
   def all_ships_sunk?
     sunk_ships.length == 5
+  end
+
+  def damaging_moves
+    moves.find_all { |move| move.hit? }
+  end
+
+  def sinking_move?(hitting_move)
+    ship = ships.select { |ship| ship.positions.include?(hitting_move.position) }[0]
+    return false unless ship.sunk?
+    hitting_move == damaging_moves.find_all { |move| ship.positions.include?(move.position) }.max
   end
 
   def patrol_boat

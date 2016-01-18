@@ -106,12 +106,58 @@ class CompAI
     @available_positions = BOARD - @board.moves.map(&:position)
   end
 
-  def new_move
-    @available_positions.sample
+  def new_move # must return a position
+    case analyze
+    when "random"
+      @available_positions.sample
+    when "educated guess"
+      return left(@last_hit.position) if @available_positions.include?(left(@last_hit.position))
+      return down(@last_hit.position) if @available_positions.include?(down(@last_hit.position))
+      return right(@last_hit.position) if @available_positions.include?(right(@last_hit.position))
+      return up(@last_hit.position) if @available_positions.include?(up(@last_hit.position))
+      second_last = @board.damaging_moves.last(2)[0].position
+      return down(second_last) if @available_positions.include?(down(second_last))
+      return right(second_last) if @available_positions.include?(right(second_last))
+      return up(second_last) if @available_positions.include?(up(second_last))
+      return @available_positions.sample
+    end
   end
 
   def analyze
-    # considers last move with @board.moves.last to determine next move
+    return "random" if @board.damaging_moves.length == 0
+    @last_hit = @board.damaging_moves.last
+    return "random" if @board.sinking_move?(@last_hit)
+    "educated guess"
   end
 
+  def up(position)
+    x = position.x
+    y = position.y - 1
+    y >= 1 ? ActiveRecord::Point.new(x,y) : false
+  end
+
+  def down(position)
+    x = position.x
+    y = position.y + 1
+    y <= 10 ? ActiveRecord::Point.new(x,y) : false
+  end
+
+  def left(position)
+    x = position.x - 1
+    y = position.y 
+    x >= 1 ? ActiveRecord::Point.new(x,y) : false
+  end
+
+  def right(position)
+    x = position.x + 1
+    y = position.y
+    x <= 10 ? ActiveRecord::Point.new(x,y) : false
+  end 
 end
+
+
+
+
+
+
+
