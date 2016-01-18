@@ -94,6 +94,14 @@ RSpec.describe Ship, :type => :model do
       expect(stringy_patrol.positions_to_strings).to eq(["5-8", "5-9"])
     end
   end
-end
 
-# Put ActiveRecord::Point monkey patching somewhere else?
+  context "ActiveRecord::Point#point_to_px" do
+    point1 = ActiveRecord::Point.new(1, 1)
+    point2 = ActiveRecord::Point.new(9, 5)
+
+    it "returns array of px coords" do
+      expect(point1.point_to_px).to eq(["0px", "0px"])
+      expect(point2.point_to_px).to eq(["256px", "128px"])
+    end
+  end
+end
