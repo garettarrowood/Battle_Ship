@@ -106,7 +106,7 @@ class CompAI
     @available_positions = BOARD - @board.moves.map(&:position)
   end
 
-  def new_move # must return a position
+  def new_move # returns a position
     case analyze
     when "random"
       @available_positions.sample

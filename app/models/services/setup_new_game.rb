@@ -35,7 +35,6 @@ class SetupNewGame
     board.ships.create(positions: carrier_points, classification: "Aircraft Carrier")
   end
 
-  # change into module?
   def strings_to_points(positions)
     positions.map do |string|
       x = string.split("-")[1].to_i
