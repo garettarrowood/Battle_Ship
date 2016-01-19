@@ -1,103 +1,48 @@
 /*/////// Layout ///////*/
 
-#header {
-  width: 100%;
-  background: #132029;
-  background-image: -webkit-linear-gradient(top, #132029, #6b757a);
-  background-image: -moz-linear-gradient(top, #132029, #6b757a);
-  background-image: -ms-linear-gradient(top, #132029, #6b757a);
-  background-image: -o-linear-gradient(top, #132029, #6b757a);
-  background-image: linear-gradient(to bottom, #132029, #6b757a);
-  height: 60px;
-}
-
-#footer {
-  bottom: 0;
-  width: 100%;
-  background: #132029;
-  background-image: -webkit-linear-gradient(top, #132029, #6b757a);
-  background-image: -moz-linear-gradient(top, #132029, #6b757a);
-  background-image: -ms-linear-gradient(top, #132029, #6b757a);
-  background-image: -o-linear-gradient(top, #132029, #6b757a);
-  background-image: linear-gradient(to bottom, #132029, #6b757a);
-  height: 165px;
-  z-index: 300;
-}
-
-#battleship-header {
-  position: absolute;
-  left: 32px;
-  top: 16px;
-  font-size: 28px;
-  color: white;
-}
-
-#logout {
-  position: absolute;
-  right: 55px;
-  top: 20px;
-  font-size: 20px;
-  color: white;
-  text-decoration: none;
-}
-
-#logout:hover {
-  font-style: italic;
-}
-
-#contact-info {
-  position: absolute;
-  right: 55px;
-  top: 580px;
-  font-size: 16px;
-  color: white;
-  text-decoration: none;
-}
-
-#contact-link {
-  color: white;
-}
-
-#contact-link:hover {
-  font-style: italic;
-}
-
-.left-side {
+.half-page {
   float: left;
-  width: 44%;
-  margin: 3%;
+  width: 42%;
+  margin-left: 4%;
+  margin-right: 4%;
 }
 
-.right-side {
-  float: left;
-  width: 44%;
-  margin: 3%;
-}
-
-.ship-holder {
+.draggable-ships {
   position: absolute;
   top: 224px;
   left: 448px;
 }
 
-.ship-block {
+#placement-instructions {
+  position: absolute;
+  top: 128px;
+  left: 448px;
+  width: 265px;
+}
+
+#arrange {
+  font-family: 'Sigmar One', cursive;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.arrange-instructions {
+  margin-bottom: 5px;
+}
+
+.sunk-ships {
   height: 170px;
   font-size: 18px;
 }
 
 .gameover, .welcome {
   margin: auto;
-  padding: 50px;
-  width: 300px;
+  padding: 30px;
+  width: 500px;
 }
 
 .registration {
   margin-top: 30px;
-}
-
-#notifications {
-  padding: 15px;
-  text-align: left;
 }
 
 /*/////// Game Boards ///////*/
@@ -289,6 +234,7 @@
 
 .big {
   font-size: 40px;
+  font-family: 'Sigmar One', cursive;
 }
 
 .center {
@@ -298,12 +244,13 @@
   width: 194px;
 }
 
-.top-left {
+.setup-label {
   position: absolute;
   left: 64px;
   top: 77px;
-  font-size: 20px;
+  font-size: 22px;
   width: 320px;
+  font-family: 'Sigmar One', cursive;
 }
 
 .label-align {
@@ -311,7 +258,8 @@
   left: 32px;
   top: 77px;
   width: 320px;
-  font-size: 20px;
+  font-size: 22px;
+  font-family: 'Sigmar One', cursive;
 }
 
 #opponent-board-label {
@@ -320,13 +268,6 @@
 
 #player-board-label {
   left: 610px;
-}
-
-#placement-instructions {
-  position: absolute;
-  top: 128px;
-  left: 448px;
-  width: 265px;
 }
 
 .blue-button {
@@ -346,6 +287,7 @@
   text-decoration: none;
   cursor: pointer;
   margin-top: 20px;
+  border: 2px outset buttonface;
 }
 
 .plain {
