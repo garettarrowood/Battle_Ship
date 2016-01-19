@@ -15,8 +15,8 @@
  *= require_self
  */
 
- @import url(//fonts.googleapis.com/css?family=Josefin+Sans:700);
- @import url(//fonts.googleapis.com/css?family=Sigmar+One);
+ @import url('//fonts.googleapis.com/css?family=Josefin+Sans:700');
+ @import url('//fonts.googleapis.com/css?family=Sigmar+One');
 
 /*/////// Global ///////*/
 
