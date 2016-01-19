@@ -79,6 +79,10 @@
   z-index: 100;
 }
 
+span.ship {
+  cursor: pointer;
+}
+
 .horizontal#patrol-boat {
   height: 30px;
   width: 62px;

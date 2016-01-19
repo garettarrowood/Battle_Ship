@@ -99,11 +99,19 @@ body {
   text-decoration: none;
 }
 
-#contact-link {
+#code {
+  position: absolute;
+  right: 55px;
+  top: 600px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+#contact-link, #code-link {
   color: white;
 }
 
-#contact-link:hover {
+#contact-link:hover, #code-link:hover {
   font-style: italic;
 }
 
