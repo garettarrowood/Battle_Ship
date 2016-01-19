@@ -8,7 +8,7 @@ class GamesController < ApplicationController
       @total_games = UserStats.total_games(current_user)
       @games_won = UserStats.games_won(current_user)
       @your_sunk_ships = UserStats.sunk_ships(current_user)
-      @enemy_sunk_ships = UserStats.sunk_ships(current_user)
+      @enemy_sunk_ships = UserStats.enemy_sunk_ships(current_user)
       @last_game_status = UserStats.game_status(@game)
     end
   end
