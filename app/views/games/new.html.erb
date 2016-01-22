@@ -110,21 +110,23 @@
   <div class="cell" id="10-8"></div>
   <div class="cell" id="10-9"></div>
   <div class="cell" id="10-10"></div>
-  <p class="blue-button" id="board-complete">DONE</p>
+  <p class="click-instructions">After the ship is placed, CLICK IT to rotate.</p>
+  <p>Ship will not rotate if there is not enough room.</p>
 </div>
 
-<div id="placement-instructions">
+<div id="instructions">
   <p id="arrange">ARRANGE YOUR SHIPS</p>
   <p class="arrange-instructions">Drag & Drop a Ship</p>
-  <p class="arrange-instructions">Then Click to Rotate</p>
 </div>
 
+<p class="blue-button" id="board-complete">DONE</p>
+
 <div class="draggable-ships">
-  <span class="ship horizontal position-a" id="patrol-boat"></span>
-  <span class="ship horizontal position-b" id="destroyer"></span>
+  <span class="ship horizontal position-e" id="patrol-boat"></span>
+  <span class="ship horizontal position-d" id="destroyer"></span>
   <span class="ship horizontal position-c" id="submarine"></span>
-  <span class="ship horizontal position-d" id="battleship"></span>
-  <span class="ship horizontal position-e" id="aircraft-carrier"></span>
+  <span class="ship horizontal position-b" id="battleship"></span>
+  <span class="ship horizontal position-a" id="aircraft-carrier"></span>
 </div>
 
 <script>$(document).ready(boardReady);</script>

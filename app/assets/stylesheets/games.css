@@ -13,11 +13,15 @@
   left: 448px;
 }
 
-#placement-instructions {
+#instructions {
   position: absolute;
   top: 128px;
   left: 448px;
   width: 265px;
+}
+
+.click-instructions {
+  margin-top: 15px;
 }
 
 #arrange {
@@ -301,7 +305,10 @@ span.ship {
 }
 
 #board-complete {
-  width: 280px;
+  position: absolute;
+  top: 400px;
+  left: 448px;
+  width: 221px;
 }
 
 .blue-button:hover {
