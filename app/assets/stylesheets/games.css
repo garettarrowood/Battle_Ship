@@ -231,6 +231,7 @@ span.ship {
 
 #opponent-board .available:hover {
   background-image: url("hover-cell.png");
+  cursor: pointer;
 }
 
 /*/////// Instructions & Buttons ///////*/
