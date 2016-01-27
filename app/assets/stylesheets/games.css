@@ -93,9 +93,12 @@ span.ship {
   cursor: pointer;
 }
 
-.horizontal#patrol-boat {
+.horizontal {
   min-height: 30px;
   max-height: 30px;
+}
+
+.horizontal#patrol-boat {
   min-width: 62px;
   max-width: 62px;
   background-image: url("patrol-boat.png");
@@ -109,8 +112,6 @@ span.ship {
 }
 
 .horizontal#destroyer {
-  min-height: 30px;
-  max-height: 30px;
   min-width: 94px;
   max-width: 94px;
   background-image: url("destroyer.png");
@@ -124,8 +125,6 @@ span.ship {
 }
 
 .horizontal#submarine {
-  min-height: 30px;
-  max-height: 30px;
   min-width: 94px;
   max-width: 94px;
   background-image: url("submarine.png");
@@ -139,8 +138,6 @@ span.ship {
 }
 
 .horizontal#battleship {
-  min-height: 30px;
-  max-height: 30px;
   min-width: 126px;
   max-width: 126px;
   background-image: url("battleship.png");
@@ -154,8 +151,6 @@ span.ship {
 }
 
 .horizontal#aircraft-carrier {
-  min-height: 30px;
-  max-height: 30px;
   min-width: 158px;
   max-width: 158px;
   background-image: url("aircraft-carrier.png");
@@ -168,43 +163,38 @@ span.ship {
   background-image: url("aircraft-carrier.png");
 }
 
+.vertical {
+  min-width: 30px;
+  max-width: 30px;
+}
+
 .vertical#patrol-boat {
   min-height: 62px;
   max-height: 62px;
-  min-width: 30px;
-  max-width: 30px;
   background-image: url("patrol-boat-vertical.png");
 }
 
 .vertical#destroyer {
   min-height: 94px;
   max-height: 94px;
-  min-width: 30px;
-  max-width: 30px;
   background-image: url("destroyer-vertical.png");
 }
 
 .vertical#submarine {
   min-height: 94px;
   max-height: 94px;
-  min-width: 30px;
-  max-width: 30px;
   background-image: url("submarine-vertical.png");
 }
 
 .vertical#battleship {
   min-height: 126px;
   max-height: 126px;
-  min-width: 30px;
-  max-width: 30px;
   background-image: url("battleship-vertical.png");
 }
 
 .vertical#aircraft-carrier {
   min-height: 158px;
   max-height: 158px;
-  min-width: 30px;
-  max-width: 30px;
   background-image: url("aircraft-carrier-vertical.png");
 }
 
