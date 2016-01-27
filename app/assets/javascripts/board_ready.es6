@@ -8,9 +8,9 @@ let boardReady = (function(){
       obstacles;
 
   $('.ship').mousedown(function(){
-    if (checkBottomWallCollision(this) && checkRightWallCollision(this) && checkOtherShips(this, board)){
+     if (checkBottomWallCollision(this) && checkRightWallCollision(this) && checkOtherShips(this, board)){
       rotate($(this));
-    }
+     }
   });
 
   $patrol_boat.draggable({
