@@ -15,6 +15,8 @@ gem "sprockets"
 gem "sprockets-es6"
 gem 'gon'
 gem 'rails_12factor', group: :production
+gem 'redis'
+gem 'em-hiredis'
 
 group :development, :test do
   gem 'rspec-rails'
