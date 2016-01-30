@@ -2,7 +2,8 @@ class SetupNewGame
 
   attr_accessor :patrol_boat, :destroyer, :submarine, :battleship, :aircraft_carrier, :game
 
-  def initialize(json, game)
+  def initialize(json, game, user)
+    @user = user
     @game = game
     @patrol_boat = json["0"]["positions"]
     @destroyer = json["1"]["positions"]
@@ -12,7 +13,7 @@ class SetupNewGame
   end
 
   def run!
-    user_board = @game.boards.create(owner: "{current_user.id}")
+    user_board = @game.boards.create(owner: @user.id.to_s)
     create_user_ships(user_board)
     if !@game.multiplayer?
       comp_board = @game.boards.create(owner: "comp")
