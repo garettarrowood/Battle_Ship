@@ -1,10 +1,10 @@
-# Be sure to restart your server when you modify this file. Action Cable runs in an EventMachine loop that does not support auto reloading.
 class GameChannel < ApplicationCable::Channel
-  def subscribed
-    stream_from "game_#{current_user.id}"
+  def follow(data)
+    stream_from "game_#{data['game_id']}_multiplayer_#{current_user.id}"
   end
 
-  def unsubscribed
-    Seek.remove(id)
+  def unfollow
+    Seek.remove("#{current_user.id}")
+    stop_all_streams
   end
 end
