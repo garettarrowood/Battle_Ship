@@ -1,11 +1,11 @@
 class CompAI
 
   x = 1.0
-  full_board = []
+  @@full_board = []
   10.times do
     y = 1.0
     10.times do
-      full_board << ActiveRecord::Point.new(x,y)
+      @@full_board << ActiveRecord::Point.new(x,y)
       y+=1
     end
     x+=1
@@ -13,7 +13,7 @@ class CompAI
 
   def initialize(board)
     @board = board
-    @available_positions = full_board - @board.moves.map(&:position)
+    @available_positions = @@full_board - @board.moves.map(&:position)
   end
 
   def new_move # returns a position
