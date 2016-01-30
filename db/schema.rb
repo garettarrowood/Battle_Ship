@@ -21,14 +21,16 @@ ActiveRecord::Schema.define(version: 20160130161617) do
     t.boolean  "opponent?"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_boards_on_game_id", using: :btree
   end
 
   create_table "games", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.boolean  "multiplayer?", default: false
-    t.boolean  "over?",        default: false
+    t.string   "status",       default: "pending"
+    t.index ["user_id"], name: "index_games_on_user_id", using: :btree
   end
 
   create_table "moves", force: :cascade do |t|
@@ -36,6 +38,7 @@ ActiveRecord::Schema.define(version: 20160130161617) do
     t.point    "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_moves_on_board_id", using: :btree
   end
 
   create_table "ships", force: :cascade do |t|
@@ -44,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160130161617) do
     t.string   "classification"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["board_id"], name: "index_ships_on_board_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
