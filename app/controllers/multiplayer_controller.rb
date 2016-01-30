@@ -2,15 +2,16 @@ class MultiplayerController < ApplicationController
   before_action :set_game, only: [:show]
 
   def create
-    # if Game.find(multiplayer?: true, status: "available")
-      # join that game
-      # @game = that
-    # else
-      # create new game
-      # @game = that
-    #end
+    if @game = Game.find_by(multiplayer?: true, status: "pending")
+      @game.status = "ongoing"
+      @game.users << current_user
+      @game.save
+      SetupNewGame.new(params[:ships], @game).run!
+    else
+      @game = current_user.games.create(multiplayer?: true)
+      SetupNewGame.new(params[:ships], @game).run!
+    end
     # Use Seek to determine what happens here. - some command that hits channel - maybe I don't create a game here??
-    @game = "something"
     render js: "window.location = '/multiplayer/#{@game.id}'"
   end
 

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get '/lost', to: "games#lost"
     end
     post '/load_game', to: "games#load_game", as: :load_game
-    resources :multiplayer, only: [:index, :create]
+    resources :multiplayer, only: [:show, :create]
   end
 
   # Serve websocket cable requests in-process

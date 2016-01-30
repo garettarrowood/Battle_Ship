@@ -5,11 +5,13 @@ class GamesController < ApplicationController
 
   def index
     if @game
+      @game.status = "over"
+      @game.save
       @total_games = UserStats.total_games(current_user)
-      @games_won = UserStats.games_won(current_user)
+      # @games_won = UserStats.games_won(current_user)
       @your_sunk_ships = UserStats.sunk_ships(current_user)
-      @enemy_sunk_ships = UserStats.enemy_sunk_ships(current_user)
-      @last_game_status = UserStats.game_status(@game)
+      # @enemy_sunk_ships = UserStats.enemy_sunk_ships(current_user)
+      # @last_game_status = UserStats.game_status(@game)
     end
   end
 
@@ -20,8 +22,6 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.create
     SetupNewGame.new(params[:ships], @game).run!
-    @game.status = "ongoing"
-    @game.save
     render js: "window.location = '/games/#{@game.id}'"
   end
 

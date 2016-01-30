@@ -1,5 +1,11 @@
 <p>Show view in multiplayer mode</p>
 
+<%= @game.users.map { |user| user.email } %><br>
+<%= @game.status %><br>
+<%= @game.boards %>
+
+<p><%= link_to 'Back to Base / Forfeit', games_path, :class => 'blue-button plain' %></p>
+
 <div id="text-area">
 
 </div>

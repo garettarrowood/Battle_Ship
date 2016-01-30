@@ -16,10 +16,6 @@ class UserStats
   end
 
   def self.game_status(game)
-    if game.status == "over"
-      game.boards.where(opponent?: true)[0].sunk_ships.length == 5 ? "Won" : "Lost"
-    else
-      "Still going - Click 'Back to last game'"
-    end
+    game.boards.where(opponent?: true)[0].sunk_ships.length == 5 ? "Won" : "Lost"
   end
 end
