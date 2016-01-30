@@ -7,7 +7,7 @@
   <p><%= link_to "NEW GAME", new_game_path, :class => "blue-button plain" %></p>
 
   <% if !!@game && !@game.over? %>
-    <%= link_to "Back to last game", load_game_path, method: :post, :class => "blue-button plain" %>
+    <%= link_to "Back to last game vs. computer", load_game_path, method: :post, :class => "blue-button plain" %>
   <% end %> 
 </div>
 

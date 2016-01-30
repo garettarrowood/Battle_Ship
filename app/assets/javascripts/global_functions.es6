@@ -81,6 +81,17 @@ function checkOtherShips(ship, board) {
   return answer;
 }
 
+function validBoardSetup(board) {
+  let valid = true;
+  board.ships.forEach(ship => {
+    ship.cells();
+    if (!ship.on_board()) {
+      valid = false;
+    }
+  });
+  return valid;
+}
+
 // gamePlay functions
 
 function setUserBoard(boardInfo) {
