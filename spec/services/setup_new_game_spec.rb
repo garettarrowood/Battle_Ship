@@ -49,7 +49,7 @@ RSpec.describe SetupNewGame, :type => :model do
 
   context "#create_user_ships" do
     before(:each) do
-      @board = game.boards.create(opponent?: false)
+      @board = game.boards.create(owner: "comp")
       @game_setup.create_user_ships(@board)
     end
 

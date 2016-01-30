@@ -20,7 +20,5 @@ RSpec.describe Move, :type => :model do
     it "responds false if move missed a ship" do
       expect(missing_move.hit?).to eq false
     end
-
   end
-  
 end

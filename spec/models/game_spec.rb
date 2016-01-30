@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Game, :type => :model do
   let(:game) { create :game }
-  let(:user_board) { create :board, opponent?: false, game: game }
+  let(:user_board) { create :board, owner: "1", game: game }
   
   it 'has valid factory' do
     expect(game).to be_valid

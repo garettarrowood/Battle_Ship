@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :board do
     game
-    opponent? [true, false].sample
+    owner "comp"
     transient do
       ships_count 1
     end

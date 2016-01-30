@@ -12,10 +12,10 @@ class SetupNewGame
   end
 
   def run!
-    user_board = @game.boards.create(opponent?: false)
+    user_board = @game.boards.create(owner: "{current_user.id}")
     create_user_ships(user_board)
     if !@game.multiplayer?
-      comp_board = @game.boards.create(opponent?: true)
+      comp_board = @game.boards.create(owner: "comp")
       GenerateRandomShips.new(comp_board).run!
       @game.status = "ongoing"
       @game.save
