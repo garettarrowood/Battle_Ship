@@ -14,7 +14,11 @@ class Board < ApplicationRecord
   end
 
   def all_ships_sunk?
-    sunk_ships.length == 5
+    if sunk_ships.length == 5
+      game.status = "over"
+      game.save
+      return true
+    end
   end
 
   def damaging_moves

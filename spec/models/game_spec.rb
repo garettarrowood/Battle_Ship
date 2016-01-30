@@ -8,16 +8,16 @@ RSpec.describe Game, :type => :model do
     expect(game).to be_valid
   end
 
-  context "#over?" do
+  context "#status" do
     it "returns false if game has no sunk ships" do
-      expect(game.over?).to eq false
+      expect(game.status).to eq "pending"
     end
 
     it "returns false if some but not all ships are sunk" do
       Move.create(board: user_board, position: ActiveRecord::Point.new(1,2))
       Move.create(board: user_board, position: ActiveRecord::Point.new(1,3))
       expect(user_board.ships[0].sunk?).to eq true
-      expect(game.over?).to eq false
+      expect(game.status).to eq "pending"
     end
 
     it "returns true if all ships are sunk on one board" do
@@ -38,7 +38,8 @@ RSpec.describe Game, :type => :model do
       Move.create(board: user_board, position: ActiveRecord::Point.new(5,4))
       Move.create(board: user_board, position: ActiveRecord::Point.new(5,5))
       Move.create(board: user_board, position: ActiveRecord::Point.new(5,6))
-      expect(game.over?).to eq true
+      expect(user_board.all_ships_sunk?).to eq true
+      expect(game.status).to eq "over"
     end
   end
 end

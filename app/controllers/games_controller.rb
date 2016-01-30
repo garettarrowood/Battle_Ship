@@ -20,6 +20,8 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.create
     SetupNewGame.new(params[:ships], @game).run!
+    @game.status = "ongoing"
+    @game.save
     render js: "window.location = '/games/#{@game.id}'"
   end
 
