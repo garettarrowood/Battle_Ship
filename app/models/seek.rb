@@ -1,7 +1,8 @@
 class Seek
   def self.create(id)
     if opponent = REDIS.spop("seeks")
-      # start a game - passing in a the id and the opponent / SetupNewGame: but have to alter to NOT generate random opponent ships
+      # start a game - Multiplayer.start(id, opponent, gameid)
+      binding.pry
     else
       REDIS.sadd("seeks", id)
     end
