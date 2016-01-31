@@ -6,7 +6,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     return $('#text-area').empty().append("<p>" + message + "</p>");
   },
   disconnected: function() {
-    // Called when the subscription has been terminated by the server
+    return this.printMessage("Opponent forfeited. You win!")
   },
   received: function(data) {
     // Called when there's incoming data on the websocket for this channel
