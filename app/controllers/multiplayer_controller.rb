@@ -11,11 +11,14 @@ class MultiplayerController < ApplicationController
       @game = current_user.games.create(multiplayer?: true)
       SetupNewGame.new(params[:ships], @game, current_user).run!
     end
-    # Use Seek to determine what happens here. - some command that hits channel - maybe I don't create a game here??
+    # Use Seek here? - some command that hits channel
     render js: "window.location = '/multiplayer/#{@game.id}'"
   end
 
   def show
+    @user = current_user
+    @user_board = @game.boards.where(owner: "#{current_user.id}")[0]
+    gon.jbuilder
   end
 
   private
