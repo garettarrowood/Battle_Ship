@@ -1,10 +1,10 @@
 class GameChannel < ApplicationCable::Channel
-  def follow(data)
-    stream_from "game #{data['game_id']} against user #{current_user.id}"
+  def subscribed
+    stream_from "battleship:#{current_user.id}"
   end
 
-  def unfollow
-    stop_all_streams
+  def unsubscribed
+    binding.pry
   end
 
   def move(data)
@@ -15,14 +15,21 @@ class GameChannel < ApplicationCable::Channel
     user_board = @game.boards.where(owner: user_id)[0]
     move = MoveLogger.new(data["coord"], opponent_board).log!
     if opponent_board.all_ships_sunk?
-      ActionCable.server.broadcast "game #{data["game_id"]} against user #{opponent_id}", { action: "game over", gameId: data["game_id"], winner: false }
-      ActionCable.server.broadcast "game #{data["game_id"]} against user #{user_id}", { action: "game over", gameId: data["game_id"], winner: true }
+      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "game over", gameId: data["game_id"], winner: false }
+      ActionCable.server.broadcast "battleship:#{user_id}", { action: "game over", gameId: data["game_id"], winner: true }
     else
       opponentSunkShips = opponent_board.sunk_ships
       userSunkShips = user_board.sunk_ships
-      ActionCable.server.broadcast "game #{data["game_id"]} against user #{opponent_id}", { action: "make move", x: data["x"], y: data["y"] }
+      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "make move", x: data["x"], y: data["y"] }
       move_success = move.hit?
-      ActionCable.server.broadcast "game #{data["game_id"]} against user #{user_id}", { action: "move success", move_success: move_success, coord: data["coord"], userSunkShips: userSunkShips, opponentSunkShips: opponentSunkShips }
+      ActionCable.server.broadcast "battleship:#{user_id}", { action: "move success", move_success: move_success, coord: data["coord"], userSunkShips: userSunkShips, opponentSunkShips: opponentSunkShips }
     end
+  end
+
+  def lose(data)
+    @game = Game.find(data["game_id"])
+    opponent_id = @game.users.select {|user| user != current_user }[0].id.to_s
+    ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "gave up", gameId: data["game_id"] }
+
   end
 end
