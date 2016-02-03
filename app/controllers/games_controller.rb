@@ -29,6 +29,8 @@ class GamesController < ApplicationController
   def show
     @opponent_board = @game.boards.where(owner: "comp")[0]
     @user_board = @game.boards.where(owner: "#{current_user.id}")[0]
+    set_user_ships(@user_board)
+    set_opponent_ships(@opponent_board)
     gon.jbuilder
   end
 
@@ -60,12 +62,28 @@ class GamesController < ApplicationController
 
   private
 
-  def set_game
-    @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
-  end
+    def set_game
+      @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
+    end
 
-  def set_last_game
-    @game = current_user.games.last
-  end
+    def set_last_game
+      @game = current_user.games.last
+    end
+
+    def set_user_ships(user_board)
+      @user_patrol = user_board.ships.where(classification: "Patrol Boat")[0]
+      @user_destroyer = user_board.ships.where(classification: "Destroyer")[0]
+      @user_submarine = user_board.ships.where(classification: "Submarine")[0]
+      @user_battleship = user_board.ships.where(classification: "Battleship")[0]
+      @user_carrier = user_board.ships.where(classification: "Aircraft Carrier")[0]
+    end
+
+    def set_opponent_ships(opponent_board)
+      @opponent_patrol = opponent_board.ships.where(classification: "Patrol Boat")[0]
+      @opponent_destroyer = opponent_board.ships.where(classification: "Destroyer")[0]
+      @opponent_submarine = opponent_board.ships.where(classification: "Submarine")[0]
+      @opponent_battleship = opponent_board.ships.where(classification: "Battleship")[0]
+      @opponent_carrier = opponent_board.ships.where(classification: "Aircraft Carrier")[0]
+    end
 
 end
