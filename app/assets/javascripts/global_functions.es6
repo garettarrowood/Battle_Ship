@@ -204,7 +204,7 @@ function gameUpdates(data) {
 
 function multiplayerCellCheck() {
   if ($(this).hasClass("available")) {
-    let path =  window.location.pathname,
+    let path = window.location.pathname,
         gameId = path.split("/")[2],
         opponent_coord = this.id.split("opponent-")[1],
         opponent_x = opponent_coord.split("-")[1],
@@ -215,3 +215,12 @@ function multiplayerCellCheck() {
     $('#opponent-board .cell').off("click");
   }
 };
+
+function loseCallBack(){
+  let path = window.location.pathname,
+      gameId = path.split("/")[2];
+
+  App.game.perform("lose", { game_id: gameId} )
+}
+
+

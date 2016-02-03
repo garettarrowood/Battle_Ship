@@ -1,12 +1,16 @@
 App.game = App.cable.subscriptions.create("GameChannel", {
+
   connected: function() {
-    return this.printMessage("Waiting for opponent...");
+    this.printMessage("Waiting for game to start.");
   },
+
   printMessage: function(message) {
-    return $('#multiplayer-message').empty().append("<p>" + message + "</p>");
+    $('#multiplayer-message').empty().append("<p>" + message + "</p>");
   },
+
   disconnected: function() {
-    return this.printMessage("Opponent forfeited. You win!")
+    this.printMessage("Opponent forfeited. You win!")
+    // this.received({action: "game over", winner: true})
   },
   received: function(data) {
     switch (data.action) {
@@ -18,10 +22,10 @@ App.game = App.cable.subscriptions.create("GameChannel", {
         let $opponent_cell = $("#opponent-"+data.coord);
         if (data.move_success) {
           $opponent_cell.addClass("hit");
-          this.printMessage("Hit! Now wait for your turn.");
+          this.printMessage("Hit! Wait for opponent's move.");
         } else {
           $opponent_cell.addClass("miss");
-          this.printMessage("Miss. Now wait for your turn.");
+          this.printMessage("Miss. Wait for opponent's move.");
         }
         updateOpponentShipDisplay(data.opponentSunkShips);
         updateUserShipDisplay(data.userSunkShips);
@@ -30,7 +34,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
       case "make move":
         updateUserBoard(data.x, data.y);
         $('#opponent-board .cell').on("click", multiplayerCellCheck);
-        this.printMessage("Your turn! Launch you missile.");
+        this.printMessage("Your turn! Launch a missile.");
         break;
       case "game over":
         if (data.winner === true) {
@@ -38,6 +42,9 @@ App.game = App.cable.subscriptions.create("GameChannel", {
         } else if (data.winner === false) {
           window.location.href = `/games/${data.gameId}/lost`;
         }
+        break;
+      case "gave up":
+        window.location.href = `/multiplayer/${data.gameId}/opponent-forfeit`
         break;
     }
   }
