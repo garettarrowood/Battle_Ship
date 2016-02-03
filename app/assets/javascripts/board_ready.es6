@@ -68,17 +68,17 @@ let boardReady = (function(){
     tolerance: "fit"
   });
 
-  $('#board-complete').on("click", (event) => {
-    let valid = true;
-    board.ships.forEach(ship => {
-      ship.cells();
-      if (!ship.on_board()) {
-        valid = false;
-      }
-    });
-
-    if (valid) {
+  $('#board-complete-comp').on("click", (event) => {
+    if (validBoardSetup(board)) {
       $.post("/games", { ships: board.ships } )
+    } else {
+      alert("Make sure all your ships are placed before submitting your board.");
+    }
+  });
+
+  $('#board-complete-multi').on("click", (event) => {
+    if (validBoardSetup(board)) {
+      $.post("/multiplayer", { ships: board.ships } )
     } else {
       alert("Make sure all your ships are placed before submitting your board.");
     }

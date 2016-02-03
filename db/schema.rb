@@ -11,22 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151220022035) do
+ActiveRecord::Schema.define(version: 20160130210218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
     t.integer  "game_id"
-    t.boolean  "opponent?"
+    t.string   "owner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_boards_on_game_id", using: :btree
   end
 
   create_table "games", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "multiplayer?", default: false
+    t.string   "status",       default: "pending"
+    t.string   "winner"
   end
 
   create_table "moves", force: :cascade do |t|
@@ -34,6 +37,7 @@ ActiveRecord::Schema.define(version: 20151220022035) do
     t.point    "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_moves_on_board_id", using: :btree
   end
 
   create_table "ships", force: :cascade do |t|
@@ -42,6 +46,7 @@ ActiveRecord::Schema.define(version: 20151220022035) do
     t.string   "classification"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["board_id"], name: "index_ships_on_board_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,6 +64,13 @@ ActiveRecord::Schema.define(version: 20151220022035) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "users_games", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.index ["game_id"], name: "index_users_games_on_game_id", using: :btree
+    t.index ["user_id"], name: "index_users_games_on_user_id", using: :btree
   end
 
 end

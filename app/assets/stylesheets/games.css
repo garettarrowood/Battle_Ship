@@ -321,9 +321,16 @@ span.ship {
   display: block;
 }
 
-#board-complete {
+#board-complete-comp {
   position: absolute;
   top: 400px;
+  left: 448px;
+  width: 221px;
+}
+
+#board-complete-multi {
+  position: absolute;
+  top: 460px;
   left: 448px;
   width: 221px;
 }

@@ -1,0 +1,12 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+#multiplayer-message {
+  position: absolute;
+  color: white;
+  top: 28px;
+  left: 360px;
+  font-size: 15px;
+}

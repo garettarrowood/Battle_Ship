@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', github: "rails/rails"
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'turbolinks'
@@ -15,6 +14,8 @@ gem "sprockets"
 gem "sprockets-es6"
 gem 'gon'
 gem 'rails_12factor', group: :production
+gem 'redis'
+gem 'em-hiredis'
 
 group :development, :test do
   gem 'rspec-rails'

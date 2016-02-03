@@ -81,6 +81,17 @@ function checkOtherShips(ship, board) {
   return answer;
 }
 
+function validBoardSetup(board) {
+  let valid = true;
+  board.ships.forEach(ship => {
+    ship.cells();
+    if (!ship.on_board()) {
+      valid = false;
+    }
+  });
+  return valid;
+}
+
 // gamePlay functions
 
 function setUserBoard(boardInfo) {
@@ -105,19 +116,16 @@ function setUserShip(boatData, $boat) {
   }
 }
 
-// wait for sound to finish before going on? - setTimeout()
 function clickCellCallback() {
   if ($(this).hasClass("available")) {
-    let launch = new Audio('/assets/Missle_Launch.mp3'),
-        gamePath =  window.location.pathname,
+    let path =  window.location.pathname,
         opponent_coord = this.id.split("opponent-")[1],
         opponent_x = opponent_coord.split("-")[1],
         opponent_y = opponent_coord.split("-")[0];
 
-    // launch.play();
     updateOpponentBoard(opponent_x, opponent_y);
 
-    $.post(`${gamePath}/move`, {move: opponent_coord}).done(gameUpdates);
+    $.post(`${path}/move`, {move: opponent_coord}).done(gameUpdates);
   }
 };
 
@@ -191,4 +199,28 @@ function gameUpdates(data) {
     window.location.href = `${gamePath}/lost`;
   }
 }
+
+// multiplayer functions
+
+function multiplayerCellCheck() {
+  if ($(this).hasClass("available")) {
+    let path = window.location.pathname,
+        gameId = path.split("/")[2],
+        opponent_coord = this.id.split("opponent-")[1],
+        opponent_x = opponent_coord.split("-")[1],
+        opponent_y = opponent_coord.split("-")[0];
+
+    App.game.perform("move", { game_id: gameId, x: opponent_x, y: opponent_y, coord: opponent_coord });
+
+    $('#opponent-board .cell').off("click");
+  }
+};
+
+function loseCallBack(){
+  let path = window.location.pathname,
+      gameId = path.split("/")[2];
+
+  App.game.perform("lose", { game_id: gameId} )
+}
+
 

@@ -247,8 +247,6 @@
     <div class="ship dummy-battleship"></div>
     <div class="ship dummy-aircraft"></div>
   </div>
-
-  <p><%= link_to 'Back to Base / Forfeit', games_path, :class => 'blue-button plain' %></p>
 </div>
 
 <div class="labels">
@@ -256,4 +254,8 @@
   <p class="label-align" id="player-board-label">PLAYER</p>
 </div>
 
-<script>$(document).ready(gamePlay);</script>
+<div id="multiplayer-message">
+  <%= @user.email %>
+</div>
+
+<script>$(document).ready(multiplayerPlay);</script>
