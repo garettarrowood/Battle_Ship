@@ -8,3 +8,4 @@
 
 User.create! email: "submarine@guest.com", password: "battleship"
 User.create! email: "destroyer@guest.com", password: "battleship"
+User.create! email: "torpedo@guest.com", password: "battleship"
