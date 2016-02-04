@@ -93,7 +93,6 @@ function validBoardSetup(board) {
 }
 
 // gamePlay functions
-
 function setUserBoard(boardInfo) {
   let $patrol_boat = $('#patrol-boat'),
       $destroyer = $('#destroyer'),
@@ -201,7 +200,6 @@ function gameUpdates(data) {
 }
 
 // multiplayer functions
-
 function multiplayerCellCheck() {
   if ($(this).hasClass("available")) {
     let path = window.location.pathname,
@@ -222,5 +220,3 @@ function loseCallBack(){
 
   App.game.perform("lose", { game_id: gameId} )
 }
-
-

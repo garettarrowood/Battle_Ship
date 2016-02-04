@@ -3,10 +3,6 @@ class GameChannel < ApplicationCable::Channel
     stream_from "battleship:#{current_user.id}"
   end
 
-  def unsubscribed
-    binding.pry
-  end
-
   def move(data)
     @game = Game.find(data["game_id"])
     opponent_id = @game.users.select {|user| user != current_user }[0].id.to_s
