@@ -27,17 +27,15 @@ class GamesController < ApplicationController
   end
 
   def show
-    @opponent_board = @game.boards.where(owner: "comp")[0]
-    @user_board = @game.boards.where(owner: "#{current_user.id}")[0]
-    set_user_ships(@user_board)
-    set_opponent_ships(@opponent_board)
+    @opponent_board = @game.boards.find_by_owner("comp")
+    @user_board = @game.boards.find_by_owner("#{current_user.id}")
     gon.jbuilder
   end
 
   def move
-    @opponent_board = @game.boards.where(owner: "comp")[0]
+    @opponent_board = @game.boards.find_by_owner("comp")
     MoveLogger.new(params[:move], @opponent_board).log!
-    @user_board = @game.boards.where(owner: "#{current_user.id}")[0]
+    @user_board = @game.boards.find_by_owner("#{current_user.id}")
     @comp_position = CompAI.new(@user_board).new_move
     MoveLogger.new(@comp_position, @user_board).log!
   end
@@ -49,15 +47,15 @@ class GamesController < ApplicationController
   def won
     @game.winner = current_user.id
     @game.save
-    @moves = @game.boards.where.not(owner: "#{current_user.id}")[0].moves.length
-    @sunk_ships = @game.boards.where(owner: "#{current_user.id}")[0].sunk_ships.length
+    @moves = @game.boards.where.not(owner: "#{current_user.id}")[0].moves.size
+    @sunk_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
   end
 
   def lost
     @game.winner = @game.boards.where.not(owner: "#{current_user.id}")[0].owner
     @game.save
-    @moves = @game.boards.where(owner: "#{current_user.id}")[0].moves.length
-    @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.length
+    @moves = @game.boards.find_by_owner("#{current_user.id}").moves.size
+    @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.size
   end
 
   private
@@ -68,22 +66,6 @@ class GamesController < ApplicationController
 
     def set_last_game
       @game = current_user.games.last
-    end
-
-    def set_user_ships(user_board)
-      @user_patrol = user_board.ships.where(classification: "Patrol Boat")[0]
-      @user_destroyer = user_board.ships.where(classification: "Destroyer")[0]
-      @user_submarine = user_board.ships.where(classification: "Submarine")[0]
-      @user_battleship = user_board.ships.where(classification: "Battleship")[0]
-      @user_carrier = user_board.ships.where(classification: "Aircraft Carrier")[0]
-    end
-
-    def set_opponent_ships(opponent_board)
-      @opponent_patrol = opponent_board.ships.where(classification: "Patrol Boat")[0]
-      @opponent_destroyer = opponent_board.ships.where(classification: "Destroyer")[0]
-      @opponent_submarine = opponent_board.ships.where(classification: "Submarine")[0]
-      @opponent_battleship = opponent_board.ships.where(classification: "Battleship")[0]
-      @opponent_carrier = opponent_board.ships.where(classification: "Aircraft Carrier")[0]
     end
 
 end

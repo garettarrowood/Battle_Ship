@@ -17,9 +17,7 @@ class MultiplayerController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @user_board = @game.boards.where(owner: "#{current_user.id}")[0]
-    set_user_ships(@user_board)
+    @user_board = @game.boards.find_by_owner("#{current_user.id}")
     gon.jbuilder
   end
 
@@ -33,13 +31,5 @@ class MultiplayerController < ApplicationController
 
     def set_game
       @game = Game.find(params[:id])
-    end
-
-    def set_user_ships(user_board)
-      @user_patrol = user_board.ships.where(classification: "Patrol Boat")[0]
-      @user_destroyer = user_board.ships.where(classification: "Destroyer")[0]
-      @user_submarine = user_board.ships.where(classification: "Submarine")[0]
-      @user_battleship = user_board.ships.where(classification: "Battleship")[0]
-      @user_carrier = user_board.ships.where(classification: "Aircraft Carrier")[0]
     end
 end
