@@ -57,3 +57,7 @@ Rails.application.configure do
   # Added for Devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
+
+# ENV["REDISTOGO_URL"] = 'redis://redistogo:7996801445e69dc679c13dfe744acace@chubb.redistogo.com:9668/'
+
+# ActionCable.server.config.allowed_request_origins = ["http://localhost:3000"]
