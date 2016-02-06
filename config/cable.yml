@@ -2,6 +2,7 @@
 production:
   url: redis://redistogo:7996801445e69dc679c13dfe744acace@chubb.redistogo.com:9668
   password: 7996801445e69dc679c13dfe744acace
+  host: chubb.redistogo.com
   port: 9668
   inline: true
   timeout: 1

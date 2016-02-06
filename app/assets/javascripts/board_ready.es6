@@ -84,7 +84,7 @@ let boardReady = (function(){
     if (validBoardSetup(board)) {
       $.post("/games", { ships: board.ships } )
     } else {
-      shipPlacementWarning("Ships are not validly placed");
+      shipPlacementWarning("Ship placement invalid");
     }
   });
 
@@ -92,7 +92,7 @@ let boardReady = (function(){
     if (validBoardSetup(board)) {
       $.post("/multiplayer", { ships: board.ships } )
     } else {
-      shipPlacementWarning("Ships are not validly placed");
+      shipPlacementWarning("Ship placement invalid");
     }
   });
 });
