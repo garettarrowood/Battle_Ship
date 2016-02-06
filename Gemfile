@@ -16,6 +16,7 @@ gem 'gon'
 gem 'rails_12factor', group: :production
 gem 'redis'
 gem 'em-hiredis'
+gem 'faye-websocket'
 
 group :development, :test do
   gem 'rspec-rails'

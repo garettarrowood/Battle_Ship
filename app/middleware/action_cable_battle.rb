@@ -1,5 +1,3 @@
-require 'faye/websocket'
-
 class ActionCableBattle  
   def initialize(app, options={})
     @app = app
