@@ -169,6 +169,7 @@ function updateOpponentBoard(x, y) {
 }
 
 function isUserShipHit(user_coord) {
+  debugger
   return gon.user_board.occupied_positions.includes(user_coord);
 }
 
