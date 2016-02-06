@@ -18,37 +18,43 @@ function rotate($ship) {
 }
 
 function checkBottomWallCollision(ship) {
-  switch (ship.id) {
-    case "patrol-boat":
-      return parseInt(ship.style.top) <= 160;
-      break;
-    case "destroyer":
-    case "submarine":
-      return parseInt(ship.style.top) <= 128;
-      break;
-    case "battleship":
-      return parseInt(ship.style.top) <= 96;
-      break;
-    case "aircraft-carrier":
-      return parseInt(ship.style.top) <= 64;
+  if (ship.classList.contains('vertical')) {
+    switch (ship.id) {
+      case "patrol-boat":
+        return parseInt(ship.style.top) <= 160;
+        break;
+      case "destroyer":
+      case "submarine":
+        return parseInt(ship.style.top) <= 128;
+        break;
+      case "battleship":
+        return parseInt(ship.style.top) <= 96;
+        break;
+      case "aircraft-carrier":
+        return parseInt(ship.style.top) <= 64;
+    }
   }
+  return true;
 }
 
 function checkRightWallCollision(ship) {
-  switch (ship.id) {
-    case "patrol-boat":
-      return parseInt(ship.style.left) <= -128;
-      break;
-    case "destroyer":
-    case "submarine":
-      return parseInt(ship.style.left) <= -160;
-      break;
-    case "battleship":
-      return parseInt(ship.style.left) <= -192;
-      break;
-    case "aircraft-carrier":
-      return parseInt(ship.style.left) <= -224;
+  if (ship.classList.contains('horizontal')) {
+    switch (ship.id) {
+      case "patrol-boat":
+        return parseInt(ship.style.left) <= -128;
+        break;
+      case "destroyer":
+      case "submarine":
+        return parseInt(ship.style.left) <= -160;
+        break;
+      case "battleship":
+        return parseInt(ship.style.left) <= -192;
+        break;
+      case "aircraft-carrier":
+        return parseInt(ship.style.left) <= -224;
+    }
   }
+  return true;
 }
 
 function checkOtherShips(ship, board) {
@@ -61,13 +67,13 @@ function checkOtherShips(ship, board) {
           column = parseInt(first),
           row = parseInt(first.substr(2));
 
-      if (ship.className.match(/\bhorizontal\b/)) {
+      if (ship.className.match(/\bvertical\b/)) {
         for(let i=0; i<size; i++) {
           flipped.push((column+i)+'-'+row);
         }
       } else {
         for(let i=0; i<size; i++) {
-          flipped.push(column+'-'+(row+1));
+          flipped.push(column+'-'+(row+i));
         }
       }
 
@@ -82,14 +88,26 @@ function checkOtherShips(ship, board) {
 }
 
 function validBoardSetup(board) {
-  let valid = true;
+  let valid = true,
+      positions = [];
   board.ships.forEach(ship => {
-    ship.cells();
-    if (!ship.on_board()) {
+    positions.push(ship.cells());
+    let boat = $('#'+ship.classification)[0];
+    if (!ship.on_board() || !checkRightWallCollision(boat) || !checkBottomWallCollision(boat)) {
       valid = false;
     }
   });
+  let allPositions = [].concat.apply([], positions);
+  if (allPositions.uniq().length !== 17){
+    valid = false;
+  }
   return valid;
+}
+
+function shipPlacementWarning(message) {
+  $('#ship-warning').append('<p class="ship-message">'+message+'</p>').fadeOut(3000, function() {
+    $(this).empty().fadeIn(0);
+  });
 }
 
 // gamePlay functions
@@ -219,4 +237,17 @@ function loseCallBack(){
       gameId = path.split("/")[2];
 
   App.game.perform("lose", { game_id: gameId} )
+}
+
+// uniq function
+Array.prototype.uniq = function() {
+  let n = {},
+      r=[];
+  for(var i = 0; i < this.length; i++) {
+    if (!n[this[i]]) {
+      n[this[i]] = true; 
+      r.push(this[i]); 
+    }
+  }
+  return r;
 }

@@ -110,13 +110,12 @@
   <div class="cell" id="10-8"></div>
   <div class="cell" id="10-9"></div>
   <div class="cell" id="10-10"></div>
-  <p class="click-instructions">After the ship is placed, CLICK IT to rotate.</p>
-  <p>Ship will not rotate if there is not enough room.</p>
+  <p class="click-instructions"></p>
 </div>
 
 <div id="instructions">
   <p id="arrange">ARRANGE YOUR SHIPS</p>
-  <p class="arrange-instructions">Drag & Drop a Ship</p>
+  <p class="arrange-instructions">Drag & Drop a Ship<br>CLICK to rotate</p>
 </div>
 
 <p class="blue-button" id="board-complete-comp">Play Computer</p>
@@ -129,5 +128,7 @@
   <div class="ship horizontal position-b" id="battleship"></div>
   <div class="ship horizontal position-a" id="aircraft-carrier"></div>
 </div>
+
+<div id="ship-warning"></div>
 
 <script>$(document).ready(boardReady);</script>

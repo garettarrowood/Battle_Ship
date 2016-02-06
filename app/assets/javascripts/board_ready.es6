@@ -5,12 +5,24 @@ let boardReady = (function(){
       $battleship = $('#battleship'),
       $aircraft_carrier = $('#aircraft-carrier'),
       board = new Board,
-      obstacles;
+      obstacles, shipLeftPosition, shipTopPosition;
 
   $('.ship').mousedown(function(){
-     if (checkBottomWallCollision(this) && checkRightWallCollision(this) && checkOtherShips(this, board)){
+    shipLeftPosition = this.style.left;
+    shipTopPosition = this.style.top;
+  });
+
+  $('.ship').mouseup(function(){
+    if (this.style.top === shipTopPosition && 
+        this.style.left === shipLeftPosition) {
       rotate($(this));
-     }
+      if (!checkBottomWallCollision(this) || !checkRightWallCollision(this)) {
+        shipPlacementWarning("Ship is off of board");
+      }
+      if (!checkOtherShips(this, board)) {
+        shipPlacementWarning("Ships overlap");
+      }
+    }
   });
 
   $patrol_boat.draggable({
@@ -72,7 +84,7 @@ let boardReady = (function(){
     if (validBoardSetup(board)) {
       $.post("/games", { ships: board.ships } )
     } else {
-      alert("Make sure all your ships are placed before submitting your board.");
+      shipPlacementWarning("Ships are not validly placed");
     }
   });
 
@@ -80,7 +92,7 @@ let boardReady = (function(){
     if (validBoardSetup(board)) {
       $.post("/multiplayer", { ships: board.ships } )
     } else {
-      alert("Make sure all your ships are placed before submitting your board.");
+      shipPlacementWarning("Ships are not validly placed");
     }
   });
 });
