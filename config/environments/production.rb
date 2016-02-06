@@ -40,8 +40,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Action Cable endpoint configuration
-  # config.action_cable.url = 'wss://example.com/cable'
-  # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
+  config.action_cable.url = 'wss://example.com/cable'
+  config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -84,6 +84,6 @@ Rails.application.configure do
   # Added for Devise via the instructions it provided me in my shell after install
   config.action_mailer.default_url_options = { host: "when I push to Heroku, it says I need to replace this string with the full url. But didn't have to with previous app." }
 
-  config.middleware.use ActionCableBattle
-  config.web_socket_server_url = "wss://play-battleship.herokuapp.com/"
+  # config.middleware.use ActionCableBattle
+  # config.web_socket_server_url = "wss://play-battleship.herokuapp.com/"
 end
