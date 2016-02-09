@@ -9,9 +9,8 @@ App.game = App.cable.subscriptions.create("GameChannel", {
   },
 
   disconnected: function() {
-    this.printMessage("Opponent forfeited. You win!")
-    // this.received({action: "game over", winner: true})
   },
+
   received: function(data) {
     switch (data.action) {
       case "go first":
@@ -44,7 +43,10 @@ App.game = App.cable.subscriptions.create("GameChannel", {
         }
         break;
       case "gave up":
-        window.location.href = `/multiplayer/${data.gameId}/opponent-forfeit`
+        function delayForfeit() {
+          window.location.href = `/multiplayer/${data.gameId}/opponent-forfeit`;
+        }
+        setTimeout(delayForfeit, 2500);
         break;
     }
   }

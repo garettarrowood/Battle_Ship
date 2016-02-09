@@ -236,17 +236,17 @@ function loseCallBack(){
   let path = window.location.pathname,
       gameId = path.split("/")[2];
 
-  App.game.perform("lose", { game_id: gameId} )
+  App.game.perform("lose", { game_id: gameId} );
 }
 
 // uniq function
 Array.prototype.uniq = function() {
   let n = {},
-      r=[];
+      r = [];
   for(var i = 0; i < this.length; i++) {
     if (!n[this[i]]) {
       n[this[i]] = true; 
-      r.push(this[i]); 
+      r.push(this[i]);
     }
   }
   return r;
