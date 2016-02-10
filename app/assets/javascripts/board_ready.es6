@@ -17,7 +17,7 @@ let boardReady = (function(){
         this.style.left === shipLeftPosition) {
       rotate($(this));
       if (!checkBottomWallCollision(this) || !checkRightWallCollision(this)) {
-        shipPlacementWarning("Ship is off of board");
+        shipPlacementWarning("Ship is off board");
       }
       if (!checkOtherShips(this, board)) {
         shipPlacementWarning("Ships overlap");
