@@ -11,10 +11,10 @@ class Ship {
 
   cells() {
     if (this.on_board()) {
-      let ship = $('#'+this.classification);
-      let row = parseInt(ship[0].style.left)/32 + 13;
-      let column = parseInt(ship[0].style.top)/32 + 4;
-      let answer = [];
+      let ship = $('#'+this.classification),
+          row = parseInt(ship[0].style.left)/32 + 13,
+          column = parseInt(ship[0].style.top)/32 + 3,
+          answer = [];
 
       if (ship.hasClass("vertical")){
         for(let i=0;i<this.length;i++){

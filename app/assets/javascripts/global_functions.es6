@@ -21,17 +21,17 @@ function checkBottomWallCollision(ship) {
   if (ship.classList.contains('vertical')) {
     switch (ship.id) {
       case "patrol-boat":
-        return parseInt(ship.style.top) <= 160;
+        return parseInt(ship.style.top) <= 192;
         break;
       case "destroyer":
       case "submarine":
-        return parseInt(ship.style.top) <= 128;
+        return parseInt(ship.style.top) <= 160;
         break;
       case "battleship":
-        return parseInt(ship.style.top) <= 96;
+        return parseInt(ship.style.top) <= 128;
         break;
       case "aircraft-carrier":
-        return parseInt(ship.style.top) <= 64;
+        return parseInt(ship.style.top) <= 96;
     }
   }
   return true;
@@ -105,7 +105,7 @@ function validBoardSetup(board) {
 }
 
 function shipPlacementWarning(message) {
-  $('#ship-warning').append('<p class="ship-message">'+message+'</p>').fadeOut(3000, function() {
+  $('#ship-warning').append('<p class="ship-message">'+message+'</p>').fadeOut(2500, function() {
     $(this).empty().fadeIn(0);
   });
 }

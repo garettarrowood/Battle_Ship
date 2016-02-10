@@ -3,10 +3,26 @@
   They will automatically be included in application.css.
 */
 
-#multiplayer-message {
+.multiplayer-center {
   position: absolute;
-  color: white;
-  top: 28px;
-  left: 360px;
-  font-size: 15px;
+  left: 384px;
+  top: 77px;
+  width: 194px;
+}
+
+#multiplayer-message {
+  height: 51px;
+  font-size: 25px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.black {
+  color: black;
 }
