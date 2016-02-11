@@ -7,7 +7,12 @@ class GamesController < ApplicationController
     if @game
       @game.status = "over"
       @game.save
-      @stats = UserStats.new(current_user, @game)
+      stats = UserStats.new(current_user, @game)
+      @total_games = stats.total_games
+      @games_won = stats.games_won
+      @your_sunk_ships = stats.sunk_ships
+      @enemy_sunk_ships = stats.enemy_sunk_ships
+      @last_game_status = stats.game_status
     end
   end
 
