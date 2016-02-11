@@ -8,13 +8,15 @@ App.game = App.cable.subscriptions.create("GameChannel", {
     $('#multiplayer-message').empty().append("<p class='" + color + "''>" + message + "</p>");
   },
 
-  disconnected: function() {
+  addOpponentName: function(name) {
+    $('.opponent-name').empty().append(name);
   },
 
   received: function(data) {
     switch (data.action) {
       case "go first":
         $('#opponent-board .cell').on("click", multiplayerCellCheck);
+        this.addOpponentName(data.name);
         this.printMessage("Game started. You go first!", "green");
         break;
       case "move success":
@@ -33,6 +35,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
       case "make move":
         updateUserBoard(data.x, data.y);
         $('#opponent-board .cell').on("click", multiplayerCellCheck);
+        this.addOpponentName(data.name);
         this.printMessage("Your turn! Launch a missile.", "green");
         break;
       case "game over":

@@ -7,8 +7,9 @@ class MultiplayerController < ApplicationController
       @game.status = "ongoing"
       @game.users << current_user 
       @game.save
+      user_screenname = current_user.email.split('@')[0]
       SetupNewGame.new(params[:ships], @game, current_user).run!
-      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "go first" }
+      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "go first", name: user_screenname }
     else
       @game = current_user.games.create(multiplayer?: true)
       SetupNewGame.new(params[:ships], @game, current_user).run!

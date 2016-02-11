@@ -26,3 +26,13 @@
 .black {
   color: black;
 }
+
+.opponent-name {
+  position: absolute;
+  left: 32px;
+  top: 68px;
+  width: 320px;
+  font-size: 14px;
+  font-style: italic;
+  color: navy;
+}

@@ -7,6 +7,7 @@ class GameChannel < ApplicationCable::Channel
     @game = Game.find(data["game_id"])
     opponent_id = @game.users.select {|user| user != current_user }[0].id.to_s
     user_id = current_user.id.to_s
+    user_name = current_user.email.split('@')[0]
     opponent_board = @game.boards.where(owner: opponent_id)[0]
     user_board = @game.boards.where(owner: user_id)[0]
     move = MoveLogger.new(data["coord"], opponent_board).log!
@@ -16,7 +17,7 @@ class GameChannel < ApplicationCable::Channel
     else
       opponentSunkShips = opponent_board.sunk_ships
       userSunkShips = user_board.sunk_ships
-      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "make move", x: data["x"], y: data["y"] }
+      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "make move", x: data["x"], y: data["y"], name: user_name }
       move_success = move.hit?
       ActionCable.server.broadcast "battleship:#{user_id}", { action: "move success", move_success: move_success, coord: data["coord"], userSunkShips: userSunkShips, opponentSunkShips: opponentSunkShips }
     end
