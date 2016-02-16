@@ -24,8 +24,13 @@ class MultiplayerController < ApplicationController
 
   def opponent_forfeit
     @game = Game.find(params[:multiplayer_id])
-    @game.winner = current_user.id
-    @game.save
+    if @game.status != "over"
+      @game.winner = current_user.id
+      @game.status = "over"
+      @game.save
+    else
+      redirect_to games_url
+    end
   end
 
   private

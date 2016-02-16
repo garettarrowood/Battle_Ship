@@ -46,6 +46,7 @@ class GamesController < ApplicationController
 
   def won
     @game.winner = current_user.id
+    @game.status = "over"
     @game.save
     @moves = @game.boards.where.not(owner: "#{current_user.id}")[0].moves.size
     @sunk_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
@@ -53,6 +54,7 @@ class GamesController < ApplicationController
 
   def lost
     @game.winner = @game.boards.where.not(owner: "#{current_user.id}")[0].owner
+    @game.status = "over"
     @game.save
     @moves = @game.boards.find_by_owner("#{current_user.id}").moves.size
     @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.size
