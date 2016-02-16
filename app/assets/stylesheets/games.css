@@ -35,6 +35,7 @@
 }
 
 .sunk-ships {
+  top: 150px;
   height: 170px;
   font-size: 18px;
 }
@@ -64,12 +65,12 @@
 
 #opponent-board {
   top: 128px;
-  left: 32px;
+  left: 230px;
 }
 
 #user-board {
   top: 128px;
-  left: 610px;
+  left: 570px;
 }
 
 /*/////// Ships ///////*/
@@ -268,11 +269,18 @@ span.ship {
   font-family: 'Sigmar One', cursive;
 }
 
-.center {
+.opponent-side {
   position: absolute;
-  left: 384px;
-  top: 77px;
+  left: 18px;
   width: 194px;
+  top: 180px;
+}
+
+.player-side {
+  position: absolute;
+  left: 908px;
+  width: 194px;
+  top: 180px;
 }
 
 .setup-label {
@@ -294,11 +302,11 @@ span.ship {
 }
 
 #opponent-board-label {
-  left: 32px;
+  left: 235px;
 }
 
 #player-board-label {
-  left: 610px;
+  left: 570px;
 }
 
 .blue-button {
@@ -325,6 +333,11 @@ span.ship {
   padding-top: 15px;
   padding-bottom: 15px;
   display: block;
+}
+
+.high {
+  position: absolute;
+  top: -120px;
 }
 
 #board-complete-comp {

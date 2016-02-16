@@ -3,13 +3,6 @@
   They will automatically be included in application.css.
 */
 
-.multiplayer-center {
-  position: absolute;
-  left: 384px;
-  top: 77px;
-  width: 194px;
-}
-
 #multiplayer-message {
   height: 51px;
   font-size: 25px;
@@ -29,10 +22,29 @@
 
 .opponent-name {
   position: absolute;
-  left: 32px;
-  top: 68px;
-  width: 320px;
+  left: 18px;
+  width: 194px;
   font-size: 14px;
   font-style: italic;
   color: navy;
 }
+
+.sound {
+  position: absolute;
+  top: 110px;
+  left: 18px;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 60px;
+  width: 194px;
+}
+
+.sound-on {
+  background-image: url("sound-on.png");
+}
+
+.sound-off {
+  background-image: url("sound-off.png");
+}
+
