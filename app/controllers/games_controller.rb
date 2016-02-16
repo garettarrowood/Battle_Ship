@@ -40,10 +40,6 @@ class GamesController < ApplicationController
     MoveLogger.new(@comp_position, @user_board).log!
   end
 
-  def load_game # resolves load issue with gon gem
-    redirect_to @game
-  end
-
   def won
     @game.winner = current_user.id
     @game.status = "over"
