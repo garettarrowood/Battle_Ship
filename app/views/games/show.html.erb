@@ -108,7 +108,7 @@
   <div class="cell available" id="opponent-10-8"></div>
   <div class="cell available" id="opponent-10-9"></div>
   <div class="cell available" id="opponent-10-10"></div>
-  <p class="click-instructions">Click board to take a shot!!</p>
+  <p class="click-instructions">Click THIS board to take a shot!</p>
 </div>
 
 <div class="grid" id="user-board">
@@ -229,31 +229,32 @@
   <div class="ship horizontal position-e" id="aircraft-carrier"></div>
 </div>
 
-<div class="center">
-  <div class="sunk-ships" id="user-block">
-    <p>Your Sunk Ships</p>
+<div class="player-side">
+  <div class="sunk-ships mid" id="user-block">
+    <p>Ships YOU have LOST</p>
     <div class="ship dummy-patrol"></div>
     <div class="ship dummy-destroyer"></div>
     <div class="ship dummy-submarine"></div>
     <div class="ship dummy-battleship"></div>
     <div class="ship dummy-aircraft"></div>
   </div>
+</div>
 
-  <div class="sunk-ships" id="opponent-block">
-    <p>Opponent's Sunk Ships</p>
+<div class="opponent-side">
+  <div class="sunk-ships mid" id="opponent-block">
+    <p>Ships YOU have SUNK</p>
     <div class="ship dummy-patrol"></div>
     <div class="ship dummy-destroyer"></div>
     <div class="ship dummy-submarine"></div>
     <div class="ship dummy-battleship"></div>
     <div class="ship dummy-aircraft"></div>
   </div>
-
-  <p><%= link_to 'Back to Base / Forfeit', games_path, :class => 'blue-button plain' %></p>
+  <p><%= link_to 'Forfeit', games_path, :class => 'blue-button plain' %></p>
 </div>
 
 <div class="labels">
-  <p class="label-align" id="opponent-board-label">OPPONENT</p>
-  <p class="label-align" id="player-board-label">PLAYER</p>
+  <p class="label-align" id="opponent-board-label">ENEMY</p>
+  <p class="label-align" id="player-board-label">YOU</p>
 </div>
 
 <script>$(document).ready(gamePlay);</script>
