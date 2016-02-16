@@ -1,3 +1,6 @@
+let hit = new Audio('/assets/Hit.mp3'),
+    miss = new Audio('/assets/Miss.mp3');
+
 // boardReady functions
 function generateObstacles(ship, board) {
   let obstacleArray = [];
@@ -164,7 +167,6 @@ function updateOpponentBoard(x, y) {
   } else {
     $opponent_cell.addClass("miss");
   }
-
   $opponent_cell.removeClass('available');
 }
 
@@ -237,6 +239,37 @@ function loseCallBack(){
       gameId = path.split("/")[2];
 
   App.game.perform("lose", { game_id: gameId} );
+}
+
+function multiplayerHitCallback(cell) {
+  App.game.printMessage("Hit! Wait for opponent's move.", "red");
+  cell.addClass("hit");
+  if (sound) {
+    hit.play();
+  }
+}
+
+function multiplayerMissCallback(cell) {
+  App.game.printMessage("Miss. Wait for opponent's move.", "red");
+  cell.addClass("miss");
+  if (sound) {
+    miss.play();
+  }
+}
+
+function updateMultiplayerUserBoard(x, y) {
+  let user_coord = `${y}-${x}`;
+  if (isUserShipHit(user_coord)) {
+    if (sound) {
+      hit.play();
+    }
+    $('#user-'+user_coord).addClass("hit");
+  } else {
+    if (sound) {
+      miss.play();
+    }
+    $('#user-'+user_coord).addClass("miss");
+  }
 }
 
 // uniq function

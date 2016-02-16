@@ -9,7 +9,7 @@ App.game = App.cable.subscriptions.create("GameChannel", {
   },
 
   addOpponentName: function(name) {
-    $('.opponent-name').empty().append(name);
+    $('.opponent-name').empty().append("playing against " + name);
   },
 
   received: function(data) {
@@ -22,18 +22,16 @@ App.game = App.cable.subscriptions.create("GameChannel", {
       case "move success":
         let $opponent_cell = $("#opponent-"+data.coord);
         if (data.move_success) {
-          $opponent_cell.addClass("hit");
-          this.printMessage("Hit! Wait for opponent's move.", "red");
+          multiplayerHitCallback($opponent_cell);
         } else {
-          $opponent_cell.addClass("miss");
-          this.printMessage("Miss. Wait for opponent's move.", "red");
+          multiplayerMissCallback($opponent_cell);
         }
         updateOpponentShipDisplay(data.opponentSunkShips);
         updateUserShipDisplay(data.userSunkShips);
         $opponent_cell.removeClass('available');
         break;
       case "make move":
-        updateUserBoard(data.x, data.y);
+        updateMultiplayerUserBoard(data.x, data.y);
         $('#opponent-board .cell').on("click", multiplayerCellCheck);
         this.addOpponentName(data.name);
         this.printMessage("Your turn! Launch a missile.", "green");
