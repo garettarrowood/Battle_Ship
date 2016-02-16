@@ -35,7 +35,7 @@ class MultiplayerController < ApplicationController
   end
 
   def disconnected
-    flash[:alert] = "You disconnected from game and have been sent back to base."
+    flash[:alert] = "You got disconnected from the game and have been sent back to base."
     redirect_to games_url
   end
 
