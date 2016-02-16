@@ -25,7 +25,9 @@ class GameChannel < ApplicationCable::Channel
 
   def lose(data)
     @game = Game.find(data["game_id"])
-    opponent_id = @game.users.select {|user| user != current_user }[0].id.to_s
-    ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "gave up", gameId: data["game_id"] }
+    if (@game.status != "over")
+      opponent_id = @game.users.select {|user| user != current_user }[0].id.to_s
+      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "opponent disconnect", gameId: data["game_id"] }
+    end
   end
 end

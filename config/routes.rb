@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :multiplayer, only: [:show, :create] do 
       get '/opponent-forfeit', to: "multiplayer#opponent_forfeit"
     end
+    get '/disconnected', to: "multiplayer#disconnected"
   end
 
   # Serve websocket cable requests in-process

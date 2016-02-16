@@ -43,11 +43,14 @@ App.game = App.cable.subscriptions.create("GameChannel", {
           window.location.href = `/games/${data.gameId}/lost`;
         }
         break;
-      case "gave up":
+      case "opponent disconnect":
         function delayForfeit() {
           window.location.href = `/multiplayer/${data.gameId}/opponent-forfeit`;
         }
-        setTimeout(delayForfeit, 2500);
+        setTimeout(delayForfeit, 1500);
+        break;
+      case "forfeit":
+        window.location.href = `/disconnected`
         break;
     }
   }

@@ -28,9 +28,15 @@ class MultiplayerController < ApplicationController
       @game.winner = current_user.id
       @game.status = "over"
       @game.save
-    else
-      redirect_to games_url
+
+      opponent_id = @game.users.select {|user| user != current_user }[0].id
+      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "forfeit" }
     end
+  end
+
+  def disconnected
+    flash[:alert] = "You disconnected from game and have been sent back to base."
+    redirect_to games_url
   end
 
   private
