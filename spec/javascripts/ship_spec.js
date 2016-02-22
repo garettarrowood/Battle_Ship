@@ -44,7 +44,7 @@ describe("Ship", function() {
           <div class="cell" id="2-10"></div>\
           <div id="new-row"></div>\
         </span>').appendTo('#konacha');
-      $('<span class="ship position-a ui-draggable ui-draggable-handle horizontal" id="patrol-boat" style="left: -256px; top: -96px;"></span>').appendTo('#konacha');
+      $('<span class="ship position-a ui-draggable ui-draggable-handle horizontal" id="patrol-boat" style="left: -384px; top: -64px;"></span>').appendTo('#konacha');
     });
 
     afterEach(function() {

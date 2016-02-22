@@ -4,7 +4,7 @@ let boardReady = (function(){
       $submarine = $('#submarine'),
       $battleship = $('#battleship'),
       $aircraft_carrier = $('#aircraft-carrier'),
-      board = new Board,
+      board = new Board([new Ship(2, "patrol-boat"), new Ship(3, "destroyer"), new Ship(3, "submarine"), new Ship(4, "battleship"), new Ship(5, "aircraft-carrier")]),
       obstacles, shipLeftPosition, shipTopPosition;
 
   $('.ship').mousedown(function(){

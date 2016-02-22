@@ -1,6 +1,6 @@
 class Board {
-  constructor() {
-    this.ships = [new Ship(2, "patrol-boat"), new Ship(3, "destroyer"), new Ship(3, "submarine"), new Ship(4, "battleship"), new Ship(5, "aircraft-carrier")];
+  constructor(ships) {
+    this.ships = ships;
   }
 
   placed_ships() {
