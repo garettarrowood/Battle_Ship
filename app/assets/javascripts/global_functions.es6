@@ -234,11 +234,11 @@ function multiplayerCellCheck() {
   }
 };
 
-function loseCallBack(){
+function disconnectCallBack(){
   let path = window.location.pathname,
       gameId = path.split("/")[2];
 
-  App.game.perform("lose", { game_id: gameId} );
+  App.game.perform("disconnect", { game_id: gameId} );
 }
 
 function multiplayerHitCallback(cell) {
