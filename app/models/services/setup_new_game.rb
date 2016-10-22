@@ -13,10 +13,9 @@ class SetupNewGame
   end
 
   def run!
-    user_board = @game.boards.create(owner: @user.id.to_s)
     create_user_ships(user_board)
+
     if !@game.multiplayer?
-      comp_board = @game.boards.create(owner: "comp")
       GenerateRandomShips.new(comp_board).run!
       @game.status = "ongoing"
       @game.save
@@ -25,19 +24,24 @@ class SetupNewGame
 
   def create_user_ships(board)
     patrol_points = strings_to_points(@patrol_boat)
-    board.ships.create(positions: patrol_points, classification: "Patrol Boat")
+    board.ships.create(positions: patrol_points,
+                       classification: "Patrol Boat")
 
     destroyer_points = strings_to_points(@destroyer)
-    board.ships.create(positions: destroyer_points, classification: "Destroyer")
+    board.ships.create(positions: destroyer_points,
+                       classification: "Destroyer")
 
     sub_points = strings_to_points(@submarine)
-    board.ships.create(positions: sub_points, classification: "Submarine")
+    board.ships.create(positions: sub_points,
+                       classification: "Submarine")
 
     battle_points = strings_to_points(@battleship)
-    board.ships.create(positions: battle_points, classification: "Battleship")
+    board.ships.create(positions: battle_points,
+                       classification: "Battleship")
 
     carrier_points = strings_to_points(@aircraft_carrier)
-    board.ships.create(positions: carrier_points, classification: "Aircraft Carrier")
+    board.ships.create(positions: carrier_points,
+                       classification: "Aircraft Carrier")
   end
 
   def strings_to_points(positions)
@@ -48,4 +52,11 @@ class SetupNewGame
     end
   end
 
+  def user_board
+    @user_board ||= @game.boards.create(owner: @user.id.to_s)
+  end
+
+  def comp_board
+    @comp_board ||= @game.boards.create(owner: "comp")
+  end
 end
