@@ -20,7 +20,7 @@ Dir[Rails.root.join("app/models/**/*.rb")].each { |f| require f }
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec/support/*.rb")].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
