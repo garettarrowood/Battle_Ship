@@ -33,6 +33,7 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'selenium-webdriver'
   gem 'sprockets-rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do
