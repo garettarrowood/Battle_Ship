@@ -1,7 +1,6 @@
 require 'rails_helper'
-require_relative '../../app/models/services/generate_random_ships.rb'
 
-RSpec.describe GenerateRandomShips, :type => :model do
+RSpec.describe GenerateRandomShips do
   let(:board) { create :board, ships: [] }
 
   before(:each) do

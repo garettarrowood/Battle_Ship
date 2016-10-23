@@ -1,7 +1,6 @@
 require 'rails_helper'
-require_relative '../../app/models/services/setup_new_game.rb'
 
-RSpec.describe SetupNewGame, :type => :model do
+RSpec.describe SetupNewGame do
   let(:user) { create :user }
   let(:game) { create :game }
   json = {"0" => {

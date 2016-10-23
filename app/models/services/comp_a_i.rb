@@ -34,6 +34,8 @@ class CompAI
     end
   end
 
+private
+
   def analyze
     return "random" if @board.damaging_moves.length == 0
     @last_hit = @board.damaging_moves.sort_by { |move| move.id }.last
