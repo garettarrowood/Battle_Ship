@@ -19,16 +19,17 @@ class Board < ApplicationRecord
       game.save
       return true
     end
+    false
   end
 
   def damaging_moves
     moves.find_all { |move| move.hit? }
   end
 
-  def sinking_move?(hitting_move)
-    ship = ships.select { |ship| ship.positions.include?(hitting_move.position) }[0]
-    return false unless ship.sunk?
-    hitting_move == damaging_moves.find_all { |move| ship.positions.include?(move.position) }.max
+  def sinking_move?(last_hit)
+    ship = ships.find { |ship| ship.positions.include?(last_hit.position) }
+    return false unless ship && ship.sunk?
+    last_hit == damaging_moves.find_all { |move| ship.positions.include?(move.position) }.max
   end
 
   def patrol_boat
