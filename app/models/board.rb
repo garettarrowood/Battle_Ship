@@ -6,11 +6,9 @@ class Board < ApplicationRecord
   validates_associated :game
   
   def sunk_ships
-    ship_classes = []
-    ships.each do |ship|
-      ship_classes << ship.classification if ship.sunk?
+    ships.each_with_object([]) do |ship, array|
+      array << ship.classification if ship.sunk?
     end
-    ship_classes
   end
 
   def all_ships_sunk?
@@ -27,9 +25,9 @@ class Board < ApplicationRecord
   end
 
   def sinking_move?(last_hit)
-    ship = ships.find { |ship| ship.positions.include?(last_hit.position) }
+    ship = ships.find {|s| s.positions.include?(last_hit.position)}
     return false unless ship && ship.sunk?
-    last_hit == damaging_moves.find_all { |move| ship.positions.include?(move.position) }.max
+    last_hit == damaging_moves.find_all {|move| ship.positions.include?(move.position)}.max
   end
 
   def patrol_boat
@@ -54,13 +52,13 @@ class Board < ApplicationRecord
 
   def occupied_positions
     points = []
-    ships.each { |ship| points << ship.positions } if ships.length != 0
+    ships.each {|s| points << s.positions} if ships.length != 0
     points.flatten
   end
 
   def occupied_positions_as_strings
     points = []
-    ships.each { |ship| points << ship.positions_to_strings } if ships.length != 0
+    ships.each {|s| points << s.positions_to_strings} if ships.length != 0
     points.flatten
   end
 end

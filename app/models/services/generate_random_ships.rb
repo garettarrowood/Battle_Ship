@@ -13,7 +13,6 @@ class GenerateRandomShips
   end
 
   def place_aircraft_carrier
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..6).to_a.sample
@@ -35,7 +34,6 @@ class GenerateRandomShips
   end
 
   def place_battleship
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..7).to_a.sample.round(2)
@@ -58,7 +56,6 @@ class GenerateRandomShips
   end
 
   def place_submarine
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..8).to_a.sample.round(2)
@@ -81,7 +78,6 @@ class GenerateRandomShips
   end
 
   def place_destroyer
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..8).to_a.sample.round(2)
@@ -104,7 +100,6 @@ class GenerateRandomShips
   end
 
   def place_patrol_boat
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..9).to_a.sample.round(2)
@@ -124,5 +119,11 @@ class GenerateRandomShips
     return place_patrol_boat if positions & @board.occupied_positions != []
     @board.ships.create(positions: positions,
                         classification: "Patrol Boat")
+  end
+
+private
+
+  def direction
+    ["horizontal", "vertical"].sample
   end
 end

@@ -15,7 +15,7 @@ class SetupNewGame
   def run!
     create_user_ships(user_board)
 
-    if !@game.multiplayer?
+    unless @game.multiplayer?
       GenerateRandomShips.new(comp_board).run!
       @game.status = "ongoing"
       @game.save

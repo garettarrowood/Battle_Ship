@@ -20,7 +20,7 @@ class Ship < ApplicationRecord
     positions.map { |point| "#{point.y.round(0).to_s}-#{point.x.round(0).to_s}" }
   end
 
-  private
+private
 
   def adjacent?
     if positions.map(&:x).uniq.size == 1

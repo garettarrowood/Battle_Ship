@@ -14,5 +14,4 @@ class Seek
   def self.clear_all
     REDIS.del("seeks")
   end
-
 end
