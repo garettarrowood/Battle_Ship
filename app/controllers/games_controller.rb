@@ -1,10 +1,8 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :move, :won, :lost]
-  before_action :set_last_game, only: [:index, :load_game]
   before_filter :authenticate_user!
 
   def index
-    @game.update(status: "over") if @game
   end
 
   def new
@@ -43,14 +41,10 @@ class GamesController < ApplicationController
     UpdateStats.user_loses(current_user, @game, @sunk_ships)
   end
 
-  private
+private
 
-    def set_game
-      @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
-    end
-
-    def set_last_game
-      @game = current_user.games.last
-    end
+  def set_game
+    @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
+  end
 
 end

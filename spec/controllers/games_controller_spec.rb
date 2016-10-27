@@ -18,15 +18,6 @@ RSpec.describe GamesController, :type => :controller do
       get :index
       expect(response).to render_template("index")
     end
-
-    it "assigns game if one exists on user" do
-      get :index
-      expect(assigns(:game)).to be nil
-
-      game = @user.games.create
-      get :index
-      expect(assigns(:game).id).to be game.id
-    end
   end
 
   context "GET #new" do
