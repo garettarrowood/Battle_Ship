@@ -4,16 +4,7 @@ class GamesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if @game
-      @game.status = "over"
-      @game.save
-      stats = UserStats.new(current_user, @game)
-      @total_games = stats.total_games
-      @games_won = stats.games_won
-      @your_sunk_ships = stats.sunk_ships
-      @enemy_sunk_ships = stats.enemy_sunk_ships
-      @last_game_status = stats.game_status
-    end
+    @game.update(status: "over") if @game
   end
 
   def new
@@ -41,19 +32,15 @@ class GamesController < ApplicationController
   end
 
   def won
-    @game.winner = current_user.id
-    @game.status = "over"
-    @game.save
     @moves = @game.boards.where.not(owner: "#{current_user.id}")[0].moves.size
-    @sunk_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
+    @lost_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
+    UpdateStats.user_wins(current_user, @game, @lost_ships)
   end
 
   def lost
-    @game.winner = @game.boards.where.not(owner: "#{current_user.id}")[0].owner
-    @game.status = "over"
-    @game.save
     @moves = @game.boards.find_by_owner("#{current_user.id}").moves.size
     @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.size
+    UpdateStats.user_loses(current_user, @game, @sunk_ships)
   end
 
   private

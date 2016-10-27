@@ -9,9 +9,9 @@
 
 <div class="half-page">
   <p class="big">STATS</p>
-  <p>Total games played: <%= @total_games %></p>
-  <p>Total games won: <%= @games_won %></p>
-  <p>Ships you have sunk: <%= @enemy_sunk_ships %></p>
-  <p>Ships you have lost: <%= @your_sunk_ships %></p>
-  <p>Last game: <%= @last_game_status %></p>
+  <p>Total games played: <%= current_user.total_games %></p>
+  <p>Total games won: <%= current_user.games_won %></p>
+  <p>Ships you have sunk: <%= current_user.enemy_sunk_ships %></p>
+  <p>Ships you have lost: <%= current_user.lost_ships %></p>
+  <p>Last game result: <%= current_user.last_game_result %></p>
 </div>
