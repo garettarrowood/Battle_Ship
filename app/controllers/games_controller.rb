@@ -30,25 +30,25 @@ class GamesController < ApplicationController
   end
 
   def apply_win
-    @lost_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
-    UpdateStats.user_wins(current_user, @game, @lost_ships)
+    lost_ships = @game.lost_ships(current_user.id)
+    UpdateStats.user_wins(current_user, @game, lost_ships)
     redirect_to game_won_url
   end
 
   def won
     @moves = current_user.moves_made(@game)
-    @lost_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
+    @lost_ships = @game.lost_ships(current_user.id)
   end
 
   def apply_loss
-    @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.size
-    UpdateStats.user_loses(current_user, @game, @sunk_ships)
+    destroyed_ships = @game.destroyed_ships(current_user.id)
+    UpdateStats.user_loses(current_user, @game, destroyed_ships)
     redirect_to game_lost_url
   end
 
   def lost
     @moves = current_user.moves_made(@game)
-    @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.size
+    @destroyed_ships = @game.destroyed_ships(current_user.id)
   end
 
 private
