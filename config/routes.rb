@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     root to: 'games#index'
     resources :games, only: [:index, :new, :create, :show] do
       post '/move', to: "games#move"
+      put '/apply_win', to: "games#apply_win"
+      put '/apply_loss', to: "games#apply_loss"
       get '/won', to: "games#won"
       get '/lost', to: "games#lost"
     end

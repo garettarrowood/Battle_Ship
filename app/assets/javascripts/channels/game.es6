@@ -38,9 +38,15 @@ App.game = App.cable.subscriptions.create("GameChannel", {
         break;
       case "game over":
         if (data.winner === true) {
-          window.location.href = `/games/${data.gameId}/won`;
+          $.ajax({
+            url: `/games/${data.gameId}/apply_win`,
+            type: 'PUT'
+          });
         } else if (data.winner === false) {
-          window.location.href = `/games/${data.gameId}/lost`;
+          $.ajax({
+            url: `/games/${data.gameId}/apply_loss`,
+            type: 'PUT'
+          });
         }
         break;
       case "opponent disconnect":

@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :move, :won, :lost]
+  before_action :set_game, only: [:show, :move, :apply_win, :won, :apply_loss, :lost]
   before_filter :authenticate_user!
 
   def index
@@ -29,16 +29,26 @@ class GamesController < ApplicationController
     MoveLogger.new(@comp_position, @user_board).log!
   end
 
-  def won
-    @moves = @game.boards.where.not(owner: "#{current_user.id}")[0].moves.size
+  def apply_win
     @lost_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
     UpdateStats.user_wins(current_user, @game, @lost_ships)
+    redirect_to game_won_url
+  end
+
+  def won
+    @moves = current_user.moves_made(@game)
+    @lost_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
+  end
+
+  def apply_loss
+    @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.size
+    UpdateStats.user_loses(current_user, @game, @sunk_ships)
+    redirect_to game_lost_url
   end
 
   def lost
-    @moves = @game.boards.find_by_owner("#{current_user.id}").moves.size
+    @moves = current_user.moves_made(@game)
     @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.size
-    UpdateStats.user_loses(current_user, @game, @sunk_ships)
   end
 
 private
