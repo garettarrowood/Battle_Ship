@@ -1,6 +1,5 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :move, :apply_win, :won, :apply_loss, :lost]
-  before_filter :authenticate_user!
 
   def index
   end
