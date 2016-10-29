@@ -6,7 +6,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :games, join_table: :users_games
 
   def moves_made(game)
-    game.boards.where.not(owner: "#{id}").first.moves.size
+    board = game.boards.find_by_owner("#{id}")
+    board.present? ? board.moves.size : 0
   end
 
   def create_multiplayer_game(ships)
@@ -25,7 +26,8 @@ class User < ApplicationRecord
   end
 
   def opponent_id(game)
-    game.users.where.not(id: id).first.id
+    opponent = game.users.where.not(id: id).first
+    opponent.present? ? opponent.id : "comp"
   end
 
   def last_game
