@@ -4,11 +4,23 @@ class Game < ApplicationRecord
 
   validates_associated :users
 
+  after_save :clear_out_old_data, on: :update
+
   def lost_ships(owner)
     boards.find_by_owner(owner.to_s).sunk_ships.size
   end
 
   def destroyed_ships(owner)
     boards.where.not(owner: owner.to_s).first.sunk_ships.size
+  end
+
+private
+
+  def clear_out_old_data
+    if status == "over"
+      two_days_ago = DateTime.now - 2.days
+      Board.where("updated_at <= ?", two_days_ago).destroy_all
+      Game.where("updated_at <= ?", two_days_ago).destroy_all
+    end
   end
 end
