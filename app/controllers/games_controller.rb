@@ -31,7 +31,7 @@ class GamesController < ApplicationController
 
   def apply_win
     lost_ships = @game.lost_ships(current_user.id)
-    UpdateStats.user_wins(current_user, @game, lost_ships)
+    UpdateStats.user_wins(current_user, @game)
     redirect_to game_won_url
   end
 
@@ -42,7 +42,7 @@ class GamesController < ApplicationController
 
   def apply_loss
     destroyed_ships = @game.destroyed_ships(current_user.id)
-    UpdateStats.user_loses(current_user, @game, destroyed_ships)
+    UpdateStats.user_loses(current_user, @game)
     redirect_to game_lost_url
   end
 
@@ -56,5 +56,4 @@ private
   def set_game
     @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
   end
-
 end

@@ -3,45 +3,39 @@ class MultiplayerController < ApplicationController
 
   def create
     if @game = Game.find_by(multiplayer?: true, status: "pending")
-      opponent_id = @game.users[0].id
-      @game.status = "ongoing"
-      @game.users << current_user 
-      @game.save
-      user_screenname = current_user.email.split('@')[0]
-      SetupNewGame.new(params[:ships], @game, current_user).run!
-      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "go first", name: user_screenname }
+      current_user.join_multiplayer_game(params[:ships], @game)
     else
-      @game = current_user.games.create(multiplayer?: true)
-      SetupNewGame.new(params[:ships], @game, current_user).run!
+      @game = current_user.create_multiplayer_game(params[:ships])
     end
     render js: "window.location = '/multiplayer/#{@game.id}'"
   end
 
   def show
-    @user_board = @game.boards.find_by_owner("#{current_user.id}")
+    @user_board = @game.boards.find_by_owner "#{current_user.id}"
     gon.jbuilder
   end
 
   def opponent_forfeit
     @game = Game.find(params[:multiplayer_id])
     if @game.status != "over"
-      @game.winner = current_user.id
-      @game.status = "over"
-      @game.save
+      UpdateStats.user_wins(current_user, @game)
 
-      opponent_id = @game.users.select {|user| user != current_user }[0].id
-      ActionCable.server.broadcast "battleship:#{opponent_id}", { action: "forfeit" }
+      ActionCable.server.broadcast(
+        "battleship:#{current_user.opponent_id(@game)}",
+        { action: "forfeit" }
+      )
     end
   end
 
   def disconnected
-    flash[:alert] = "You got disconnected from the game and have been sent back to base."
+    flash[:alert] = "You disconnected from the game and are back at the base."
+    UpdateStats.user_loses(current_user, current_user.last_game)
     redirect_to games_url
   end
 
-  private
+private
 
-    def set_game
-      @game = Game.find(params[:id])
-    end
+  def set_game
+    @game = Game.find(params[:id])
+  end
 end
