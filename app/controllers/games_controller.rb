@@ -1,19 +1,7 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :move, :won, :lost]
-  before_action :set_last_game, only: [:index, :load_game]
-  before_filter :authenticate_user!
+  before_action :set_game, only: [:show, :move, :apply_win, :won, :apply_loss, :lost]
 
   def index
-    if @game
-      @game.status = "over"
-      @game.save
-      stats = UserStats.new(current_user, @game)
-      @total_games = stats.total_games
-      @games_won = stats.games_won
-      @your_sunk_ships = stats.sunk_ships
-      @enemy_sunk_ships = stats.enemy_sunk_ships
-      @last_game_status = stats.game_status
-    end
   end
 
   def new
@@ -40,30 +28,31 @@ class GamesController < ApplicationController
     MoveLogger.new(@comp_position, @user_board).log!
   end
 
+  def apply_win
+    lost_ships = @game.lost_ships(current_user.id)
+    UpdateStats.user_wins(current_user, @game)
+    redirect_to game_won_url
+  end
+
   def won
-    @game.winner = current_user.id
-    @game.status = "over"
-    @game.save
-    @moves = @game.boards.where.not(owner: "#{current_user.id}")[0].moves.size
-    @sunk_ships = @game.boards.find_by_owner("#{current_user.id}").sunk_ships.size
+    @moves = current_user.moves_made(@game)
+    @lost_ships = @game.lost_ships(current_user.id)
+  end
+
+  def apply_loss
+    destroyed_ships = @game.destroyed_ships(current_user.id)
+    UpdateStats.user_loses(current_user, @game)
+    redirect_to game_lost_url
   end
 
   def lost
-    @game.winner = @game.boards.where.not(owner: "#{current_user.id}")[0].owner
-    @game.status = "over"
-    @game.save
-    @moves = @game.boards.find_by_owner("#{current_user.id}").moves.size
-    @sunk_ships = @game.boards.where.not(owner: "#{current_user.id}")[0].sunk_ships.size
+    @moves = current_user.moves_made(@game)
+    @destroyed_ships = @game.destroyed_ships(current_user.id)
   end
 
-  private
+private
 
-    def set_game
-      @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
-    end
-
-    def set_last_game
-      @game = current_user.games.last
-    end
-
+  def set_game
+    @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
+  end
 end

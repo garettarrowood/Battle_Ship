@@ -213,9 +213,15 @@ function gameUpdates(data) {
   updateUserShipDisplay(data.userSunkShips);
 
   if (data.userWins === true) {
-    window.location.href = `${gamePath}/won`;
+    $.ajax({
+      url: `${gamePath}/apply_win`,
+      type: 'PUT'
+    });
   } else if (data.opponentWins === true) {
-    window.location.href = `${gamePath}/lost`;
+    $.ajax({
+      url: `${gamePath}/apply_loss`,
+      type: 'PUT'
+    });
   }
 }
 
@@ -234,11 +240,11 @@ function multiplayerCellCheck() {
   }
 };
 
-function loseCallBack(){
+function disconnectCallBack(){
   let path = window.location.pathname,
       gameId = path.split("/")[2];
 
-  App.game.perform("lose", { game_id: gameId} );
+  App.game.perform("disconnect", { game_id: gameId} );
 }
 
 function multiplayerHitCallback(cell) {

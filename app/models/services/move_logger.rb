@@ -13,10 +13,11 @@ class MoveLogger
     end
   end
 
+private
+
   def string_to_point(coord)
     x = coord.split("-")[1].to_i
     y = coord.split("-")[0].to_i
     ActiveRecord::Point.new(x,y)
   end
-
 end

@@ -2,7 +2,7 @@ let sound = true;
 
 let multiplayerPlay = (function(){
   setUserBoard(gon.user_board);
-  $(window).unload(loseCallBack);
+  $(window).unload(disconnectCallBack);
 
   $('.sound').on('click', function() {
     if ($(this).hasClass('sound-on')) {

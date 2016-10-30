@@ -10,7 +10,7 @@ class Move < ApplicationRecord
     board.occupied_positions.include?(self.position)
   end
 
-  private
+private
 
   def uniqueness_checker
     board.moves.include?(self) ? false : true

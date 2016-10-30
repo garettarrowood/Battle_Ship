@@ -13,7 +13,6 @@ class GenerateRandomShips
   end
 
   def place_aircraft_carrier
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..6).to_a.sample
@@ -30,11 +29,11 @@ class GenerateRandomShips
         y+=1
       end
     end
-    @board.ships.create(positions: positions, classification: "Aircraft Carrier")
+    @board.ships.create(positions: positions,
+                        classification: "Aircraft Carrier")
   end
 
   def place_battleship
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..7).to_a.sample.round(2)
@@ -52,11 +51,11 @@ class GenerateRandomShips
       end
     end
     return place_battleship if positions & @board.occupied_positions != []
-    @board.ships.create(positions: positions, classification: "Battleship")
+    @board.ships.create(positions: positions,
+                        classification: "Battleship")
   end
 
   def place_submarine
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..8).to_a.sample.round(2)
@@ -74,11 +73,11 @@ class GenerateRandomShips
       end
     end
     return place_submarine if positions & @board.occupied_positions != []
-    @board.ships.create(positions: positions, classification: "Submarine")
+    @board.ships.create(positions: positions,
+                        classification: "Submarine")
   end
 
   def place_destroyer
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..8).to_a.sample.round(2)
@@ -96,11 +95,11 @@ class GenerateRandomShips
       end
     end
     return place_destroyer if positions & @board.occupied_positions != []
-    @board.ships.create(positions: positions, classification: "Destroyer")
+    @board.ships.create(positions: positions,
+                        classification: "Destroyer")
   end
 
   def place_patrol_boat
-    direction = ["horizontal", "vertical"].sample
     positions = []
     if direction == "horizontal"
       x = (1..9).to_a.sample.round(2)
@@ -118,6 +117,13 @@ class GenerateRandomShips
       end
     end
     return place_patrol_boat if positions & @board.occupied_positions != []
-    @board.ships.create(positions: positions, classification: "Patrol Boat")
+    @board.ships.create(positions: positions,
+                        classification: "Patrol Boat")
+  end
+
+private
+
+  def direction
+    ["horizontal", "vertical"].sample
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Game, :type => :model do
+RSpec.describe Game, type: :model do
   let(:game) { create :game }
   let(:user_board) { create :board, owner: "1", game: game }
   
@@ -9,18 +9,18 @@ RSpec.describe Game, :type => :model do
   end
 
   context "#status" do
-    it "returns false if game has no sunk ships" do
+    it "returns 'pending' if game has no sunk ships" do
       expect(game.status).to eq "pending"
     end
 
-    it "returns false if some but not all ships are sunk" do
+    it "returns 'pending' if some but not all ships are sunk" do
       Move.create(board: user_board, position: ActiveRecord::Point.new(1,2))
       Move.create(board: user_board, position: ActiveRecord::Point.new(1,3))
       expect(user_board.ships[0].sunk?).to eq true
       expect(game.status).to eq "pending"
     end
 
-    it "returns true if all ships are sunk on one board" do
+    it "returns 'over' if all ships are sunk on one board" do
       Move.create(board: user_board, position: ActiveRecord::Point.new(1,2))
       Move.create(board: user_board, position: ActiveRecord::Point.new(1,3))
       Move.create(board: user_board, position: ActiveRecord::Point.new(2,2))
