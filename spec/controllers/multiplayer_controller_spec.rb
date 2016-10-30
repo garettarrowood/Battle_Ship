@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe MultiplayerController, type: :controller do
   let(:game) { create(:game,
-             multiplayer?: true,
-             status: "ongoing",
-             boards: [
-               create(:board, owner: "1000"),
-               create(:board)
-             ]
-           )}
+               multiplayer?: true,
+               status: "ongoing",
+               boards: [
+                 create(:board, owner: "1000"),
+                 create(:board)
+               ]
+             )}
 
   before(:each) do
     @user = create(:user, id: 1000, games: [game])
@@ -46,6 +46,11 @@ RSpec.describe MultiplayerController, type: :controller do
       get :show, params: { id: game.id }
       expect(assigns(:user_board)).to be_instance_of Board
     end
+
+    it "renders the show template" do
+      get :show, params: { id: game.id }
+      expect(response).to render_template("show")
+    end
   end
 
   context "GET #opponent_forfeit" do
@@ -69,6 +74,11 @@ RSpec.describe MultiplayerController, type: :controller do
       expect(ActionCable).to_not receive(:server).and_call_original
       expect(UpdateStats).to_not receive(:user_wins).and_call_original
       get :opponent_forfeit, params: { multiplayer_id: game.id }
+    end
+
+    it "renders the show template" do
+      get :opponent_forfeit, params: { multiplayer_id: game.id }
+      expect(response).to render_template("opponent_forfeit")
     end
   end
 
