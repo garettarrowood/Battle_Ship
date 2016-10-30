@@ -40,10 +40,22 @@ RSpec.describe Board, type: :model do
   end
 
   describe "#damaging_moves" do
-    let!(:occupied1) { create :move, board: board, position: ActiveRecord::Point.new(1.0, 2.0) }
-    let!(:occupied2) { create :move, board: board, position: ActiveRecord::Point.new(1.0, 3.0) }
-    let!(:unoccupied1) { create :move, board: board, position: ActiveRecord::Point.new(6.0, 8.0) }
-    let!(:unoccupied2) { create :move, board: board, position: ActiveRecord::Point.new(6.0, 9.0) }
+    let!(:occupied1) { create :move,
+                       board: board,
+                       position: ActiveRecord::Point.new(1.0, 2.0)
+                     }
+    let!(:occupied2) { create :move,
+                       board: board,
+                       position: ActiveRecord::Point.new(1.0, 3.0)
+                     }
+    let!(:unoccupied1) { create :move,
+                         board: board,
+                         position: ActiveRecord::Point.new(6.0, 8.0)
+                       }
+    let!(:unoccupied2) { create :move,
+                         board: board,
+                         position: ActiveRecord::Point.new(6.0, 9.0)
+                       }
 
     it "returns only damaging moves" do
       moves = board.damaging_moves
@@ -107,20 +119,24 @@ RSpec.describe Board, type: :model do
 
   describe "#sinking_move?" do
     it "will return false if given a non-hitting move" do
-      miss = Move.create(board: board, position: ActiveRecord::Point.new(8,8))
+      miss = Move.create(board: board,
+                         position: ActiveRecord::Point.new(8,8))
 
       expect(board.reload.sinking_move?(miss)).to eq false
     end
 
     it "will return false if hitting move did not belong to sunk ship" do
-      hit = Move.create(board: board, position: ActiveRecord::Point.new(1,3))
+      hit = Move.create(board: board,
+                        position: ActiveRecord::Point.new(1,3))
 
       expect(board.reload.sinking_move?(hit)).to eq false
     end
 
     it "will return true if hitting move sunk a ship" do
-      first_hit = Move.create(board: board, position: ActiveRecord::Point.new(1,2))
-      sinking_hit = Move.create(board: board, position: ActiveRecord::Point.new(1,3))
+      first_hit = Move.create(board: board,
+                              position: ActiveRecord::Point.new(1,2))
+      sinking_hit = Move.create(board: board,
+                                position: ActiveRecord::Point.new(1,3))
 
       expect(board.reload.sinking_move?(first_hit)).to eq false
       expect(board.sinking_move?(sinking_hit)).to eq true

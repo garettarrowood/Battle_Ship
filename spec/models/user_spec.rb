@@ -50,9 +50,11 @@ RSpec.describe User, type: :model do
     subject { user.join_multiplayer_game(ships_json, pending_online_game) }
 
     it "adds user to game" do
-      expect(pending_online_game.users).to_not include user
+      expect(pending_online_game.users)
+        .to_not include user
       expect{subject}.to change{pending_online_game.users.size}.by(1)
-      expect(pending_online_game.users).to include user
+      expect(pending_online_game.users)
+        .to include user
     end
 
     it "changes game status to 'ongoing'" do
