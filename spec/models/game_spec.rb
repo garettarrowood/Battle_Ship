@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Game, :type => :model do
+RSpec.describe Game, type: :model do
   let(:game) { create :game }
   let(:user_board) { create :board, owner: "1", game: game }
   

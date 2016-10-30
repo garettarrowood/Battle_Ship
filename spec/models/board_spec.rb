@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Board, :type => :model do
+RSpec.describe Board, type: :model do
   let(:board) { create :board }
   
   it 'has valid factories' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Ship, :type => :model do
+RSpec.describe Ship, type: :model do
   let(:patrol_boat) { build :patrol_boat }
   let(:destroyer) { build :destroyer }
   let(:submarine) { build :submarine }
