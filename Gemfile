@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-ruby "2.3.1"
+ruby "2.4.2"
 
-gem 'rails', '5.0.0.1'
+gem 'rails', '5.1.3'
 gem 'pg'
 gem 'uglifier'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jbuilder'
@@ -16,7 +17,7 @@ gem "sprockets"
 gem "sprockets-es6"
 gem 'gon'
 gem 'rails_12factor', group: :production
-gem 'redis'
+gem 'redis', '~> 3.3'
 gem 'em-hiredis'
 gem 'faye-websocket'
 gem 'coffee-rails'
