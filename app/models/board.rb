@@ -28,7 +28,7 @@ class Board < ApplicationRecord
 
   def sinking_move?(last_hit)
     ship = ships.find { |s| s.positions.include?(last_hit.position) }
-    return false unless ship && ship.sunk?
+    return false unless ship&.sunk?
     last_hit == ship_damage(ship).max
   end
 

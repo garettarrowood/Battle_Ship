@@ -4,6 +4,8 @@ AllCops:
   TargetRubyVersion: 2.4
   Exclude:
     - 'app/views/**/*.json.jbuilder'
+    - 'bin/*'
+    - 'config/environments/*'
 
 Documentation:
   Enabled: false
