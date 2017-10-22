@@ -1,3 +1,9 @@
 ---
+
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - 'app/views/**/*.json.jbuilder'
+
 Documentation:
   Enabled: false
