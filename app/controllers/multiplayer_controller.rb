@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MultiplayerController < ApplicationController
   before_action :set_game, only: [:show]
 

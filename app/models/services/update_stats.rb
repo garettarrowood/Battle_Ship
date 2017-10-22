@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateStats
   class << self
     def user_wins(user, game)

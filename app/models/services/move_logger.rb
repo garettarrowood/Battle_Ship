@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MoveLogger
   def initialize(coord, board)
     @coord = coord

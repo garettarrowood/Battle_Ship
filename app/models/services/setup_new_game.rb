@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SetupNewGame
   attr_accessor :patrol_boat, :destroyer, :submarine
   attr_accessor :battleship, :aircraft_carrier, :game

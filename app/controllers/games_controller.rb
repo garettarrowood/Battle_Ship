@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show move apply_win won apply_loss lost]
 

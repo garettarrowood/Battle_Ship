@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CompAI
   def self.full_board # rubocop:disable Metrics/MethodLength
     @full_board ||= begin
