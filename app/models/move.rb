@@ -7,13 +7,12 @@ class Move < ApplicationRecord
   validates_acceptance_of :uniqueness_checker
 
   def hit?
-    board.occupied_positions.include?(self.position)
+    board.occupied_positions.include?(position)
   end
 
-private
+  private
 
   def uniqueness_checker
     board.moves.include?(self) ? false : true
   end
-  
 end

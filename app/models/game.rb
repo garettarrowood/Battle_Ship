@@ -14,13 +14,12 @@ class Game < ApplicationRecord
     boards.where.not(owner: owner.to_s).first.sunk_ships.size
   end
 
-private
+  private
 
   def clear_out_old_data
-    if status == "over"
-      two_days_ago = DateTime.now - 2.days
-      Board.where("updated_at <= ?", two_days_ago).destroy_all
-      Game.where("updated_at <= ?", two_days_ago).destroy_all
-    end
+    return unless status == 'over'
+    two_days_ago = Time.now - 2.days
+    Board.where('updated_at <= ?', two_days_ago).destroy_all
+    Game.where('updated_at <= ?', two_days_ago).destroy_all
   end
 end

@@ -13,44 +13,65 @@ class Ship < ApplicationRecord
   end
 
   def direction
-    self.positions[0].x < self.positions[1].x ? "horizontal" : "vertical"
+    positions[0].x < positions[1].x ? 'horizontal' : 'vertical'
   end
 
   def positions_to_strings
-    positions.map { |point| "#{point.y.round(0).to_s}-#{point.x.round(0).to_s}" }
+    positions.map { |point| "#{point.y.round(0)}-#{point.x.round(0)}" }
   end
 
-private
+  private
 
   def adjacent?
-    if positions.map(&:x).uniq.size == 1
-      ys = positions.map(&:y).each_cons(2)
-      ys.all? { |a,b| b == a + 1 } || ys.all? { |a,b| b == a - 1 }
-    elsif positions.map(&:y).uniq.size == 1
-      xs = positions.map(&:x).each_cons(2)
-      xs.all? { |a,b| b == a + 1 } || xs.all? { |a,b| b == a - 1 }
+    if straight_line_of?(:x)
+      make_up_line?(consecutive(:y))
+    elsif straight_line_of?(:y)
+      make_up_line?(consecutive(:x))
     else
       false
     end
   end
 
+  def straight_line_of?(dimension)
+    positions.map { |p| p.send(dimension) }.uniq.size == 1
+  end
+
+  def consecutive(dimension)
+    positions.map { |p| p.send(dimension) }.each_cons(2)
+  end
+
+  def make_up_line?(points)
+    points.all? { |a, b| b == a + 1 } || points.all? { |a, b| b == a - 1 }
+  end
+
   def in_bounds?
-    positions.map(&:x).all? { |x| x.between?(1,10) } && positions.map(&:y).all? { |y| y.between?(1,10) }
+    x_bound = positions.map(&:x).all? { |x| x.between?(1, 10) }
+    y_bound = positions.map(&:y).all? { |y| y.between?(1, 10) }
+    x_bound && y_bound
   end
 
   def correct_size?
     case classification
-    when "Patrol Boat" then positions.size == 2
-    when "Destroyer" then positions.size == 3
-    when "Submarine" then positions.size == 3
-    when "Battleship" then positions.size == 4
-    when "Aircraft Carrier" then positions.size == 5
-    end  
+    when 'Patrol Boat' then positions? 2
+    when 'Destroyer' then positions? 3
+    when 'Submarine' then positions? 3
+    when 'Battleship' then positions? 4
+    when 'Aircraft Carrier' then positions? 5
+    end
+  end
+
+  def positions?(size)
+    positions.size == size
   end
 end
 
-class ActiveRecord::Point
-  def point_to_px
-    [ (x.to_i*32-32).to_s+"px", (y.to_i*32-32).to_s+"px" ]
+module ActiveRecord
+  class Point
+    def point_to_px
+      [
+        (x.to_i * 32 - 32).to_s + 'px',
+        (y.to_i * 32 - 32).to_s + 'px'
+      ]
+    end
   end
 end

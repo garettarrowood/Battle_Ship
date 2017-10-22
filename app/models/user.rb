@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :games, join_table: :users_games
 
   def moves_made(game)
-    board = game.boards.find_by_owner("#{id}")
+    board = game.boards.find_by_owner(id.to_s)
     board.present? ? board.moves.size : 0
   end
 
@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def join_multiplayer_game(ships, game)
-    game.status = "ongoing"
+    game.status = 'ongoing'
     game.users << self
     game.save
 
@@ -27,21 +27,20 @@ class User < ApplicationRecord
 
   def opponent_id(game)
     opponent = game.users.where.not(id: id).first
-    opponent.present? ? opponent.id : "comp"
+    opponent.present? ? opponent.id : 'comp'
   end
 
   def last_game
     games.max
   end
 
-private
+  private
 
   def broadcast_start(game)
     ActionCable.server.broadcast(
       "battleship:#{opponent_id(game)}",
-      { action: "go first",
-        name: email.split('@').first
-      }
+      action: 'go first',
+      name: email.split('@').first
     )
   end
 end
