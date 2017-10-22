@@ -34,6 +34,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'sprockets-rails'
   gem 'rails-controller-testing'
+  gem 'rubocop', require: false
 end
 
 group :development do
