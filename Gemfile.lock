@@ -261,7 +261,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   capybara
   coffee-rails
   database_cleaner
@@ -274,7 +273,6 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   pg
-  pry
   pry-byebug
   puma
   rails (= 5.1.3)
