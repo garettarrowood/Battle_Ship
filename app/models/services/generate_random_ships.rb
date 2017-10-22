@@ -1,5 +1,4 @@
 class GenerateRandomShips
-
   def initialize(board)
     @board = board
   end
@@ -13,117 +12,83 @@ class GenerateRandomShips
   end
 
   def place_aircraft_carrier
-    positions = []
-    if direction == "horizontal"
-      x = (1..6).to_a.sample
-      y = (1..10).to_a.sample
-      5.times do
-        positions << ActiveRecord::Point.new(x,y)
-        x+=1
-      end
+    if horizontal? # rubocop:disable Style/ConditionalAssignment
+      points = horizontal_positions(times: 5, x: upto(6), y: upto(10))
     else
-      x = (1..10).to_a.sample
-      y = (1..6).to_a.sample
-      5.times do
-        positions << ActiveRecord::Point.new(x,y)
-        y+=1
-      end
+      points = vertical_positions(times: 5, x: upto(10), y: upto(6))
     end
-    @board.ships.create(positions: positions,
-                        classification: "Aircraft Carrier")
+    @board.ships.create(positions: points, classification: 'Aircraft Carrier')
   end
 
   def place_battleship
-    positions = []
-    if direction == "horizontal"
-      x = (1..7).to_a.sample.round(2)
-      y = (1..10).to_a.sample.round(2)
-      4.times do
-        positions << ActiveRecord::Point.new(x,y)
-        x+=1
-      end
+    if horizontal? # rubocop:disable Style/ConditionalAssignment
+      points = horizontal_positions(times: 4, x: upto(7), y: upto(10))
     else
-      y = (1..7).to_a.sample.round(2)
-      x = (1..10).to_a.sample.round(2)
-      4.times do
-        positions << ActiveRecord::Point.new(x,y)
-        y+=1
-      end
+      points = vertical_positions(times: 4, x: upto(10), y: upto(7))
     end
-    return place_battleship if positions & @board.occupied_positions != []
-    @board.ships.create(positions: positions,
-                        classification: "Battleship")
+    return place_battleship if overlap?(points)
+    @board.ships.create(positions: points, classification: 'Battleship')
   end
 
   def place_submarine
-    positions = []
-    if direction == "horizontal"
-      x = (1..8).to_a.sample.round(2)
-      y = (1..10).to_a.sample.round(2)
-      3.times do
-        positions << ActiveRecord::Point.new(x,y)
-        x+=1
-      end
+    if horizontal? # rubocop:disable Style/ConditionalAssignment
+      points = horizontal_positions(times: 3, x: upto(8), y: upto(10))
     else
-      y = (1..8).to_a.sample.round(2)
-      x = (1..10).to_a.sample.round(2)
-      3.times do
-        positions << ActiveRecord::Point.new(x,y)
-        y+=1
-      end
+      points = vertical_positions(times: 3, x: upto(10), y: upto(8))
     end
-    return place_submarine if positions & @board.occupied_positions != []
-    @board.ships.create(positions: positions,
-                        classification: "Submarine")
+    return place_submarine if overlap?(points)
+    @board.ships.create(positions: points, classification: 'Submarine')
   end
 
   def place_destroyer
-    positions = []
-    if direction == "horizontal"
-      x = (1..8).to_a.sample.round(2)
-      y = (1..10).to_a.sample.round(2)
-      3.times do
-        positions << ActiveRecord::Point.new(x,y)
-        x+=1
-      end
+    if horizontal? # rubocop:disable Style/ConditionalAssignment
+      points = horizontal_positions(times: 3, x: upto(8), y: upto(10))
     else
-      y = (1..8).to_a.sample.round(2)
-      x = (1..10).to_a.sample.round(2)
-      3.times do
-        positions << ActiveRecord::Point.new(x,y)
-        y+=1
-      end
+      points = vertical_positions(times: 3, x: upto(10), y: upto(8))
     end
-    return place_destroyer if positions & @board.occupied_positions != []
-    @board.ships.create(positions: positions,
-                        classification: "Destroyer")
+    return place_destroyer if overlap?(points)
+    @board.ships.create(positions: points, classification: 'Destroyer')
   end
 
   def place_patrol_boat
-    positions = []
-    if direction == "horizontal"
-      x = (1..9).to_a.sample.round(2)
-      y = (1..10).to_a.sample.round(2)
-      2.times do
-        positions << ActiveRecord::Point.new(x,y)
-        x+=1
-      end
+    if horizontal? # rubocop:disable Style/ConditionalAssignment
+      points = horizontal_positions(times: 2, x: upto(9), y: upto(10))
     else
-      y = (1..9).to_a.sample.round(2)
-      x = (1..10).to_a.sample.round(2)
-      2.times do
-        positions << ActiveRecord::Point.new(x,y)
-        y+=1
-      end
+      points = vertical_positions(times: 2, x: upto(10), y: upto(9))
     end
-    return place_patrol_boat if positions & @board.occupied_positions != []
-    @board.ships.create(positions: positions,
-                        classification: "Patrol Boat")
+    return place_patrol_boat if overlap?(points)
+    @board.ships.create(positions: points, classification: 'Patrol Boat')
   end
 
-private
+  private
 
-  def direction
-    ["horizontal", "vertical"].sample
+  def horizontal?
+    [true, false].sample
+  end
+
+  def upto(max)
+    (1..max).to_a.sample.to_f
+  end
+
+  def horizontal_positions(times:, x:, y:)
+    positions = []
+    times.times do
+      positions << ActiveRecord::Point.new(x, y)
+      x += 1
+    end
+    positions
+  end
+
+  def vertical_positions(times:, x:, y:)
+    positions = []
+    times.times do
+      positions << ActiveRecord::Point.new(x, y)
+      y += 1
+    end
+    positions
+  end
+
+  def overlap?(positions)
+    positions & @board.occupied_positions != []
   end
 end
