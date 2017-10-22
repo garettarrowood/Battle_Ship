@@ -22,7 +22,7 @@ class GameChannel < ApplicationCable::Channel
   private
 
   def opponent_id
-    @opponent_id ||= @game.users.select { |user| user != current_user }.first.id
+    @opponent_id ||= @game.users.reject { |user| user == current_user }.first.id
   end
 
   def user_id
