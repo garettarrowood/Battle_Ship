@@ -27,16 +27,44 @@ RSpec.describe Ship, type: :model do
     expect(submarine).to_not be_valid
   end
 
-  let(:crazy_patroller) { build :patrol_boat, positions: [ActiveRecord::Point.new(1, 1), ActiveRecord::Point.new(4, 9)] }
-  let(:crooked_battleship) { build :battleship, positions: [ActiveRecord::Point.new(2,2), ActiveRecord::Point.new(3,2), ActiveRecord::Point.new(4,2), ActiveRecord::Point.new(6,2)]}
+  let(:crazy_patroller) do
+    build :patrol_boat,
+          positions: [
+            ActiveRecord::Point.new(1, 1),
+            ActiveRecord::Point.new(4, 9)
+          ]
+  end
+  let(:crooked_battleship) do
+    build :battleship,
+          positions: [
+            ActiveRecord::Point.new(2, 2),
+            ActiveRecord::Point.new(3, 2),
+            ActiveRecord::Point.new(4, 2),
+            ActiveRecord::Point.new(6, 2)
+          ]
+  end
 
   it 'only has consecutive adjacent positions' do
     expect(crooked_battleship.valid?).to eq false
     expect(crazy_patroller.valid?).to eq false
   end
 
-  let(:jumping_submarine) { build :submarine, positions: [ActiveRecord::Point.new(3,9), ActiveRecord::Point.new(3,10), ActiveRecord::Point.new(3,11)] }
-  let(:renagade_destroyer) { build :destroyer, positions: [ActiveRecord::Point.new(1,2), ActiveRecord::Point.new(0,3), ActiveRecord::Point.new(-1,4)]}
+  let(:jumping_submarine) do
+    build :submarine,
+          positions: [
+            ActiveRecord::Point.new(3, 9),
+            ActiveRecord::Point.new(3, 10),
+            ActiveRecord::Point.new(3, 11)
+          ]
+  end
+  let(:renagade_destroyer) do
+    build :destroyer,
+          positions: [
+            ActiveRecord::Point.new(1, 2),
+            ActiveRecord::Point.new(0, 3),
+            ActiveRecord::Point.new(-1, 4)
+          ]
+  end
 
   it 'only has positions on the 10x10 board' do
     expect(jumping_submarine.valid?).to eq false
@@ -65,45 +93,61 @@ RSpec.describe Ship, type: :model do
     end
   end
 
-  context "#sunk?" do
-    it "returns false if ship is afloat" do
+  context '#sunk?' do
+    it 'returns false if ship is afloat' do
       patrol_boat.save
       expect(patrol_boat.sunk?).to eq false
     end
 
-    it "returns true if ship is sunk" do
+    it 'returns true if ship is sunk' do
       patrol_boat.save
-      patrol_boat.board.moves.create(position: ActiveRecord::Point.new(1.0,2.0))
-      patrol_boat.board.moves.create(position: ActiveRecord::Point.new(1.0,3.0))
+      patrol_boat.board.moves.create(
+        position: ActiveRecord::Point.new(1.0, 2.0)
+      )
+      patrol_boat.board.moves.create(
+        position: ActiveRecord::Point.new(1.0, 3.0)
+      )
       expect(patrol_boat.sunk?).to eq true
     end
   end
 
-  context "#direction" do
+  context '#direction' do
     let(:vertical_patrol) { build :patrol_boat }
-    let(:horizontal_patrol) { build :patrol_boat, positions: [ActiveRecord::Point.new(8, 5), ActiveRecord::Point.new(9, 5)]}
+    let(:horizontal_patrol) do
+      build :patrol_boat,
+            positions: [
+              ActiveRecord::Point.new(8, 5),
+              ActiveRecord::Point.new(9, 5)
+            ]
+    end
 
-    it "returns whether ship is placed horizontal or vertical" do
-      expect(vertical_patrol.direction).to eq "vertical"
-      expect(horizontal_patrol.direction).to eq "horizontal"
+    it 'returns whether ship is placed horizontal or vertical' do
+      expect(vertical_patrol.direction).to eq 'vertical'
+      expect(horizontal_patrol.direction).to eq 'horizontal'
     end
   end
 
-  context "#positions_to_strings" do
-    let(:stringy_patrol) { build :patrol_boat, positions: [ActiveRecord::Point.new(8, 5), ActiveRecord::Point.new(9, 5)]}
+  context '#positions_to_strings' do
+    let(:stringy_patrol) do
+      build :patrol_boat,
+            positions: [
+              ActiveRecord::Point.new(8, 5),
+              ActiveRecord::Point.new(9, 5)
+            ]
+    end
 
     it "returns all ship positions as 'y-x' instead of point datatypes" do
-      expect(stringy_patrol.positions_to_strings).to eq(["5-8", "5-9"])
+      expect(stringy_patrol.positions_to_strings).to eq(['5-8', '5-9'])
     end
   end
 
-  context "ActiveRecord::Point#point_to_px" do
+  context 'ActiveRecord::Point#point_to_px' do
     point1 = ActiveRecord::Point.new(1, 1)
     point2 = ActiveRecord::Point.new(9, 5)
 
-    it "returns array of px coords" do
-      expect(point1.point_to_px).to eq(["0px", "0px"])
-      expect(point2.point_to_px).to eq(["256px", "128px"])
+    it 'returns array of px coords' do
+      expect(point1.point_to_px).to eq(%w[0px 0px])
+      expect(point2.point_to_px).to eq(%w[256px 128px])
     end
   end
 end
