@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -7,7 +9,7 @@ RSpec.describe User, type: :model do
   let(:pending_online_game) { create(:game, status: "pending", users: [opponent], boards: [user_board]) }
   let(:online_game) { create(:game, users: [user, opponent], boards: [create(:board), user_board]) }
   let(:comp_game) { create(:game, users: [user], boards: [create(:board), user_board]) }
-  
+
   it 'has valid factory' do
     expect(user).to be_valid
   end

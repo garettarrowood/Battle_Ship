@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe GenerateRandomShips do
@@ -124,7 +126,7 @@ RSpec.describe GenerateRandomShips do
     end
   end
 
-  context "#run!" do 
+  context "#run!" do
     it "should receive all place_{ship} methods" do
       expect(@random_setup).to receive(:place_aircraft_carrier)
       expect(@random_setup).to receive(:place_battleship)

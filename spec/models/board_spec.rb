@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Board, type: :model do
   let(:board) { create :board }
-  
+
   it 'has valid factories' do
     expect(board).to be_valid
   end

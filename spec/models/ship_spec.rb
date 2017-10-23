@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Ship, type: :model do
@@ -6,7 +8,7 @@ RSpec.describe Ship, type: :model do
   let(:submarine) { build :submarine }
   let(:battleship) { build :battleship }
   let(:aircraft_carrier) { build :aircraft_carrier }
-  
+
   it 'has valid factories' do
     expect(patrol_boat).to be_valid
     expect(destroyer).to be_valid
@@ -42,25 +44,25 @@ RSpec.describe Ship, type: :model do
   end
 
   context 'has size of' do
-    it '2 positions if a Patrol Boat' do 
+    it '2 positions if a Patrol Boat' do
       expect(patrol_boat.positions.size).to eq 2
     end
 
-    it '3 positions if a Destroyer' do 
+    it '3 positions if a Destroyer' do
       expect(destroyer.positions.size).to eq 3
     end
 
-    it '3 positions if a Submarine' do 
+    it '3 positions if a Submarine' do
       expect(submarine.positions.size).to eq 3
     end
 
-    it '4 positions if a Battleship' do 
+    it '4 positions if a Battleship' do
       expect(battleship.positions.size).to eq 4
     end
 
-    it '5 positions if an Aircraft Carrier' do 
+    it '5 positions if an Aircraft Carrier' do
       expect(aircraft_carrier.positions.size).to eq 5
-    end  
+    end
   end
 
   context "#sunk?" do
