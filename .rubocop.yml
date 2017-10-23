@@ -6,6 +6,9 @@ AllCops:
     - 'app/views/**/*.json.jbuilder'
     - 'bin/*'
     - 'config/environments/*'
+    - 'config/initializers/devise.rb'
+    - 'db/migrate/*'
+    - 'db/*'
 
 Documentation:
   Enabled: false
