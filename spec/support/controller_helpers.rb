@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file swiped from
 # https://gist.github.com/vlado/812948efe4fb0667a964
 

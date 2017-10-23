@@ -1,8 +1,9 @@
-class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :move, :apply_win, :won, :apply_loss, :lost]
+# frozen_string_literal: true
 
-  def index
-  end
+class GamesController < ApplicationController
+  before_action :set_game, only: %i[show move apply_win won apply_loss lost]
+
+  def index; end
 
   def new
     @game = Game.new
@@ -15,21 +16,20 @@ class GamesController < ApplicationController
   end
 
   def show
-    @opponent_board = @game.boards.find_by_owner("comp")
-    @user_board = @game.boards.find_by_owner("#{current_user.id}")
+    @opponent_board = @game.boards.find_by_owner('comp')
+    @user_board = @game.boards.find_by_owner(current_user.id.to_s)
     gon.jbuilder
   end
 
   def move
-    @opponent_board = @game.boards.find_by_owner("comp")
+    @opponent_board = owner_board('comp')
     MoveLogger.new(params[:move], @opponent_board).log!
-    @user_board = @game.boards.find_by_owner("#{current_user.id}")
+    @user_board = owner_board(current_user.id.to_s)
     @comp_position = CompAI.new(@user_board).new_move
     MoveLogger.new(@comp_position, @user_board).log!
   end
 
   def apply_win
-    lost_ships = @game.lost_ships(current_user.id)
     UpdateStats.user_wins(current_user, @game)
     redirect_to game_won_url
   end
@@ -40,7 +40,6 @@ class GamesController < ApplicationController
   end
 
   def apply_loss
-    destroyed_ships = @game.destroyed_ships(current_user.id)
     UpdateStats.user_loses(current_user, @game)
     redirect_to game_lost_url
   end
@@ -50,9 +49,14 @@ class GamesController < ApplicationController
     @destroyed_ships = @game.destroyed_ships(current_user.id)
   end
 
-private
+  private
+
+  def owner_board(id)
+    @game.boards.find_by_owner(id)
+  end
 
   def set_game
-    @game = !!params[:id] ? Game.find(params[:id]) : Game.find(params[:game_id])
+    id = params[:id].present? ? params[:id] : params[:game_id]
+    @game = Game.find(id)
   end
 end

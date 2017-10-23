@@ -1,0 +1,19 @@
+---
+
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - 'app/views/**/*.json.jbuilder'
+    - 'bin/*'
+    - 'config/environments/*'
+    - 'config/initializers/devise.rb'
+    - 'db/migrate/*'
+    - 'db/*'
+    - 'spec/support/controller_helpers.rb'
+
+Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

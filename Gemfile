@@ -1,45 +1,47 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-ruby "2.4.2"
+ruby '2.4.2'
 
 gem 'rails', '5.1.3'
-gem 'pg'
-gem 'uglifier'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'turbolinks'
-gem 'jbuilder'
+
+gem 'coffee-rails'
 gem 'devise'
-gem 'responders'
-gem 'puma'
-gem "sprockets"
-gem "sprockets-es6"
-gem 'gon'
-gem 'rails_12factor', group: :production
-gem 'redis', '~> 3.3'
 gem 'em-hiredis'
 gem 'faye-websocket'
-gem 'coffee-rails'
+gem 'gon'
+gem 'jbuilder'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'pg'
+gem 'puma'
+gem 'rails_12factor', group: :production
+gem 'redis', '~> 3.3'
+gem 'responders'
+gem 'sprockets'
+gem 'sprockets-es6'
+gem 'turbolinks'
+gem 'uglifier'
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'capybara'
-  gem 'factory_girl_rails'
-  gem 'shoulda-matchers'
-  gem 'pry'
-  gem 'byebug'
-  gem 'pry-byebug'
   gem 'database_cleaner'
-  gem 'simplecov', require: false
-  gem 'selenium-webdriver'
-  gem 'sprockets-rails'
+  gem 'factory_girl_rails'
+  gem 'pry-byebug'
   gem 'rails-controller-testing'
+  gem 'rspec-rails'
+  gem 'rubocop', require: false
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+  gem 'sprockets-rails'
 end
 
 group :development do
-  gem 'web-console'
   gem 'spring'
+  gem 'web-console'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

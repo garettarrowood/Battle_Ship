@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Settings specified here will take precedence
+  # over those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -26,11 +29,13 @@ Rails.application.configure do
   config.assets.compile = true
   config.serve_static_assets = true
 
-  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
+  # Asset digests allow you to set far-future
+  # HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
 
-  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
+  # `config.assets.precompile` and `config.assets.version`
+  # have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
@@ -41,9 +46,13 @@ Rails.application.configure do
 
   # Action Cable endpoint configuration
   config.action_cable.url = 'wss://play-battleship.herokuapp.com/cable'
-  config.action_cable.allowed_request_origins = [ 'https://play-battleship.herokuapp.com', /http:\/\/play-battleship.herokuapp.*/ ]
+  config.action_cable.allowed_request_origins = [
+    'https://play-battleship.herokuapp.com',
+    /http:\/\/play-battleship.herokuapp.*/
+  ]
 
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # Force all access to the app over SSL,
+  # use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
@@ -65,7 +74,8 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "Battle_Ship_#{Rails.env}"
 
   # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # Set this to true and configure the email server for
+  # immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -82,7 +92,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Added for Devise via the instructions it provided me in my shell after install
-  config.action_mailer.default_url_options = { host: "when I push to Heroku, it says I need to replace this string with the full url. But didn't have to with previous app." }
+  config.action_mailer.default_url_options = {
+    host: "when I push to Heroku, it says I need to replace this string with the full url. But didn't have to with previous app."
+  }
 
   # config.middleware.use ActionCableBattle
   # config.web_socket_server_url = "wss://play-battleship.herokuapp.com/"
