@@ -9,6 +9,7 @@ AllCops:
     - 'config/initializers/devise.rb'
     - 'db/migrate/*'
     - 'db/*'
+    - 'spec/support/controller_helpers.rb'
 
 Documentation:
   Enabled: false
