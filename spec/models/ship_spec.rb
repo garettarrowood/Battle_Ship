@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Ship, type: :model do
+RSpec.describe Ship, :aggregate_failures, type: :model do
   let(:patrol_boat) { build :patrol_boat }
   let(:destroyer) { build :destroyer }
   let(:submarine) { build :submarine }
@@ -20,11 +20,6 @@ RSpec.describe Ship, type: :model do
   it 'has to have classification' do
     destroyer.classification = nil
     expect(destroyer).to_not be_valid
-  end
-
-  it 'must belong to board' do
-    submarine.board_id = nil
-    expect(submarine).to_not be_valid
   end
 
   let(:crazy_patroller) do

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :board do
     game
-    owner 'comp'
-    transient { ships_count 1 }
-    before(:create) do |board, evaluator|
+    owner { 'comp' }
+    transient { ships_count { 1 } }
+    after(:create) do |board, evaluator|
       create_list(:patrol_boat, evaluator.ships_count, board: board)
       create_list(:destroyer, evaluator.ships_count, board: board)
       create_list(:submarine, evaluator.ships_count, board: board)
